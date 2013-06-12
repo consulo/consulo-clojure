@@ -15,91 +15,55 @@
 
 package org.jetbrains.plugins.clojure.config.ui;
 
-import com.intellij.facet.Facet;
-import com.intellij.facet.ui.FacetEditorContext;
-import com.intellij.facet.ui.FacetEditorTab;
-import com.intellij.facet.ui.FacetValidatorsManager;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.options.ConfigurationException;
-import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.ClojureBundle;
-import org.jetbrains.plugins.clojure.config.ClojureModuleSettings;
+import org.jetbrains.plugins.clojure.module.extension.ClojureMutableModuleExtension;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * @author ilyas
  */
-public class ClojureFacetSettingsTab extends FacetEditorTab {
-
-  public static final Logger LOG = Logger.getInstance("org.jetbrains.plugins.clojure.config.ui.ClojureFacetTab");
-
-  private Module myModule;
+public class ClojureFacetSettingsTab  extends JPanel{
   private JPanel myPanel;
   private JTextField myJvmOpts;
   private JTextField myReplOpts;
   private JTextField myReplClass;
   private JPanel myReplPanel;
-  private FacetEditorContext myEditorContext;
-  private FacetValidatorsManager myValidatorsManager;
-  private final ClojureModuleSettings mySettings;
 
-  public ClojureFacetSettingsTab(FacetEditorContext editorContext, FacetValidatorsManager validatorsManager, ClojureModuleSettings settings) {
-    myModule = editorContext.getModule();
-    myEditorContext = editorContext;
-    myValidatorsManager = validatorsManager;
+  private final ClojureMutableModuleExtension myMutableModuleExtension;
 
-    mySettings = settings;
+  public ClojureFacetSettingsTab(ClojureMutableModuleExtension mutableModuleExtension) {
 
-    myJvmOpts.setText(mySettings.myJvmOpts);
-    myReplClass.setText(mySettings.myReplClass);
-    myReplOpts.setText(mySettings.myReplOpts);
+    myMutableModuleExtension = mutableModuleExtension;
 
-    reset();
-  }
+    myJvmOpts.setText(myMutableModuleExtension.getJvmOpts());
+    myReplClass.setText(myMutableModuleExtension.getReplClass());
+    myReplOpts.setText(myMutableModuleExtension.getReplOpts());
 
-  @Nls
-  public String getDisplayName() {
-    return ClojureBundle.message("clojure.sdk.configuration");
-  }
+    myJvmOpts.addKeyListener(new KeyAdapter() {
+      @Override
+      public void keyReleased(KeyEvent e) {
+        myMutableModuleExtension.setJvmOpts(myJvmOpts.getText());
+      }
+    });
 
-  public JComponent createComponent() {
-    return myPanel;
-  }
+    myReplClass.addKeyListener(new KeyAdapter() {
+      @Override
+      public void keyReleased(KeyEvent e) {
+        myMutableModuleExtension.setReplClass(myReplClass.getText());
+      }
+    });
 
-  public boolean isModified() {
-    return !myJvmOpts.getText().trim().equals(mySettings.myJvmOpts) ||
-        !myReplClass.getText().trim().equals(mySettings.myReplClass) ||
-        !myReplOpts.getText().trim().equals(mySettings.myReplOpts);
-  }
-
-  @Override
-  public String getHelpTopic() {
-    return super.getHelpTopic();
-  }
-
-  public void onFacetInitialized(@NotNull Facet facet) {
-  }
-
-  public void apply() throws ConfigurationException {
-    mySettings.myJvmOpts = myJvmOpts.getText().trim();
-    mySettings.myReplClass = myReplClass.getText().trim();
-    mySettings.myReplOpts = myReplOpts.getText().trim();
-  }
-
-  public void reset() {
-    myJvmOpts.setText(mySettings.myJvmOpts);
-    myReplClass.setText(mySettings.myReplClass);
-    myReplClass.setText(mySettings.myReplClass);
-  }
-
-  public void disposeUIResources() {
+    myReplOpts.addKeyListener(new KeyAdapter() {
+      @Override
+      public void keyReleased(KeyEvent e) {
+        myMutableModuleExtension.setReplOpts(myReplOpts.getText());
+      }
+    });
   }
 
   private void createUIComponents() {
+    myPanel = this;
   }
-
-
 }

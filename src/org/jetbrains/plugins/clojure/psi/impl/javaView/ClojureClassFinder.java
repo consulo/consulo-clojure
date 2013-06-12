@@ -1,26 +1,22 @@
 package org.jetbrains.plugins.clojure.psi.impl.javaView;
 
-import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Condition;
 import com.intellij.psi.*;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.PsiShortNamesCache;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.clojure.psi.impl.ClojurePsiManager;
-import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.compiler.ClojureCompilerSettings;
+import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.psi.stubs.index.ClojureFullScriptNameIndex;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * @author ilyas
@@ -42,18 +38,8 @@ public class ClojureClassFinder extends PsiElementFinder {
     return getClassesByFQName(qualifiedName, scope);
   }
 
-  @Nullable
-  public PsiPackage findPackage(@NotNull String qualifiedName) {
-    return null;
-  }
-
   @NotNull
-  public PsiPackage[] getSubPackages(@NotNull PsiPackage psiPackage, @NotNull GlobalSearchScope scope) {
-    return new PsiPackage[0];
-  }
-
-  @NotNull
-  public PsiClass[] getClasses(@NotNull PsiPackage psiPackage, @NotNull GlobalSearchScope scope) {
+  public PsiClass[] getClasses(@NotNull PsiJavaPackage psiPackage, @NotNull GlobalSearchScope scope) {
     if (!ClojureCompilerSettings.getInstance(psiPackage.getProject()).getState().COMPILE_CLOJURE) return PsiClass.EMPTY_ARRAY;
 
     List<PsiClass> result = new ArrayList<PsiClass>();

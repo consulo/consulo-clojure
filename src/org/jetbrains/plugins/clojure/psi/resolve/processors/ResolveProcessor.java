@@ -1,8 +1,8 @@
 package org.jetbrains.plugins.clojure.psi.resolve.processors;
 
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiJavaPackage;
 import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.PsiPackage;
 import com.intellij.psi.scope.ElementClassHint;
 import com.intellij.psi.scope.NameHint;
 import com.intellij.psi.scope.PsiScopeProcessor;
@@ -43,7 +43,7 @@ public abstract class ResolveProcessor implements PsiScopeProcessor, NameHint, E
   public boolean kindMatches(PsiNamedElement element) {
     if (element instanceof PsiClass) {
       return hasKind(ResolveKind.JAVA_CLASS);
-    } else if (element instanceof PsiPackage) {
+    } else if (element instanceof PsiJavaPackage) {
       return hasKind(ResolveKind.NAMESPACE);
     } else {
       return hasKind(ResolveKind.OTHER);

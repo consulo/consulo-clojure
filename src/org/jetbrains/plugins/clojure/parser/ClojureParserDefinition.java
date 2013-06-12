@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.clojure.parser;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
@@ -33,14 +34,16 @@ import org.jetbrains.plugins.clojure.psi.impl.ClojureFileImpl;
 public class ClojureParserDefinition implements ParserDefinition {
 
   @NotNull
-  public Lexer createLexer(Project project) {
+  public Lexer createLexer(Project project, @NotNull LanguageVersion languageVersion) {
     return new ClojureFlexLexer();
   }
 
-  public PsiParser createParser(Project project) {
+  @NotNull
+  public PsiParser createParser(Project project, @NotNull LanguageVersion languageVersion) {
     return new ClojureParser();
   }
 
+  @NotNull
   public IFileElementType getFileNodeType() {
     return ClojureElementTypes.FILE;
   }

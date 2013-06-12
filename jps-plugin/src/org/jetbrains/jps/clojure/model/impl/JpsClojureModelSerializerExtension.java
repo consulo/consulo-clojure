@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class JpsClojureModelSerializerExtension extends JpsModelSerializerExtension {
   public static final String CLOJURE_COMPILER_SETTINGS_COMPONENT_NAME = "ClojureCompilerSettings";
-  public static final String CLOJURE_COMPILER_SETTINGS_FILE = "clojure_compiler.xml";
+  public static final String CLOJURE_COMPILER_SETTINGS_FILE = "compiler.xml";
 
   @NotNull
   @Override

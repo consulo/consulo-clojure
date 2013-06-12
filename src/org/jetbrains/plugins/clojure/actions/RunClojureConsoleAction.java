@@ -2,20 +2,19 @@ package org.jetbrains.plugins.clojure.actions;
 
 import com.intellij.execution.CantRunException;
 import com.intellij.execution.ExecutionHelper;
-import com.intellij.facet.FacetManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.ClojureIcons;
-import org.jetbrains.plugins.clojure.config.ClojureFacet;
-import org.jetbrains.plugins.clojure.config.ClojureFacetType;
+import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
 import org.jetbrains.plugins.clojure.repl.ClojureConsoleRunner;
 
 import java.util.Arrays;
@@ -68,9 +67,7 @@ public class RunClojureConsoleAction extends AnAction implements DumbAware {
         module = modules[0];
       } else {
         for (Module m : modules) {
-          final FacetManager manager = FacetManager.getInstance(m);
-          final ClojureFacet clFacet = manager.getFacetByType(ClojureFacetType.INSTANCE.getId());
-          if (clFacet != null) {
+          if (ModuleUtilCore.getExtension(m, ClojureModuleExtension.class) != null) {
             module = m;
             break;
           }

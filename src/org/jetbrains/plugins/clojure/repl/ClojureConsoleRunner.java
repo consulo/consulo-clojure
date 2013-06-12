@@ -9,17 +9,16 @@ import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.*;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.execution.ui.actions.CloseAction;
-import com.intellij.facet.FacetManager;
 import com.intellij.ide.CommonActionsManager;
 import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.compiler.CompilerPaths;
-import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actions.ToggleUseSoftWrapsToolbarAction;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.impl.softwrap.SoftWrapAppliancePlaces;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.JavaSdkType;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -36,8 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
-import org.jetbrains.plugins.clojure.config.ClojureFacet;
-import org.jetbrains.plugins.clojure.settings.ClojureProjectSettings;
+import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
 
 import javax.swing.*;
@@ -332,11 +330,11 @@ public class ClojureConsoleRunner {
   }
 
   private static String getMainReplClass(Module module) {
-    final ClojureFacet facet = getClojureFacet(module);
-    if (facet == null) {
+    final ClojureModuleExtension clojureModuleExtension = ModuleUtilCore.getExtension(module, ClojureModuleExtension.class);
+    if (clojureModuleExtension == null) {
       return ClojureUtils.CLOJURE_MAIN;
     }
-    return facet.getReplClass();
+    return clojureModuleExtension.getReplClass();
   }
 
   private GeneralCommandLine createCommandLine(Module module, String workingDir) throws CantRunException {
@@ -394,20 +392,15 @@ public class ClojureConsoleRunner {
   }
 
   private static List<String> getJvmClojureOptions(Module module) {
-    final ClojureFacet facet = getClojureFacet(module);
-    String opts = facet != null ? facet.getJvmOptions() : null;
+    final ClojureModuleExtension clojureModuleExtension = ModuleUtilCore.getExtension(module, ClojureModuleExtension.class);
+    String opts = clojureModuleExtension != null ? clojureModuleExtension.getJvmOpts() : null;
     if (opts == null || opts.trim().isEmpty()) return Arrays.asList();
     return Arrays.asList(opts.split("\\s+"));
   }
 
-  private static ClojureFacet getClojureFacet(Module module) {
-    final FacetManager manager = FacetManager.getInstance(module);
-    return manager.getFacetByType(ClojureFacet.ID);
-  }
-
   private static List<String> getReplClojureOptions(Module module) {
-    final ClojureFacet facet = getClojureFacet(module);
-    String opts = facet != null ? facet.getReplOptions() : null;
+    final ClojureModuleExtension clojureModuleExtension = ModuleUtilCore.getExtension(module, ClojureModuleExtension.class);
+    String opts = clojureModuleExtension != null ? clojureModuleExtension.getReplOpts() : null;
     if (opts == null || opts.trim().isEmpty()) return Arrays.asList();
     return Arrays.asList(opts.split("\\s+"));
   }

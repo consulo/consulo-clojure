@@ -139,12 +139,12 @@ public class NamespaceUtil {
       }
 
       final String qualifiedName = getQualifiedName();
-      final PsiPackage aPackage = JavaPsiFacade.getInstance(getProject()).findPackage(qualifiedName);
+      final PsiJavaPackage aPackage = JavaPsiFacade.getInstance(getProject()).findPackage(qualifiedName);
       if (aPackage != null) {
         for (PsiClass clazz : aPackage.getClasses(place.getResolveScope())) {
           if (!ResolveUtil.processElement(processor, clazz)) return false;
         }
-        for (PsiPackage pack : aPackage.getSubPackages(place.getResolveScope())) {
+        for (PsiJavaPackage pack : aPackage.getSubPackages(place.getResolveScope())) {
           if (!innerNamespaces.contains(pack.getQualifiedName()) &&
               !ResolveUtil.processElement(processor, getNamespaceElement(pack))) {
             return false;
@@ -157,7 +157,7 @@ public class NamespaceUtil {
 
   }
 
-  public static ClSyntheticNamespace getNamespaceElement(PsiPackage pack) {
+  public static ClSyntheticNamespace getNamespaceElement(PsiJavaPackage pack) {
     return new MyClSyntheticNamespace(pack.getProject(), pack.getName(), pack.getQualifiedName(), null);
   }
 }

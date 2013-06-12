@@ -1,12 +1,7 @@
 package org.jetbrains.plugins.clojure.utils;
 
-import com.intellij.facet.FacetManager;
-import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.roots.impl.libraries.LibraryEx;
 import com.intellij.openapi.roots.libraries.Library;
@@ -87,47 +82,10 @@ public class LibrariesUtil {
     return path;
   }
 
-  public static void addLibrary(Library library, Module module) {
-    final ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
-    if (!libraryReferenced(rootManager, library)) {
-      final ModifiableRootModel moduleModel = rootManager.getModifiableModel();
-      final LibraryOrderEntry addedEntry = moduleModel.addLibraryEntry(library);
-      final OrderEntry[] order = moduleModel.getOrderEntries();
-
-      //place library before jdk
-      assert order[order.length - 1] == addedEntry;
-      int insertionPoint = -1;
-      for (int i = 0; i < order.length - 1; i++) {
-        if (order[i] instanceof JdkOrderEntry) {
-          insertionPoint = i;
-          break;
-        }
-      }
-      if (insertionPoint >= 0) {
-        for (int i = order.length - 1; i > insertionPoint; i--) {
-          order[i] = order[i - 1];
-        }
-        order[insertionPoint] = addedEntry;
-
-        moduleModel.rearrangeOrderEntries(order);
-      }
-      moduleModel.commit();
-    }
-  }
-
-  public static Library[] getGlobalLibraries(Condition<Library> condition) {
+    public static Library[] getGlobalLibraries(Condition<Library> condition) {
     LibraryTable table = LibraryTablesRegistrar.getInstance().getLibraryTable();
     List<Library> libs = ContainerUtil.findAll(table.getLibraries(), condition);
     return libs.toArray(new Library[libs.size()]);
-  }
-
-  public static void addLibraryToReferringModules(FacetTypeId<?> facetID, Library library) {
-    for (Project prj : ProjectManager.getInstance().getOpenProjects())
-      for (Module module : ModuleManager.getInstance(prj).getModules()) {
-        if (FacetManager.getInstance(module).getFacetByType(facetID) != null) {
-          addLibrary(library, module);
-        }
-      }
   }
 
   @Nullable
@@ -135,26 +93,6 @@ public class LibrariesUtil {
     if (name == null) return null;
     LibraryTable table = LibraryTablesRegistrar.getInstance().getLibraryTable();
     return table.getLibraryByName(name);
-  }
-
-  public static void placeEntryToCorrectPlace(ModifiableRootModel model, LibraryOrderEntry addedEntry) {
-    final OrderEntry[] order = model.getOrderEntries();
-    //place library before jdk
-    assert order[order.length - 1] == addedEntry;
-    int insertionPoint = -1;
-    for (int i = 0; i < order.length - 1; i++) {
-      if (order[i] instanceof JdkOrderEntry) {
-        insertionPoint = i;
-        break;
-      }
-    }
-    if (insertionPoint >= 0) {
-      for (int i = order.length - 1; i > insertionPoint; i--) {
-        order[i] = order[i - 1];
-      }
-      order[insertionPoint] = addedEntry;
-      model.rearrangeOrderEntries(order);
-    }
   }
 
   public static boolean libraryReferenced(ModuleRootManager rootManager, Library library) {

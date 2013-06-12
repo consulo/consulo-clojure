@@ -15,11 +15,15 @@ import com.intellij.openapi.components.PathMacroManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.JavaSdkType;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.*;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ModuleSourceOrderEntry;
+import com.intellij.openapi.roots.OrderEntry;
+import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.ui.configuration.ClasspathEditor;
 import com.intellij.openapi.roots.ui.configuration.ModulesConfigurator;
 import com.intellij.openapi.ui.Messages;
@@ -28,7 +32,7 @@ import com.intellij.openapi.util.JDOMExternalizer;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.containers.hash.*;
+import org.consulo.java.platform.module.extension.JavaModuleExtension;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +43,6 @@ import org.jetbrains.plugins.clojure.utils.ClojureUtils;
 
 import java.io.File;
 import java.util.*;
-import java.util.HashSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -184,34 +187,6 @@ public class ClojureScriptRunConfiguration extends ModuleBasedConfiguration impl
     }
   }
 
-  private boolean isJarFromJRE(String path, Module module) {
-    if (path == null) return false;
-    OrderEntry[] entries = ModuleRootManager.getInstance(module).getOrderEntries();
-    for (OrderEntry entry : entries) {
-      if (entry instanceof JdkOrderEntry) {
-        JdkOrderEntry jdkEntry = (JdkOrderEntry) entry;
-        for (VirtualFile file : jdkEntry.getFiles(OrderRootType.CLASSES)) {
-          if (file.getPresentableUrl().equals(path)) return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  public StringBuffer getClearClassPathString(JavaParameters params, final Module module) {
-    List<String> list = params.getClassPath().getPathList();
-    Sdk jdk = params.getJdk();
-    StringBuffer buffer = new StringBuffer();
-    if (jdk != null) {
-      for (String libPath : list) {
-        if (!isJarFromJRE(libPath, module) /*&& !isJarFromClojureLib(libPath, module)*/) {
-          buffer.append(libPath).append(File.pathSeparator);
-        }
-      }
-    }
-    //buffer.append(CLOJURE_SDK);
-    return buffer;
-  }
 
   private void configureScript(JavaParameters params) {
     // add script
@@ -231,10 +206,15 @@ public class ClojureScriptRunConfiguration extends ModuleBasedConfiguration impl
       throw new ExecutionException("Module is not specified");
     }
 
-    final ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
-    final Sdk sdk = rootManager.getSdk();
+    final JavaModuleExtension extension = ModuleUtilCore.getExtension(module, JavaModuleExtension.class);
+    if(extension == null) {
+      throw CantRunException.noModuleExtension(module, JavaModuleExtension.class);
+    }
+
+    final Sdk sdk = extension.getSdk();
+
     if (sdk == null || !(sdk.getSdkType() instanceof JavaSdkType)) {
-      throw CantRunException.noJdkForModule(getModule());
+      throw CantRunException.noSdkForModuleExtension(extension);
     }
 
     final Project project = module.getProject();

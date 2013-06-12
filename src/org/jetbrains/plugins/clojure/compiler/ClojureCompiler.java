@@ -1,6 +1,5 @@
 package org.jetbrains.plugins.clojure.compiler;
 
-import com.intellij.compiler.CompilerConfiguration;
 import com.intellij.compiler.CompilerException;
 import com.intellij.compiler.impl.javaCompiler.BackendCompiler;
 import com.intellij.compiler.impl.javaCompiler.BackendCompilerWrapper;
@@ -87,7 +86,7 @@ public class ClojureCompiler implements TranslatingCompiler {
 
     // Copy clojure sources to output path
     if (settings.getState().COPY_CLJ_SOURCES) {
-      final ResourceCompiler resourceCompiler = new ResourceCompiler(myProject, CompilerConfiguration.getInstance(myProject));
+      final ResourceCompiler resourceCompiler = new ResourceCompiler(myProject);
       resourceCompiler.compile(context, moduleChunk, files, outputSink);
     }
   }

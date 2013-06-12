@@ -1,6 +1,5 @@
 package org.jetbrains.plugins.clojure.config.util;
 
-import com.intellij.facet.ui.libraries.LibraryInfo;
 import org.jetbrains.annotations.NonNls;
 
 /**
@@ -21,7 +20,7 @@ public class ClojureMavenLibraryUtil {
   private ClojureMavenLibraryUtil() {
   }
 
-  public static LibraryInfo createJarDownloadInfo(final boolean useBrainsUrl, final String jarName, final String version,
+  /*public static LibraryInfo createJarDownloadInfo(final boolean useBrainsUrl, final String jarName, final String version,
                                                   final String... requiredClasses) {
     final String v = version == null || version.length() == 0 ? "" : "/" + version + "/";
     if (useBrainsUrl)
@@ -31,6 +30,6 @@ public class ClojureMavenLibraryUtil {
       return new LibraryInfo(jarName, MAVEN_DOWNLOADING_URL + v
           + jarName.substring(0, jarName.lastIndexOf('.')) + "-" + version + ".jar", DOWNLOAD_MAVEN_ORG, null,
           requiredClasses);
-  }
+  } */
 
 }

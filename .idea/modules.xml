@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/jps-plugin/clojure-jps-plugin.iml" filepath="$PROJECT_DIR$/jps-plugin/clojure-jps-plugin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/clojure-plugin.iml" filepath="$PROJECT_DIR$/clojure-plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/clojure-runner/clojure-runner.iml" filepath="$PROJECT_DIR$/clojure-runner/clojure-runner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/consulo-clojure.iml" filepath="$PROJECT_DIR$/consulo-clojure.iml" />
     </modules>
   </component>
 </project>

@@ -1,9 +1,11 @@
 package org.jetbrains.plugins.clojure.compiler;
 
-import com.intellij.openapi.components.*;
-import com.intellij.openapi.project.Project;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.components.StorageScheme;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import org.jetbrains.annotations.NotNull;
+import org.consulo.lombok.annotations.ProjectService;
 import org.jetbrains.jps.clojure.model.impl.JpsClojureCompilerSettingsState;
 import org.jetbrains.jps.clojure.model.impl.JpsClojureModelSerializerExtension;
 
@@ -17,7 +19,8 @@ import org.jetbrains.jps.clojure.model.impl.JpsClojureModelSerializerExtension;
    ,@Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/" + JpsClojureModelSerializerExtension.CLOJURE_COMPILER_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
     }
 )
-public class ClojureCompilerSettings implements PersistentStateComponent<JpsClojureCompilerSettingsState>, ProjectComponent {
+@ProjectService
+public class ClojureCompilerSettings implements PersistentStateComponent<JpsClojureCompilerSettingsState> {
   private JpsClojureCompilerSettingsState myState = new JpsClojureCompilerSettingsState();
 
   public JpsClojureCompilerSettingsState getState() {
@@ -26,27 +29,6 @@ public class ClojureCompilerSettings implements PersistentStateComponent<JpsCloj
                 
   public void loadState(JpsClojureCompilerSettingsState state) {
     XmlSerializerUtil.copyBean(state, myState);
-  }
-
-  public void projectOpened() {
-  }
-
-  public void projectClosed() {
-  }
-
-  @NotNull
-  public String getComponentName() {
-    return "ClojureCompilerSettings";
-  }
-
-  public void initComponent() {
-  }
-
-  public void disposeComponent() {
-  }
-
-  public static ClojureCompilerSettings getInstance(Project project) {
-    return project.getComponent(ClojureCompilerSettings.class);
   }
 
 }

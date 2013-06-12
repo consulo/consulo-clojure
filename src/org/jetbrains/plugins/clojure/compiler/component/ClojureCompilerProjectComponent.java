@@ -1,21 +1,13 @@
 package org.jetbrains.plugins.clojure.compiler.component;
 
-import com.intellij.openapi.compiler.CompilerManager;
 import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.compiler.ClojureCompiler;
-import org.jetbrains.plugins.clojure.compiler.ClojureCompilerSettings;
-import org.jetbrains.plugins.clojure.file.ClojureFileType;
-
-import java.util.Arrays;
-import java.util.HashSet;
 
 /**
  * @author ilyas
  */
+@Deprecated
 public class ClojureCompilerProjectComponent implements ProjectComponent {
   private Project myProject;
 
@@ -25,7 +17,7 @@ public class ClojureCompilerProjectComponent implements ProjectComponent {
 
   public void projectOpened() {
     /* add clojure as compilable files */
-    CompilerManager compilerManager = CompilerManager.getInstance(myProject);
+  /*TODO [VISTALL]  CompilerManager compilerManager = CompilerManager.getInstance(myProject);
     compilerManager.addCompilableFileType(ClojureFileType.CLOJURE_FILE_TYPE);
 
     ClojureCompilerSettings settings = ClojureCompilerSettings.getInstance(myProject);
@@ -41,7 +33,7 @@ public class ClojureCompilerProjectComponent implements ProjectComponent {
         CompilerManager.getInstance(myProject).removeCompiler(compiler);
       }
       CompilerManager.getInstance(myProject).addCompiler(new ClojureCompiler(myProject));
-    }
+    }  */
   }
 
   public void projectClosed() {

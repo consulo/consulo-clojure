@@ -2,17 +2,11 @@ package org.jetbrains.plugins.clojure.compiler;
 
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.fileTypes.StdFileTypes;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.compiler.CompilerManager;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.plugins.clojure.ClojureIcons;
-import org.jetbrains.plugins.clojure.file.ClojureFileType;
 
 import javax.swing.*;
-import java.util.HashSet;
-import java.util.Arrays;
 
 /**
  * ilyas
@@ -23,11 +17,9 @@ public class ClojureCompilerConfigurable implements Configurable {
   private JCheckBox myCompileTaggedCb;
   private JCheckBox myCopySourcesCb;
   private ClojureCompilerSettings mySettings;
-  private Project myProject;
 
-  public ClojureCompilerConfigurable(ClojureCompilerSettings settings, Project project) {
-    myProject = project;
-    mySettings = settings;
+  public ClojureCompilerConfigurable(Project project) {
+    mySettings = ClojureCompilerSettings.getInstance(project);
   }
 
   @Nls
@@ -54,7 +46,7 @@ public class ClojureCompilerConfigurable implements Configurable {
   }
 
   public void apply() throws ConfigurationException {
-    if (myClojureBeforeCheckBox.isSelected() && mySettings.getState().CLOJURE_BEFORE != myClojureBeforeCheckBox.isSelected()) {
+    /*if (myClojureBeforeCheckBox.isSelected() && mySettings.getState().CLOJURE_BEFORE != myClojureBeforeCheckBox.isSelected()) {
       for (ClojureCompiler compiler: CompilerManager.getInstance(myProject).getCompilers(ClojureCompiler.class)) {
         CompilerManager.getInstance(myProject).removeCompiler(compiler);
       }
@@ -66,7 +58,7 @@ public class ClojureCompilerConfigurable implements Configurable {
         CompilerManager.getInstance(myProject).removeCompiler(compiler);
       }
       CompilerManager.getInstance(myProject).addCompiler(new ClojureCompiler(myProject));
-    }
+    }      */
 
     mySettings.getState().CLOJURE_BEFORE = myClojureBeforeCheckBox.isSelected();
     mySettings.getState().COMPILE_CLOJURE = myCompileTaggedCb.isSelected();

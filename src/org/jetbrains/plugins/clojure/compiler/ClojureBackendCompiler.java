@@ -1,21 +1,20 @@
 package org.jetbrains.plugins.clojure.compiler;
 
-import com.intellij.compiler.CompilerConfigurationImpl;
 import com.intellij.compiler.OutputParser;
+import com.intellij.compiler.impl.ModuleChunk;
 import com.intellij.compiler.impl.javaCompiler.ExternalCompiler;
-import com.intellij.compiler.impl.javaCompiler.ModuleChunk;
-import com.intellij.compiler.impl.javaCompiler.javac.JavacConfiguration;
+import com.intellij.compiler.impl.javaCompiler.javac.JavacCompilerConfiguration;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.CompileScope;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.JavaSdkType;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.impl.MockJdkWrapper;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.io.FileUtil;
@@ -23,11 +22,12 @@ import com.intellij.openapi.vfs.JarFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import org.consulo.java.platform.module.extension.JavaModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.model.java.compiler.JpsJavaCompilerOptions;
 import org.jetbrains.plugins.clojure.ClojureBundle;
-import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
+import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
 
@@ -63,16 +63,8 @@ public class ClojureBackendCompiler extends ExternalCompiler {
       }
     }
 
-    boolean hasJava = false;
     for (Module module : modules) {
-      if (ClojureUtils.isSuitableModule(module)) {
-        hasJava = true;
-      }
-    }
-    if (!hasJava) return false; //this compiler work with only Java modules, so we don't need to continue.
-
-    for (Module module : modules) {
-      if (!(ClojureConfigUtil.isClojureConfigured(module) && ClojureUtils.isSuitableModule(module))) {
+      if (ModuleUtilCore.getExtension(module, ClojureModuleExtension.class) == null) {
         Messages.showErrorDialog(myProject, ClojureBundle.message("cannot.compile.clojure.files.no.facet", module.getName()), ClojureBundle.message("cannot.compile"));
         return false;
       }
@@ -80,8 +72,12 @@ public class ClojureBackendCompiler extends ExternalCompiler {
 
     Set<Module> nojdkModules = new HashSet<Module>();
     for (Module module : scope.getAffectedModules()) {
-      if (!(ClojureUtils.isSuitableModule(module))) continue;
-      Sdk sdk = ModuleRootManager.getInstance(module).getSdk();
+      ClojureModuleExtension clojureModuleExtension = ModuleUtilCore.getExtension(module, ClojureModuleExtension.class);
+      if(clojureModuleExtension == null) {
+        continue;
+      }
+
+      final Sdk sdk = ModuleUtilCore.getSdk(module, JavaModuleExtension.class);
       if (sdk == null || !(sdk.getSdkType() instanceof JavaSdkType)) {
         nojdkModules.add(module);
       }
@@ -92,7 +88,7 @@ public class ClojureBackendCompiler extends ExternalCompiler {
       if (noJdkArray.length == 1) {
         Messages.showErrorDialog(myProject, ClojureBundle.message("cannot.compile.clojure.files.no.sdk", noJdkArray[0].getName()), ClojureBundle.message("cannot.compile"));
       } else {
-        StringBuffer modulesList = new StringBuffer();
+        StringBuilder modulesList = new StringBuilder();
         for (int i = 0; i < noJdkArray.length; i++) {
           if (i > 0) modulesList.append(", ");
           modulesList.append(noJdkArray[i].getName());
@@ -194,7 +190,7 @@ public class ClojureBackendCompiler extends ExternalCompiler {
     // Add classpath and sources
 
     for (Module module : chunk.getModules()) {
-      if (ClojureUtils.isSuitableModule(module)) {
+      if (ModuleUtilCore.getExtension(module, ClojureModuleExtension.class) != null) {
         ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
         OrderEntry[] entries = moduleRootManager.getOrderEntries();
         Set<VirtualFile> cpVFiles = new HashSet<VirtualFile>();
@@ -305,8 +301,9 @@ public class ClojureBackendCompiler extends ExternalCompiler {
   }
 
   private Sdk getJdkForStartupCommand(final ModuleChunk chunk) {
-    final Sdk jdk = chunk.getJdk();
-    final JpsJavaCompilerOptions javacSettings = JavacConfiguration.getOptions(myProject, JavacConfiguration.class);
+    final Sdk jdk = ModuleUtilCore.getSdk(chunk.getModule(), JavaModuleExtension.class);
+    final JpsJavaCompilerOptions javacSettings = JavacCompilerConfiguration.getInstance(myProject);
+    /*TODO [VISTALL]
     if (ApplicationManager.getApplication().isUnitTestMode() && javacSettings.isTestsUseExternalCompiler()) {
       final String jdkHomePath = CompilerConfigurationImpl.getTestsExternalCompilerHome();
       if (jdkHomePath == null) {
@@ -314,7 +311,7 @@ public class ClojureBackendCompiler extends ExternalCompiler {
       }
       // when running under Mock JDK use VM executable from the JDK on which the tests run
       return new MockJdkWrapper(jdkHomePath, jdk);
-    }
+    }  */
     return jdk;
   }
 

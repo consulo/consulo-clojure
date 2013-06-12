@@ -21,7 +21,7 @@ import javax.swing.*;
 /**
  * @author ilyas
  */
-public class ClSyntheticNamespace extends LightElement implements PsiPackage {
+public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage {
   @NotNull private final String myName;
   @NotNull private final String myQualifiedName;
   private ClNs myNamespace;
@@ -55,18 +55,18 @@ public class ClSyntheticNamespace extends LightElement implements PsiPackage {
     return myQualifiedName;
   }
 
-  public PsiPackage getParentPackage() {
+  public PsiJavaPackage getParentPackage() {
     return null;
   }
 
   @NotNull
-  public PsiPackage[] getSubPackages() {
-    return new PsiPackage[0];
+  public PsiJavaPackage[] getSubPackages() {
+    return new PsiJavaPackage[0];
   }
 
   @NotNull
-  public PsiPackage[] getSubPackages(@NotNull GlobalSearchScope scope) {
-    return new PsiPackage[0];
+  public PsiJavaPackage[] getSubPackages(@NotNull GlobalSearchScope scope) {
+    return new PsiJavaPackage[0];
   }
 
   @NotNull

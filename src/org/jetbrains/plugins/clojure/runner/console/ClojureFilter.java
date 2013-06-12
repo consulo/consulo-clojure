@@ -3,23 +3,22 @@ package org.jetbrains.plugins.clojure.runner.console;
 import com.intellij.execution.filters.Filter;
 import com.intellij.execution.filters.HyperlinkInfo;
 import com.intellij.execution.filters.OpenFileHyperlinkInfo;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.ui.popup.PopupChooserBuilder;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.search.PsiShortNamesCache;
-import com.intellij.psi.*;
-import com.intellij.pom.Navigatable;
+import com.intellij.ide.DataManager;
 import com.intellij.ide.util.EditSourceUtil;
 import com.intellij.ide.util.PsiElementListCellRenderer;
-import com.intellij.ide.DataManager;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.popup.PopupChooserBuilder;
+import com.intellij.pom.Navigatable;
+import com.intellij.psi.*;
+import com.intellij.psi.search.PsiShortNamesCache;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-
-import org.jetbrains.annotations.Nullable;
+import java.util.regex.Pattern;
 
 /**
  * @author ilyas
@@ -112,7 +111,7 @@ public class ClojureFilter implements Filter {
     protected String getContainerText(final PsiElement element, final String name) {
       final PsiDirectory parent = ((PsiFile) element).getParent();
       if (parent == null) return null;
-      final PsiPackage psiPackage = JavaDirectoryService.getInstance().getPackage(parent);
+      final PsiJavaPackage psiPackage = JavaDirectoryService.getInstance().getPackage(parent);
       if (psiPackage == null) return null;
       return "(" + psiPackage.getQualifiedName() + ")";
     }

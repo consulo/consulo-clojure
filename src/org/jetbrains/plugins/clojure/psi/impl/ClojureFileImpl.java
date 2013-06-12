@@ -7,35 +7,34 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Condition;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.source.PsiFileImpl;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.PsiElementProcessor;
-import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubTree;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.containers.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.parser.ClojureElementTypes;
-import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
+import org.jetbrains.plugins.clojure.parser.ClojureParser;
 import org.jetbrains.plugins.clojure.psi.api.ClList;
+import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
 import org.jetbrains.plugins.clojure.psi.api.ns.ClNs;
 import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 import org.jetbrains.plugins.clojure.psi.impl.list.ListDeclarations;
+import org.jetbrains.plugins.clojure.psi.impl.ns.NamespaceUtil;
+import org.jetbrains.plugins.clojure.psi.impl.synthetic.ClSyntheticClassImpl;
+import org.jetbrains.plugins.clojure.psi.resolve.ResolveUtil;
 import org.jetbrains.plugins.clojure.psi.stubs.api.ClFileStub;
 import org.jetbrains.plugins.clojure.psi.util.ClojureKeywords;
 import org.jetbrains.plugins.clojure.psi.util.ClojurePsiFactory;
 import org.jetbrains.plugins.clojure.psi.util.ClojurePsiUtil;
 import org.jetbrains.plugins.clojure.psi.util.ClojureTextUtil;
-import org.jetbrains.plugins.clojure.psi.impl.synthetic.ClSyntheticClassImpl;
-import org.jetbrains.plugins.clojure.psi.impl.ns.NamespaceUtil;
-import org.jetbrains.plugins.clojure.psi.resolve.ResolveUtil;
-import org.jetbrains.plugins.clojure.parser.ClojureParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -295,7 +294,7 @@ public class ClojureFileImpl extends PsiFileBase implements ClojureFile {
     final JavaPsiFacade facade = JavaPsiFacade.getInstance(getProject());
 
     // Add all java.lang classes
-    final PsiPackage javaLang = facade.findPackage(ClojurePsiUtil.JAVA_LANG);
+    final PsiJavaPackage javaLang = facade.findPackage(ClojurePsiUtil.JAVA_LANG);
     if (javaLang != null) {
       for (PsiClass clazz : javaLang.getClasses()) {
         if (!ResolveUtil.processElement(processor, clazz)) {
@@ -305,7 +304,7 @@ public class ClojureFileImpl extends PsiFileBase implements ClojureFile {
     }
 
     //Add top-level package names
-    final PsiPackage rootPackage = JavaPsiFacade.getInstance(getProject()).findPackage("");
+    final PsiJavaPackage rootPackage = JavaPsiFacade.getInstance(getProject()).findPackage("");
     if (rootPackage != null) {
       NamespaceUtil.getNamespaceElement(rootPackage).processDeclarations(processor, state, null, place);
     }
