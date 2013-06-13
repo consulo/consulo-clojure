@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.clojure.module.extension;
 
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.util.Comparing;
 import org.consulo.module.extension.MutableModuleExtension;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +37,7 @@ public class ClojureMutableModuleExtension extends ClojureModuleExtension implem
 
   @Nullable
   @Override
-  public JComponent createConfigurablePanel(@Nullable Runnable runnable) {
+  public JComponent createConfigurablePanel(@NotNull ModifiableRootModel modifiableRootModel, @Nullable Runnable runnable) {
     return new ClojureFacetSettingsTab(this);
   }
 
