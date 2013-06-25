@@ -49,17 +49,17 @@ public class ClojureParserDefinition implements ParserDefinition {
   }
 
   @NotNull
-  public TokenSet getWhitespaceTokens() {
+  public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
     return ClojureTokenTypes.WHITESPACE_SET;
   }
 
   @NotNull
-  public TokenSet getCommentTokens() {
+  public TokenSet getCommentTokens(LanguageVersion languageVersion) {
     return ClojureTokenTypes.COMMENTS;
   }
 
   @NotNull
-  public TokenSet getStringLiteralElements() {
+  public TokenSet getStringLiteralElements(LanguageVersion languageVersion) {
     return ClojureTokenTypes.STRINGS;
   }
 
