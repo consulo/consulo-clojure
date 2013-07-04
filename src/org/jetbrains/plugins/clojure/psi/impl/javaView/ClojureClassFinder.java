@@ -102,6 +102,4 @@ public class ClojureClassFinder extends PsiElementFinder {
     ClojureCompilerSettings settings = ClojureCompilerSettings.getInstance(myProject);
     return settings.getState().COMPILE_CLOJURE;
   }
-
-
 }

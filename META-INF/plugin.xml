@@ -113,10 +113,6 @@
 
   <project-components>
     <component>
-      <implementation-class>org.jetbrains.plugins.clojure.psi.impl.javaView.ClojureClassFinder
-      </implementation-class>
-    </component>
-    <component>
       <implementation-class>org.jetbrains.plugins.clojure.psi.impl.ClojurePsiManager</implementation-class>
     </component>
   </project-components>
