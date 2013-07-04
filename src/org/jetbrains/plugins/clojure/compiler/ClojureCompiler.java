@@ -5,11 +5,10 @@ import com.intellij.compiler.impl.javaCompiler.BackendCompiler;
 import com.intellij.compiler.impl.javaCompiler.BackendCompilerWrapper;
 import com.intellij.compiler.impl.resourceCompiler.ResourceCompiler;
 import com.intellij.compiler.make.CacheCorruptedException;
+import com.intellij.ide.highlighter.JavaClassFileType;
+import com.intellij.ide.highlighter.JavaFileType;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.compiler.CompileContext;
-import com.intellij.openapi.compiler.CompileScope;
-import com.intellij.openapi.compiler.CompilerMessageCategory;
-import com.intellij.openapi.compiler.TranslatingCompiler;
+import com.intellij.openapi.compiler.*;
 import com.intellij.openapi.compiler.ex.CompileContextEx;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
@@ -52,7 +51,7 @@ public class ClojureCompiler implements TranslatingCompiler {
         if (!file.isValid()) return false;
 
         final FileType fileType = FILE_TYPE_MANAGER.getFileTypeByFile(file);
-        if (!fileType.equals(ClojureFileType.CLOJURE_FILE_TYPE)) return false;
+        if (!fileType.equals(ClojureFileType.INSTANCE)) return false;
         
         PsiFile psi = PsiManager.getInstance(myProject).findFile(file);
         if (!(psi instanceof ClojureFile)) return false;
@@ -91,8 +90,26 @@ public class ClojureCompiler implements TranslatingCompiler {
     }
   }
 
+  @NotNull
+  @Override
+  public FileType[] getInputFileTypes() {
+    return new FileType[] {ClojureFileType.INSTANCE, JavaFileType.INSTANCE};
+  }
+
+  @NotNull
+  @Override
+  public FileType[] getOutputFileTypes() {
+    return new FileType[] {JavaFileType.INSTANCE, JavaClassFileType.INSTANCE};
+  }
+
+  @Override
   public boolean validateConfiguration(CompileScope scope) {
     return getBackEndCompiler().checkCompiler(scope);
+  }
+
+  @Override
+  public void init(@NotNull CompilerManager compilerManager) {
+    compilerManager.addCompilableFileType(ClojureFileType.INSTANCE);
   }
 
   private BackendCompiler getBackEndCompiler() {

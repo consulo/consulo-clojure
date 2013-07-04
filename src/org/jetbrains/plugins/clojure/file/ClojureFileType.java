@@ -1,5 +1,6 @@
 package org.jetbrains.plugins.clojure.file;
 
+import com.intellij.debugger.engine.FileTypeWithJvmDebugging;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import org.jetbrains.annotations.NonNls;
@@ -29,17 +30,19 @@ import javax.swing.*;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class ClojureFileType extends LanguageFileType {
+public class ClojureFileType extends LanguageFileType implements FileTypeWithJvmDebugging{
+  public static final ClojureFileType INSTANCE = new ClojureFileType();
+  @Deprecated
+  public static final ClojureFileType CLOJURE_FILE_TYPE = INSTANCE;
+  @Deprecated
+  public static final Language CLOJURE_LANGUAGE = ClojureLanguage.INSTANCE;
 
-  public static final ClojureFileType CLOJURE_FILE_TYPE = new ClojureFileType();
-  public static final Language CLOJURE_LANGUAGE = CLOJURE_FILE_TYPE.getLanguage();
-  public static final Icon CLOJURE_LOGO = ClojureIcons.CLOJURE_ICON_16x16;
   @NonNls
   public static final String CLOJURE_DEFAULT_EXTENSION = "clj";
 
 
   public ClojureFileType() {
-    super(new ClojureLanguage());
+    super(ClojureLanguage.INSTANCE);
   }
 
   @NotNull
@@ -54,17 +57,10 @@ public class ClojureFileType extends LanguageFileType {
 
   @NotNull
   public String getDefaultExtension() {
-    return "clj";
+    return CLOJURE_DEFAULT_EXTENSION;
   }
 
   public Icon getIcon() {
     return ClojureIcons.CLOJURE_ICON_16x16;
   }
-
-  public boolean isJVMDebuggingSupported() {
-    return true;
-  }
-
-
-
 }

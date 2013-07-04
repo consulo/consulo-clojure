@@ -1,7 +1,6 @@
 package org.jetbrains.plugins.clojure;
 
 import com.intellij.lang.Language;
-import org.jetbrains.plugins.clojure.file.ClojureFileType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,14 +18,17 @@ import org.jetbrains.plugins.clojure.file.ClojureFileType;
  * limitations under the License.
  */
 public class ClojureLanguage extends Language {
+  public static final ClojureLanguage INSTANCE = new ClojureLanguage();
+
   private static final String ID = "Clojure";
 
   public ClojureLanguage() {
     super(ID);
   }
 
+  @Deprecated
   public static Language getInstance() {
-    return ClojureFileType.CLOJURE_LANGUAGE;
+    return INSTANCE;
   }
 
 }

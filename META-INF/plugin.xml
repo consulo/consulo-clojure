@@ -21,6 +21,7 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
+    <compiler implementation="org.jetbrains.plugins.clojure.compiler.ClojureCompiler" />
     <projectService serviceInterface="org.jetbrains.plugins.clojure.compiler.ClojureCompilerSettings"
                     serviceImplementation="org.jetbrains.plugins.clojure.compiler.ClojureCompilerSettings"/>
     <errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
@@ -111,10 +112,6 @@
   </application-components>
 
   <project-components>
-    <component>
-      <implementation-class>org.jetbrains.plugins.clojure.compiler.component.ClojureCompilerProjectComponent
-      </implementation-class>
-    </component>
     <component>
       <implementation-class>org.jetbrains.plugins.clojure.psi.impl.javaView.ClojureClassFinder
       </implementation-class>

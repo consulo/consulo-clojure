@@ -8,7 +8,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.CompileScope;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.Configurable;
@@ -44,14 +43,12 @@ public class ClojureBackendCompiler extends ExternalCompiler {
   private final Project myProject;
   private final List<File> myTempFiles = new ArrayList<File>();
 
-  private final static Set<FileType> COMPILABLE_FILE_TYPES = new HashSet<FileType>(Arrays.asList(ClojureFileType.CLOJURE_FILE_TYPE));
-
   public ClojureBackendCompiler(Project project) {
     myProject = project;
   }
 
   public boolean checkCompiler(CompileScope scope) {
-    VirtualFile[] files = scope.getFiles(ClojureFileType.CLOJURE_FILE_TYPE, true);
+    VirtualFile[] files = scope.getFiles(ClojureFileType.INSTANCE, true);
     if (files.length == 0) return true;
 
     final ProjectFileIndex index = ProjectRootManager.getInstance(myProject).getFileIndex();
@@ -155,12 +152,6 @@ public class ClojureBackendCompiler extends ExternalCompiler {
       }
     }
     return commandLine.toArray(new String[commandLine.size()]);
-  }
-
-  @NotNull
-  @Override
-  public Set<FileType> getCompilableFileTypes() {
-    return COMPILABLE_FILE_TYPES;
   }
 
   private void createStartupCommandImpl(ModuleChunk chunk, ArrayList<String> commandLine, String outputPath, CompileScope scope) throws IOException {
