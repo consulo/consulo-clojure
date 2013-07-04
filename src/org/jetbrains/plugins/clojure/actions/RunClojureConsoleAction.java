@@ -4,7 +4,7 @@ import com.intellij.execution.CantRunException;
 import com.intellij.execution.ExecutionHelper;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
@@ -34,10 +34,10 @@ public class RunClojureConsoleAction extends AnAction implements DumbAware {
     final Module m = getModule(e);
     final Presentation presentation = e.getPresentation();
     if (m == null) {
-      presentation.setEnabled(false);
+      presentation.setEnabledAndVisible(false);
       return;
     }
-    presentation.setEnabled(true);
+    presentation.setEnabledAndVisible(true);
     super.update(e);
   }
 
@@ -58,13 +58,16 @@ public class RunClojureConsoleAction extends AnAction implements DumbAware {
   }
 
   static Module getModule(AnActionEvent e) {
-    Module module = e.getData(DataKeys.MODULE);
+    Module module = e.getData(LangDataKeys.MODULE);
     if (module == null) {
-      final Project project = e.getData(DataKeys.PROJECT);
-      if (project == null) return null;
+      final Project project = e.getData(LangDataKeys.PROJECT);
+      if (project == null) {
+        return null;
+      }
       final Module[] modules = ModuleManager.getInstance(project).getModules();
       if (modules.length == 1) {
         module = modules[0];
+
       } else {
         for (Module m : modules) {
           if (ModuleUtilCore.getExtension(m, ClojureModuleExtension.class) != null) {
@@ -72,12 +75,12 @@ public class RunClojureConsoleAction extends AnAction implements DumbAware {
             break;
           }
         }
-        if (module == null && modules.length > 0) {
-          module = modules[0];
-        }
       }
+    }
+
+    if (module != null && ModuleUtilCore.getExtension(module, ClojureModuleExtension.class) == null) {
+      module = null;
     }
     return module;
   }
-
 }
