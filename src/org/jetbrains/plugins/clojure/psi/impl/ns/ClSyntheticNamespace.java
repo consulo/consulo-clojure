@@ -1,7 +1,7 @@
 package org.jetbrains.plugins.clojure.psi.impl.ns;
 
+import com.intellij.ide.IconDescriptorUpdaters;
 import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
@@ -11,7 +11,6 @@ import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.clojure.ClojureIcons;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.psi.api.ns.ClNs;
 import org.jetbrains.plugins.clojure.psi.impl.ClojurePsiManager;
@@ -139,11 +138,6 @@ public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage
   }
 
   @Override
-  public Icon getIcon(int flags) {
-    return ClojureIcons.NAMESPACE;
-  }
-
-  @Override
   public ItemPresentation getPresentation() {
     return new ItemPresentation() {
       public String getPresentableText() {
@@ -160,12 +154,7 @@ public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage
 
       @Nullable
       public Icon getIcon(boolean open) {
-        return ClSyntheticNamespace.this.getIcon(Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
-      }
-
-      @Nullable
-      public TextAttributesKey getTextAttributesKey() {
-        return null;
+        return IconDescriptorUpdaters.getIcon(ClSyntheticNamespace.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
       }
     };
   }

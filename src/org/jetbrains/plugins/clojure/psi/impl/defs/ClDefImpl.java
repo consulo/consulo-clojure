@@ -1,8 +1,8 @@
 package org.jetbrains.plugins.clojure.psi.impl.defs;
 
+import com.intellij.ide.IconDescriptorUpdaters;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -16,7 +16,6 @@ import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.clojure.ClojureIcons;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.api.*;
@@ -25,7 +24,6 @@ import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 import org.jetbrains.plugins.clojure.psi.impl.list.ClListBaseImpl;
 import org.jetbrains.plugins.clojure.psi.resolve.ResolveUtil;
 import org.jetbrains.plugins.clojure.psi.stubs.api.ClDefStub;
-import org.jetbrains.plugins.clojure.psi.stubs.api.ClNsStub;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -127,12 +125,7 @@ public class ClDefImpl extends ClListBaseImpl<ClDefStub> implements ClDef, StubB
 
       @Nullable
       public Icon getIcon(boolean open) {
-        return ClDefImpl.this.getIcon(Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
-      }
-
-      @Nullable
-      public TextAttributesKey getTextAttributesKey() {
-        return null;
+        return IconDescriptorUpdaters.getIcon(ClDefImpl.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
       }
     };
   }
@@ -204,11 +197,6 @@ public class ClDefImpl extends ClListBaseImpl<ClDefStub> implements ClDef, StubB
     return buffer.toString();
   }
 
-
-  @Override
-  public Icon getIcon(int flags) {
-    return ClojureIcons.FUNCTION;
-  }
 
   public PsiElement setName(@NotNull @NonNls String name) throws IncorrectOperationException {
     final ClSymbol sym = getNameSymbol();

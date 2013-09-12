@@ -1,5 +1,6 @@
 package org.jetbrains.plugins.clojure.psi.impl.symbols;
 
+import com.intellij.ide.IconDescriptorUpdaters;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.application.Application;
@@ -24,7 +25,6 @@ import com.intellij.util.containers.HashSet;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.clojure.ClojureIcons;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import org.jetbrains.plugins.clojure.lexer.TokenSets;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElementImpl;
@@ -124,11 +124,6 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
   }
 
   @Override
-  public Icon getIcon(int flags) {
-    return ClojureIcons.SYMBOL;
-  }
-
-  @Override
   public ItemPresentation getPresentation() {
     return new ItemPresentation() {
       public String getPresentableText() {
@@ -145,7 +140,7 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
 
       @Nullable
       public Icon getIcon(boolean open) {
-        return ClSymbolImpl.this.getIcon(Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
+        return IconDescriptorUpdaters.getIcon(ClSymbolImpl.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
       }
 
       @Nullable

@@ -1,33 +1,33 @@
 package org.jetbrains.plugins.clojure.psi.impl.synthetic;
 
-import org.jetbrains.plugins.clojure.psi.api.synthetic.ClSyntheticClass;
-import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
-import org.jetbrains.plugins.clojure.psi.api.ClList;
-import org.jetbrains.plugins.clojure.psi.api.ClVector;
-import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
-import org.jetbrains.plugins.clojure.psi.util.ClojureKeywords;
-import org.jetbrains.plugins.clojure.psi.util.ClojurePsiUtil;
-import org.jetbrains.plugins.clojure.psi.impl.ClKeywordImpl;
-import org.jetbrains.plugins.clojure.file.ClojureFileType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.Nullable;
-import com.intellij.psi.impl.light.LightElement;
-import com.intellij.psi.impl.InheritanceImplUtil;
+import com.intellij.ide.IconDescriptorUpdaters;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Pair;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.InheritanceImplUtil;
+import com.intellij.psi.impl.light.LightElement;
+import com.intellij.psi.javadoc.PsiDocComment;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.javadoc.PsiDocComment;
 import com.intellij.util.IncorrectOperationException;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.navigation.ItemPresentation;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.clojure.file.ClojureFileType;
+import org.jetbrains.plugins.clojure.psi.api.ClList;
+import org.jetbrains.plugins.clojure.psi.api.ClVector;
+import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
+import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
+import org.jetbrains.plugins.clojure.psi.api.synthetic.ClSyntheticClass;
+import org.jetbrains.plugins.clojure.psi.impl.ClKeywordImpl;
+import org.jetbrains.plugins.clojure.psi.util.ClojureKeywords;
+import org.jetbrains.plugins.clojure.psi.util.ClojurePsiUtil;
 
 import javax.swing.*;
-import java.util.List;
-import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author ilyas
@@ -100,13 +100,8 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
         String pn = myFile.getPackageName();
         return "(" + (pn.equals("") ? "<default package>" : pn) + ") in " + myFile.getName();
       }
-
-      public TextAttributesKey getTextAttributesKey() {
-        return null;
-      }
-
       public Icon getIcon(boolean open) {
-        return myFile.getIcon(0);
+        return IconDescriptorUpdaters.getIcon(myFile, 0);
       }
     };
   }
@@ -398,10 +393,4 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
   public PsiTypeParameter[] getTypeParameters() {
     return new PsiTypeParameter[0];
   }
-
-  @Nullable
-  public Icon getIcon(int flags) {
-    return myFile.getIcon(flags);
-  }
-
 }

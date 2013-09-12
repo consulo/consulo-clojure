@@ -1,13 +1,12 @@
 package org.jetbrains.plugins.clojure.structure;
 
+import com.intellij.ide.IconDescriptorUpdaters;
+import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiNamedElement;
-import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.navigation.NavigationItem;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.util.Iconable;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
 
@@ -75,16 +74,12 @@ public class ClojureStructureViewElement implements StructureViewTreeElement {
         return ((PsiNamedElement) myElement).getName();
       }
 
-      public TextAttributesKey getTextAttributesKey() {
-        return null;
-      }
-
       public String getLocationString() {
         return null;
       }
 
       public Icon getIcon(boolean open) {
-        return myElement.getIcon(Iconable.ICON_FLAG_OPEN);
+        return IconDescriptorUpdaters.getIcon(myElement, 0);
       }
     };
   }

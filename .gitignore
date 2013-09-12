@@ -6,3 +6,5 @@ jflex.log
 lib/*SDK
 *~
 /.idea/workspace.xml
+
+/.consulo/workspace.xml

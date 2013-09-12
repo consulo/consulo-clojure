@@ -1,15 +1,14 @@
 package org.jetbrains.plugins.clojure.psi.impl.defs;
 
+import com.intellij.ide.IconDescriptorUpdaters;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.Iconable;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import org.jetbrains.plugins.clojure.psi.api.defs.ClDefMethod;
-import org.jetbrains.plugins.clojure.psi.stubs.api.ClDefStub;
-import org.jetbrains.plugins.clojure.ClojureIcons;
+import com.intellij.psi.stubs.IStubElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.clojure.psi.api.defs.ClDefMethod;
+import org.jetbrains.plugins.clojure.psi.stubs.api.ClDefStub;
 
 import javax.swing.*;
 
@@ -33,11 +32,6 @@ public class ClDefnMethodImpl extends ClDefImpl implements ClDefMethod {
   @Override
   public String toString() {
     return "ClDefn";
-  }
-
-  @Override
-  public Icon getIcon(int flags) {
-    return ClojureIcons.METHOD;
   }
 
   public String getPresentationText() {
@@ -68,12 +62,7 @@ public class ClDefnMethodImpl extends ClDefImpl implements ClDefMethod {
 
       @Nullable
       public Icon getIcon(boolean open) {
-        return ClDefnMethodImpl.this.getIcon(Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
-      }
-
-      @Nullable
-      public TextAttributesKey getTextAttributesKey() {
-        return null;
+        return IconDescriptorUpdaters.getIcon(ClDefnMethodImpl.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
       }
     };
   }
