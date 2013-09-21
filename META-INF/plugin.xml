@@ -80,7 +80,7 @@
     <extendWordSelectionHandler implementation="org.jetbrains.plugins.clojure.editor.selection.ClojureListSelectioner"/>
     <extendWordSelectionHandler
         implementation="org.jetbrains.plugins.clojure.editor.selection.ClojureLiteralSelectioner"/>
-    <compileServer.plugin classpath="clojure-jps-plugin.jar"/>
+
     <applicationService serviceInterface="org.jetbrains.plugins.clojure.settings.ClojureApplicationSettings"
                         serviceImplementation="org.jetbrains.plugins.clojure.settings.ClojureApplicationSettings"/>
 
