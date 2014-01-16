@@ -1,5 +1,8 @@
 package org.jetbrains.plugins.clojure.runner;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
+import org.mustbe.consulo.module.extension.ModuleExtensionHelper;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
@@ -19,13 +22,22 @@ import com.intellij.openapi.project.Project;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class ClojureScriptConfigurationFactory extends ConfigurationFactory {
-  public ClojureScriptConfigurationFactory(ClojureScriptRunConfigurationType scriptRunConfigurationType) {
-    super(scriptRunConfigurationType);
-  }
+public class ClojureScriptConfigurationFactory extends ConfigurationFactory
+{
+	public ClojureScriptConfigurationFactory(ClojureScriptRunConfigurationType scriptRunConfigurationType)
+	{
+		super(scriptRunConfigurationType);
+	}
 
-  public RunConfiguration createTemplateConfiguration(Project project) {
-    return new ClojureScriptRunConfiguration(this, project, "Clojure Script");
-  }
+	@Override
+	public RunConfiguration createTemplateConfiguration(Project project)
+	{
+		return new ClojureScriptRunConfiguration(this, project, "Clojure Script");
+	}
 
+	@Override
+	public boolean isApplicable(@NotNull Project project)
+	{
+		return ModuleExtensionHelper.getInstance(project).hasModuleExtension(ClojureModuleExtension.class);
+	}
 }

@@ -1,19 +1,56 @@
 package org.jetbrains.plugins.clojure.repl;
 
-import com.intellij.execution.*;
+import java.awt.BorderLayout;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.clojure.ClojureBundle;
+import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
+import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
+import org.jetbrains.plugins.clojure.utils.ClojureUtils;
+import org.mustbe.consulo.compiler.roots.CompilerPathsImpl;
+import com.intellij.execution.CantRunException;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.ExecutionHelper;
+import com.intellij.execution.ExecutionManager;
+import com.intellij.execution.Executor;
+import com.intellij.execution.ExecutorRegistry;
 import com.intellij.execution.configurations.CommandLineBuilder;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.JavaParameters;
 import com.intellij.execution.console.ConsoleHistoryController;
 import com.intellij.execution.executors.DefaultRunExecutor;
-import com.intellij.execution.process.*;
+import com.intellij.execution.process.CommandLineArgumentsProvider;
+import com.intellij.execution.process.ConsoleHistoryModel;
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.process.ProcessOutputTypes;
+import com.intellij.execution.process.ProcessTerminatedListener;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.execution.ui.actions.CloseAction;
 import com.intellij.ide.CommonActionsManager;
 import com.intellij.ide.DataManager;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.ActionPlaces;
+import com.intellij.openapi.actionSystem.ActionToolbar;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.actionSystem.IdeActions;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.compiler.CompilerPaths;
 import com.intellij.openapi.editor.actions.ToggleUseSoftWrapsToolbarAction;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.impl.softwrap.SoftWrapAppliancePlaces;
@@ -31,18 +68,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.IdeFocusManager;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.clojure.ClojureBundle;
-import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
-import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
-import org.jetbrains.plugins.clojure.utils.ClojureUtils;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.util.*;
-import java.util.List;
 
 /**
  * @author ilyas
@@ -299,7 +324,7 @@ public class ClojureConsoleRunner {
       }
     }
     // Also add output folders
-    final VirtualFile outputDirectory = CompilerPaths.getModuleOutputDirectory(module, false);
+    final VirtualFile outputDirectory = CompilerPathsImpl.getModuleOutputDirectory(module, false);
     if (outputDirectory != null) {
       cpVFiles.add(outputDirectory);
     }

@@ -1,10 +1,30 @@
 package org.jetbrains.plugins.clojure.runner;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import org.consulo.java.module.extension.JavaModuleExtension;
+import org.jdom.Element;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.clojure.ClojureBundle;
+import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
+import org.jetbrains.plugins.clojure.utils.ClojureUtils;
 import com.intellij.execution.CantRunException;
 import com.intellij.execution.CommonProgramRunConfigurationParameters;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.*;
+import com.intellij.execution.configurations.JavaCommandLineState;
+import com.intellij.execution.configurations.JavaParameters;
+import com.intellij.execution.configurations.ModuleBasedConfiguration;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RunConfigurationModule;
+import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.filters.Filter;
 import com.intellij.execution.filters.TextConsoleBuilderImpl;
 import com.intellij.execution.impl.ConsoleViewImpl;
@@ -32,17 +52,6 @@ import com.intellij.openapi.util.JDOMExternalizer;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import org.consulo.java.platform.module.extension.JavaModuleExtension;
-import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.clojure.ClojureBundle;
-import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
-import org.jetbrains.plugins.clojure.file.ClojureFileType;
-import org.jetbrains.plugins.clojure.utils.ClojureUtils;
-
-import java.io.File;
-import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -246,7 +255,6 @@ public class ClojureScriptRunConfiguration extends ModuleBasedConfiguration impl
       @Override
       public ConsoleView getConsole() {
         final ConsoleViewImpl view = new ConsoleViewImpl(project, false);
-        view.setFileType(ClojureFileType.CLOJURE_FILE_TYPE);
         for (Filter filter : filters) {
           view.addMessageFilter(filter);
         }

@@ -1,5 +1,11 @@
 package org.jetbrains.plugins.clojure.compiler;
 
+import java.util.Arrays;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.clojure.ClojureBundle;
+import org.jetbrains.plugins.clojure.file.ClojureFileType;
+import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import com.intellij.compiler.CompilerException;
 import com.intellij.compiler.impl.javaCompiler.BackendCompiler;
 import com.intellij.compiler.impl.javaCompiler.BackendCompilerWrapper;
@@ -8,7 +14,11 @@ import com.intellij.compiler.make.CacheCorruptedException;
 import com.intellij.ide.highlighter.JavaClassFileType;
 import com.intellij.ide.highlighter.JavaFileType;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.compiler.*;
+import com.intellij.openapi.compiler.CompileContext;
+import com.intellij.openapi.compiler.CompileScope;
+import com.intellij.openapi.compiler.CompilerManager;
+import com.intellij.openapi.compiler.CompilerMessageCategory;
+import com.intellij.openapi.compiler.TranslatingCompiler;
 import com.intellij.openapi.compiler.ex.CompileContextEx;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
@@ -20,12 +30,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.Chunk;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.ClojureBundle;
-import org.jetbrains.plugins.clojure.file.ClojureFileType;
-import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
-
-import java.util.Arrays;
 
 /**
  * @author ilyas
@@ -65,7 +69,7 @@ public class ClojureCompiler implements TranslatingCompiler {
 
   public void compile(CompileContext context, Chunk<Module> moduleChunk, VirtualFile[] files, OutputSink outputSink) {
     final BackendCompiler backEndCompiler = getBackEndCompiler();
-    final BackendCompilerWrapper wrapper = new BackendCompilerWrapper(moduleChunk, myProject, Arrays.asList(files),
+    final BackendCompilerWrapper wrapper = new BackendCompilerWrapper(this, moduleChunk, myProject, Arrays.asList(files),
         (CompileContextEx) context, backEndCompiler, outputSink);
     final ClojureCompilerSettings settings = ClojureCompilerSettings.getInstance(context.getProject());
 

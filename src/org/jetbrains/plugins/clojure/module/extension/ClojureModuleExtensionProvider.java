@@ -1,12 +1,12 @@
 package org.jetbrains.plugins.clojure.module.extension;
 
-import com.intellij.openapi.module.Module;
+import javax.swing.Icon;
+
 import org.consulo.module.extension.ModuleExtensionProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.clojure.ClojureIcons;
-
-import javax.swing.*;
+import com.intellij.openapi.module.Module;
 
 /**
  * @author VISTALL
@@ -21,11 +21,6 @@ public class ClojureModuleExtensionProvider implements ModuleExtensionProvider<C
   @NotNull
   public String getName() {
     return "Clojure";
-  }
-
-  @NotNull
-  public Class<ClojureModuleExtension> getImmutableClass() {
-    return ClojureModuleExtension.class;
   }
 
   @NotNull
