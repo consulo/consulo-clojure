@@ -1,11 +1,8 @@
 package org.jetbrains.plugins.clojure.repl;
 
-import com.intellij.execution.console.LanguageConsoleImpl;
-import com.intellij.execution.ui.ConsoleViewContentType;
-import com.intellij.openapi.util.Key;
-import org.intellij.lang.annotations.Language;
-
 import java.util.regex.Pattern;
+
+import org.intellij.lang.annotations.Language;
 
 /**
  * @author ilyas
@@ -24,16 +21,5 @@ public class ClojureConsoleHighlightingUtil {
 
   public static final Pattern CLOJURE_PROMPT_PATTERN = Pattern.compile(CLOJURE_IDENTIFIER + PROMPT_ARROW);
   public static final Pattern LINE_WITH_PROMPT_PATTERN = Pattern.compile(LINE_WITH_PROMPT);
-
-  /**
-   * Print highlighted output to the console
-   * @param console
-   * @param text
-   */
-  public static void processOutput(LanguageConsoleImpl console, String text, Key attributes) {
-    final ConsoleViewContentType outputType = ConsoleViewContentType.NORMAL_OUTPUT;
-    // todo implement multiple cases for error etc.
-    LanguageConsoleImpl.printToConsole(console, text, outputType, null);
-  }
 
 }
