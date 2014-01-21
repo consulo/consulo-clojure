@@ -216,7 +216,7 @@ public class ClojureConsoleRunner
 		for(String statement : statements2execute)
 		{
 			final String st = statement + "\n";
-			console.printToHistory(st, ConsoleViewContentType.NORMAL_OUTPUT.getAttributes());
+			console.printToHistory(st, ConsoleViewContentType.SYSTEM_OUTPUT.getAttributes());
 			final ClojureConsoleExecuteActionHandler actionHandler = getConsoleExecuteActionHandler();
 			actionHandler.processLine(st);
 		}
