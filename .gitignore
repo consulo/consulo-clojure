@@ -8,3 +8,4 @@ lib/*SDK
 /.idea/workspace.xml
 
 /.consulo/workspace.xml
+/dep
