@@ -3,7 +3,7 @@ package org.jetbrains.plugins.clojure.module.extension;
 import org.consulo.module.extension.impl.ModuleExtensionImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
-import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ModifiableRootModel;
 
 /**
  * @author VISTALL
@@ -20,9 +20,9 @@ public class ClojureModuleExtension extends ModuleExtensionImpl<ClojureModuleExt
 	@NotNull
 	protected String myReplOpts = "";
 
-	public ClojureModuleExtension(@NotNull String id, @NotNull Module module)
+	public ClojureModuleExtension(@NotNull String id, @NotNull ModifiableRootModel rootModel)
 	{
-		super(id, module);
+		super(id, rootModel);
 	}
 
 	@NotNull

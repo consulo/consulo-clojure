@@ -102,8 +102,12 @@
 		<projectConfigurable instance="org.jetbrains.plugins.clojure.compiler.ClojureCompilerConfigurable" id="Clojure"
 							 displayName="Clojure" parentId="project.propCompiler"/>
 
-		<moduleExtensionProvider key="clojure" parent-key="java"
-								 implementationClass="org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtensionProvider"/>
+		<moduleExtensionProvider key="clojure"
+								 parentKey="java"
+								 name="Clojure"
+								 icon="/org/jetbrains/plugins/clojure/icons/clojure_icon_16x16.png"
+								 immutableClass="org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension"
+								 mutableClass="org.jetbrains.plugins.clojure.module.extension.ClojureMutableModuleExtension"/>
 	</extensions>
 
 	<application-components>

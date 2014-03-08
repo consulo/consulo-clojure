@@ -6,7 +6,6 @@ import org.consulo.module.extension.MutableModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.clojure.config.ui.ClojureFacetSettingsTab;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.util.Comparing;
 
@@ -16,9 +15,9 @@ import com.intellij.openapi.util.Comparing;
  */
 public class ClojureMutableModuleExtension extends ClojureModuleExtension implements MutableModuleExtension<ClojureModuleExtension>
 {
-	public ClojureMutableModuleExtension(@NotNull String id, @NotNull Module module)
+	public ClojureMutableModuleExtension(@NotNull String id, @NotNull ModifiableRootModel rootModel)
 	{
-		super(id, module);
+		super(id, rootModel);
 	}
 
 	public void setReplClass(@NotNull String replClass)
@@ -38,7 +37,7 @@ public class ClojureMutableModuleExtension extends ClojureModuleExtension implem
 
 	@Nullable
 	@Override
-	public JComponent createConfigurablePanel(@NotNull ModifiableRootModel modifiableRootModel, @Nullable Runnable runnable)
+	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
 	{
 		return new ClojureFacetSettingsTab(this);
 	}

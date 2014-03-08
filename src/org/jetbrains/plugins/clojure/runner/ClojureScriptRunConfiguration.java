@@ -105,7 +105,7 @@ public class ClojureScriptRunConfiguration extends ModuleBasedConfiguration impl
 
   public String getAbsoluteWorkDir() {
     if (!new File(workDir).isAbsolute()) {
-      return new File(getProject().getLocation(), workDir).getAbsolutePath();
+      return new File(getProject().getBasePath(), workDir).getAbsolutePath();
     }
     return workDir;
   }
