@@ -1,9 +1,3 @@
-package org.jetbrains.plugins.clojure;
-
-import com.intellij.openapi.util.IconLoader;
-import org.jetbrains.annotations.NonNls;
-
-import javax.swing.*;
 
 /**
  * Copyright 2007, 2008, 2009 Red Shark Technology
@@ -16,6 +10,13 @@ import javax.swing.*;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jetbrains.plugins.clojure;
+
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NonNls;
+import com.intellij.openapi.util.IconLoader;
+
 public interface ClojureIcons {
   @NonNls
   final Icon CLOJURE_ICON_16x16 = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/clojure_icon_16x16.png");
