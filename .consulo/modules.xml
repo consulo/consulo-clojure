@@ -46,6 +46,7 @@
               <root url="jar://$MODULE_DIR$/dep/java/lib/java-manifest.jar!/" />
               <root url="jar://$MODULE_DIR$/dep/java/lib/java-rt.jar!/" />
               <root url="jar://$MODULE_DIR$/dep/java/lib/java.jar!/" />
+              <root url="jar://$MODULE_DIR$/dep/java/lib/jdi.jar!/" />
               <root url="jar://$MODULE_DIR$/dep/java/lib/jdk-annotations.jar!/" />
             </CLASSES>
             <DOCUMENTATION />
