@@ -445,7 +445,7 @@ public class ClojureConsoleRunner
 
 		Map<String, String> envParams = new HashMap<String, String>();
 		envParams.putAll(System.getenv());
-		line.setEnvParams(envParams);
+		line.getEnvironment().putAll(envParams);
 
 		if(!sdkConfigured)
 		{
