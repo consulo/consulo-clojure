@@ -1,5 +1,13 @@
 package org.jetbrains.plugins.clojure.psi.impl.synthetic;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.clojure.file.ClojureFileType;
+import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
+import org.jetbrains.plugins.clojure.psi.api.synthetic.ClSyntheticClass;
+import org.jetbrains.plugins.clojure.psi.api.synthetic.ClSyntheticMethod;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.PsiSuperMethodImplUtil;
@@ -8,14 +16,6 @@ import com.intellij.psi.javadoc.PsiDocComment;
 import com.intellij.psi.util.MethodSignature;
 import com.intellij.psi.util.MethodSignatureBackedByPsiMethod;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.file.ClojureFileType;
-import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
-import org.jetbrains.plugins.clojure.psi.api.synthetic.ClSyntheticClass;
-import org.jetbrains.plugins.clojure.psi.api.synthetic.ClSyntheticMethod;
-
-import java.util.List;
 
 /**
  * @author ilyas
@@ -152,10 +152,6 @@ public class ClSynteticMethodImpl extends LightElement implements ClSyntheticMet
   @NotNull
   public HierarchicalMethodSignature getHierarchicalMethodSignature() {
     return PsiSuperMethodImplUtil.getHierarchicalMethodSignature(this);
-  }
-
-  public PsiMethodReceiver getMethodReceiver() {
-    return null;
   }
 
   public PsiClass getContainingClass() {
