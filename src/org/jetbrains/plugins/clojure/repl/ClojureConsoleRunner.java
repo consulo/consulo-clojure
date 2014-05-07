@@ -41,7 +41,6 @@ import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.execution.ui.actions.CloseAction;
 import com.intellij.ide.CommonActionsManager;
-import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.ActionToolbar;
@@ -49,7 +48,6 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.IdeActions;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.actions.ToggleUseSoftWrapsToolbarAction;
 import com.intellij.openapi.editor.ex.EditorEx;
@@ -57,9 +55,6 @@ import com.intellij.openapi.editor.impl.softwrap.SoftWrapAppliancePlaces;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.JavaSdkType;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ModuleSourceOrderEntry;
 import com.intellij.openapi.roots.OrderEntry;
@@ -363,16 +358,9 @@ public class ClojureConsoleRunner
 		params.setMainClass(getMainReplClass(module));
 		params.setWorkingDirectory(new File(workingDir));
 
-		final GeneralCommandLine line = CommandLineBuilder.createFromJavaParameters(params, PlatformDataKeys.PROJECT.getData(DataManager.getInstance
-				().getDataContext()), true);
-
-		final Sdk sdk = params.getJdk();
-		assert sdk != null;
-		final SdkType type = (SdkType) sdk.getSdkType();
-		final String executablePath = ((JavaSdkType) type).getVMExecutablePath(sdk);
-
+		final GeneralCommandLine line = CommandLineBuilder.createFromJavaParameters(params, module.getProject(), true);
 		final ArrayList<String> cmd = new ArrayList<String>();
-		cmd.add(executablePath);
+		cmd.add(line.getExePath());
 		cmd.addAll(getJvmClojureOptions(module));
 		cmd.addAll(line.getParametersList().getList());
 		cmd.addAll(getReplClojureOptions(module));
@@ -429,13 +417,7 @@ public class ClojureConsoleRunner
 		params.setMainClass(getMainReplClass(module));
 		params.setWorkingDirectory(new File(workingDir));
 
-		final GeneralCommandLine line = CommandLineBuilder.createFromJavaParameters(params, PlatformDataKeys.PROJECT.getData(DataManager.getInstance
-				().getDataContext()), true);
-
-		final Sdk sdk = params.getJdk();
-		assert sdk != null;
-		final SdkType type = (SdkType) sdk.getSdkType();
-		final String executablePath = ((JavaSdkType) type).getVMExecutablePath(sdk);
+		final GeneralCommandLine line = CommandLineBuilder.createFromJavaParameters(params, module.getProject(), true);
 
 		//final ArrayList<String> cmd = new ArrayList<String>();
 		//cmd.add(executablePath);

@@ -15,6 +15,27 @@
  */
 package org.jetbrains.plugins.clojure.repl;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
+import org.jetbrains.plugins.clojure.utils.ClojureUtils;
 import clojure.lang.AFn;
 import com.intellij.execution.CantRunException;
 import com.intellij.execution.configurations.CommandLineBuilder;
@@ -24,16 +45,11 @@ import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessOutputTypes;
-import com.intellij.ide.DataManager;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.projectRoots.JavaSdkType;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ModuleSourceOrderEntry;
 import com.intellij.openapi.roots.OrderEntry;
@@ -42,16 +58,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.encoding.EncodingManager;
 import com.intellij.util.Alarm;
 import com.intellij.util.PathUtil;
-import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
-import org.jetbrains.plugins.clojure.utils.ClojureUtils;
-
-import java.io.*;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.*;
 
 /**
  * @author Kurt Christensen, ilyas
@@ -136,16 +142,11 @@ public class ClojureReplProcessHandler extends ProcessHandler {
       params.setMainClass(ClojureUtils.CLOJURE_MAIN);
       params.setWorkingDirectory(path);
 
-      final GeneralCommandLine line = CommandLineBuilder.createFromJavaParameters(params, PlatformDataKeys.PROJECT.getData(DataManager.getInstance().getDataContext()), true);
-
-      final Sdk sdk = params.getJdk();
-      assert sdk != null;
-      final SdkType type = (SdkType) sdk.getSdkType();
-      final String executablePath = ((JavaSdkType) type).getVMExecutablePath(sdk);
+      final GeneralCommandLine line = CommandLineBuilder.createFromJavaParameters(params, module.getProject(), true);
 
       final ArrayList<String> env = new ArrayList<String>();
       final ArrayList<String> cmd = new ArrayList<String>();
-      cmd.add(executablePath);
+      cmd.add(line.getExePath());
       cmd.addAll(line.getParametersList().getList());
 
       if (!sdkConfigured) {
