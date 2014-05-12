@@ -18,7 +18,7 @@ import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
-import com.intellij.compiler.JavaSdkUtil;
+import com.intellij.compiler.JavaCompilerUtil;
 import com.intellij.compiler.OutputParser;
 import com.intellij.compiler.impl.ModuleChunk;
 import com.intellij.compiler.impl.javaCompiler.ExternalCompiler;
@@ -195,7 +195,7 @@ public class ClojureBackendCompiler extends ExternalCompiler
 
 	private GeneralCommandLine createStartupCommandImpl(ModuleChunk chunk, String outputPath, CompileScope scope) throws IOException
 	{
-		final Sdk jdk = JavaSdkUtil.getSdkForCompilation(chunk);
+		final Sdk jdk = JavaCompilerUtil.getSdkForCompilation(chunk);
 		final String versionString = jdk.getVersionString();
 		if(versionString == null || "".equals(versionString))
 		{
