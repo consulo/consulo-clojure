@@ -1,22 +1,4 @@
-package org.jetbrains.plugins.clojure.file;
-
-import com.intellij.debugger.engine.FileTypeWithJvmDebugging;
-import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.ClojureIcons;
-import org.jetbrains.plugins.clojure.ClojureLanguage;
-
-import javax.swing.*;
-
 /**
- * Created by IntelliJ IDEA.
- * User: merlyn
- * Date: 16-Nov-2008
- * Time: 11:08:03 PM
- * Copyright 2007, 2008 Red Shark Technology
- * <p/>
  * Copyright 2000-2007 JetBrains s.r.o.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,37 +12,64 @@ import javax.swing.*;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class ClojureFileType extends LanguageFileType implements FileTypeWithJvmDebugging{
-  public static final ClojureFileType INSTANCE = new ClojureFileType();
-  @Deprecated
-  public static final ClojureFileType CLOJURE_FILE_TYPE = INSTANCE;
-  @Deprecated
-  public static final Language CLOJURE_LANGUAGE = ClojureLanguage.INSTANCE;
+package org.jetbrains.plugins.clojure.file;
 
-  @NonNls
-  public static final String CLOJURE_DEFAULT_EXTENSION = "clj";
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.clojure.ClojureIcons;
+import org.jetbrains.plugins.clojure.ClojureLanguage;
+import com.intellij.lang.Language;
+import com.intellij.openapi.fileTypes.LanguageFileType;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: merlyn
+ * Date: 16-Nov-2008
+ * Time: 11:08:03 PM
+ */
+public class ClojureFileType extends LanguageFileType
+{
+	public static final ClojureFileType INSTANCE = new ClojureFileType();
+	@Deprecated
+	public static final ClojureFileType CLOJURE_FILE_TYPE = INSTANCE;
+	@Deprecated
+	public static final Language CLOJURE_LANGUAGE = ClojureLanguage.INSTANCE;
+
+	@NonNls
+	public static final String CLOJURE_DEFAULT_EXTENSION = "clj";
 
 
-  public ClojureFileType() {
-    super(ClojureLanguage.INSTANCE);
-  }
+	public ClojureFileType()
+	{
+		super(ClojureLanguage.INSTANCE);
+	}
 
-  @NotNull
-  public String getName() {
-    return "Clojure";
-  }
+	@Override
+	@NotNull
+	public String getName()
+	{
+		return "Clojure";
+	}
 
-  @NotNull
-  public String getDescription() {
-    return "Clojure file";
-  }
+	@Override
+	@NotNull
+	public String getDescription()
+	{
+		return "Clojure file";
+	}
 
-  @NotNull
-  public String getDefaultExtension() {
-    return CLOJURE_DEFAULT_EXTENSION;
-  }
+	@Override
+	@NotNull
+	public String getDefaultExtension()
+	{
+		return CLOJURE_DEFAULT_EXTENSION;
+	}
 
-  public Icon getIcon() {
-    return ClojureIcons.CLOJURE_ICON_16x16;
-  }
+	@Override
+	public Icon getIcon()
+	{
+		return ClojureIcons.CLOJURE_ICON_16x16;
+	}
 }
