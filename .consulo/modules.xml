@@ -13,45 +13,37 @@
           </content>
           <orderEntry type="module-extension-sdk" extension-id="java" />
           <orderEntry type="module-extension-sdk" extension-id="consulo-plugin" />
-          <orderEntry type="sourceFolder" forTests="false" />
+          <orderEntry type="sourceFolder" />
           <orderEntry type="module-library">
             <library>
-              <CLASSES>
+              <binaries>
                 <root url="jar://$MODULE_DIR$/lib/clojure.jar!/" />
-              </CLASSES>
-              <DOCUMENTATION />
-              <SOURCES />
+              </binaries>
             </library>
           </orderEntry>
           <orderEntry type="module-library">
             <library>
-              <CLASSES>
+              <binaries>
                 <root url="jar://$MODULE_DIR$/lib/org-enclojure-repl-client.jar!/" />
-              </CLASSES>
-              <DOCUMENTATION />
-              <SOURCES />
+              </binaries>
             </library>
           </orderEntry>
           <orderEntry type="module-library">
             <library>
-              <CLASSES>
+              <binaries>
                 <root url="jar://$MODULE_DIR$/lib/org-enclojure-repl-server.jar!/" />
-              </CLASSES>
-              <DOCUMENTATION />
-              <SOURCES />
+              </binaries>
             </library>
           </orderEntry>
           <orderEntry type="module-library">
             <library name="consulo:Java">
-              <CLASSES>
+              <binaries>
                 <root url="jar://$MODULE_DIR$/dep/java/lib/java-manifest.jar!/" />
                 <root url="jar://$MODULE_DIR$/dep/java/lib/java-rt.jar!/" />
                 <root url="jar://$MODULE_DIR$/dep/java/lib/java.jar!/" />
                 <root url="jar://$MODULE_DIR$/dep/java/lib/jdi.jar!/" />
                 <root url="jar://$MODULE_DIR$/dep/java/lib/jdk-annotations.jar!/" />
-              </CLASSES>
-              <DOCUMENTATION />
-              <SOURCES />
+              </binaries>
             </library>
           </orderEntry>
         </module-layer>
@@ -59,4 +51,3 @@
     </modules>
   </component>
 </project>
-
