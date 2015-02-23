@@ -6,7 +6,7 @@ import org.consulo.module.extension.MutableModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.clojure.config.ui.ClojureFacetSettingsTab;
-import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootLayer;
 import com.intellij.openapi.util.Comparing;
 
 /**
@@ -15,9 +15,9 @@ import com.intellij.openapi.util.Comparing;
  */
 public class ClojureMutableModuleExtension extends ClojureModuleExtension implements MutableModuleExtension<ClojureModuleExtension>
 {
-	public ClojureMutableModuleExtension(@NotNull String id, @NotNull ModifiableRootModel rootModel)
+	public ClojureMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
 	{
-		super(id, rootModel);
+		super(id, moduleRootLayer);
 	}
 
 	public void setReplClass(@NotNull String replClass)
