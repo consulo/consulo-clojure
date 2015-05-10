@@ -1,7 +1,15 @@
 package org.jetbrains.plugins.clojure.highlighter;
 
-import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
+import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.clojure.lexer.ClojureFlexLexer;
+import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import com.intellij.lexer.Lexer;
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -9,14 +17,6 @@ import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.lexer.ClojureFlexLexer;
-import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
-
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * User: peter
@@ -111,33 +111,23 @@ public class ClojureSyntaxHighlighter extends SyntaxHighlighterBase implements C
 
   // Registering TextAttributes
   static {
-    TextAttributesKey.createTextAttributesKey(LINE_COMMENT_ID, SyntaxHighlighterColors.LINE_COMMENT.getDefaultAttributes());
-    TextAttributesKey.createTextAttributesKey(KEY_ID, HighlightInfoType.STATIC_FIELD.getAttributesKey().getDefaultAttributes());
-    TextAttributesKey.createTextAttributesKey(DEF_ID, SyntaxHighlighterColors.KEYWORD.getDefaultAttributes());
-    TextAttributesKey.createTextAttributesKey(NUMBER_ID, SyntaxHighlighterColors.NUMBER.getDefaultAttributes());
-    TextAttributesKey.createTextAttributesKey(STRING_ID, SyntaxHighlighterColors.STRING.getDefaultAttributes());
-    TextAttributesKey.createTextAttributesKey(BRACES_ID, SyntaxHighlighterColors.BRACES.getDefaultAttributes());
-    TextAttributesKey.createTextAttributesKey(PAREN_ID, SyntaxHighlighterColors.PARENTHS.getDefaultAttributes());
-    TextAttributesKey.createTextAttributesKey(LITERAL_ID, SyntaxHighlighterColors.KEYWORD.getDefaultAttributes());
-    TextAttributesKey.createTextAttributesKey(CHAR_ID, SyntaxHighlighterColors.STRING.getDefaultAttributes());
-    TextAttributesKey.createTextAttributesKey(BAD_CHARACTER_ID, HighlighterColors.BAD_CHARACTER.getDefaultAttributes());
 
     final Color deepBlue = SyntaxHighlighterColors.KEYWORD.getDefaultAttributes().getForegroundColor();
     ATOM_ATTRIB.setForegroundColor(deepBlue);
     TextAttributesKey.createTextAttributesKey(ATOM_ID, ATOM_ATTRIB);
   }
 
-  public static TextAttributesKey LINE_COMMENT = TextAttributesKey.createTextAttributesKey(LINE_COMMENT_ID);
-  public static TextAttributesKey KEY = TextAttributesKey.createTextAttributesKey(KEY_ID);
-  public static TextAttributesKey DEF = TextAttributesKey.createTextAttributesKey(DEF_ID);
+  public static TextAttributesKey LINE_COMMENT = TextAttributesKey.createTextAttributesKey(LINE_COMMENT_ID, DefaultLanguageHighlighterColors.LINE_COMMENT);
+  public static TextAttributesKey KEY = TextAttributesKey.createTextAttributesKey(KEY_ID, DefaultLanguageHighlighterColors.STATIC_FIELD);
+  public static TextAttributesKey DEF = TextAttributesKey.createTextAttributesKey(DEF_ID, DefaultLanguageHighlighterColors.KEYWORD);
   public static TextAttributesKey ATOM = TextAttributesKey.createTextAttributesKey(ATOM_ID);
-  public static TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey(NUMBER_ID);
-  public static TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey(STRING_ID);
-  public static TextAttributesKey BRACES = TextAttributesKey.createTextAttributesKey(BRACES_ID);
-  public static TextAttributesKey PARENTS = TextAttributesKey.createTextAttributesKey(PAREN_ID);
-  public static TextAttributesKey LITERAL = TextAttributesKey.createTextAttributesKey(LITERAL_ID);
-  public static TextAttributesKey CHAR = TextAttributesKey.createTextAttributesKey(CHAR_ID);
-  public static TextAttributesKey BAD_CHARACTER = TextAttributesKey.createTextAttributesKey(BAD_CHARACTER_ID);
+  public static TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey(NUMBER_ID, DefaultLanguageHighlighterColors.NUMBER);
+  public static TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey(STRING_ID, DefaultLanguageHighlighterColors.STRING);
+  public static TextAttributesKey BRACES = TextAttributesKey.createTextAttributesKey(BRACES_ID, DefaultLanguageHighlighterColors.BRACES);
+  public static TextAttributesKey PARENTS = TextAttributesKey.createTextAttributesKey(PAREN_ID, DefaultLanguageHighlighterColors.PARENTHESES);
+  public static TextAttributesKey LITERAL = TextAttributesKey.createTextAttributesKey(LITERAL_ID, DefaultLanguageHighlighterColors.KEYWORD);
+  public static TextAttributesKey CHAR = TextAttributesKey.createTextAttributesKey(CHAR_ID, DefaultLanguageHighlighterColors.STRING);
+  public static TextAttributesKey BAD_CHARACTER = TextAttributesKey.createTextAttributesKey(BAD_CHARACTER_ID, HighlighterColors.BAD_CHARACTER);
 
 
   static {
