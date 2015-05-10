@@ -11,13 +11,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.consulo.java.module.extension.JavaModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
+import org.mustbe.consulo.java.module.extension.JavaModuleExtension;
 import com.intellij.compiler.JavaCompilerUtil;
 import com.intellij.compiler.OutputParser;
 import com.intellij.compiler.impl.ModuleChunk;

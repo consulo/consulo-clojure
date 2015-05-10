@@ -8,13 +8,13 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.consulo.java.module.extension.JavaModuleExtension;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
+import org.mustbe.consulo.java.module.extension.JavaModuleExtension;
 import com.intellij.execution.CantRunException;
 import com.intellij.execution.CommonProgramRunConfigurationParameters;
 import com.intellij.execution.ExecutionException;
