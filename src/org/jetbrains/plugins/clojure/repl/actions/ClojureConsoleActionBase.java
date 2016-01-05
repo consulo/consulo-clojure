@@ -1,12 +1,21 @@
 package org.jetbrains.plugins.clojure.repl.actions;
 
+import java.util.Collection;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.clojure.ClojureBundle;
+import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
+import org.jetbrains.plugins.clojure.repl.ClojureConsole;
+import org.jetbrains.plugins.clojure.repl.ClojureConsoleExecuteActionHandler;
+import org.jetbrains.plugins.clojure.repl.ClojureConsoleProcessHandler;
+import org.jetbrains.plugins.clojure.repl.ClojureConsoleView;
 import com.intellij.execution.ExecutionHelper;
 import com.intellij.execution.console.LanguageConsoleImpl;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.CaretModel;
@@ -19,15 +28,6 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.NotNullFunction;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.ClojureBundle;
-import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
-import org.jetbrains.plugins.clojure.repl.ClojureConsole;
-import org.jetbrains.plugins.clojure.repl.ClojureConsoleExecuteActionHandler;
-import org.jetbrains.plugins.clojure.repl.ClojureConsoleProcessHandler;
-import org.jetbrains.plugins.clojure.repl.ClojureConsoleView;
-
-import java.util.Collection;
 
 /**
  * @author ilyas
@@ -80,7 +80,7 @@ public abstract class ClojureConsoleActionBase extends AnAction {
   public void update(AnActionEvent e) {
     final Presentation presentation = e.getPresentation();
 
-    final Editor editor = e.getData(DataKeys.EDITOR);
+    final Editor editor = e.getData(LangDataKeys.EDITOR);
 
     if (editor == null) {
       presentation.setEnabled(false);

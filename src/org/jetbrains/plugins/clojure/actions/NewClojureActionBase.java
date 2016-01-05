@@ -1,9 +1,20 @@
 package org.jetbrains.plugins.clojure.actions;
 
+import javax.swing.Icon;
+
+import org.consulo.psi.PsiPackage;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.clojure.ClojureBundle;
+import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
+import org.jetbrains.plugins.clojure.utils.ClojureNamesUtil;
 import com.intellij.CommonBundle;
 import com.intellij.ide.IdeView;
 import com.intellij.ide.actions.CreateElementActionBase;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
@@ -11,16 +22,14 @@ import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.*;
+import com.intellij.psi.JavaDirectoryService;
+import com.intellij.psi.JavaPsiFacade;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiJavaPackage;
+import com.intellij.psi.PsiNameHelper;
 import com.intellij.util.IncorrectOperationException;
-import org.consulo.psi.PsiPackage;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.ClojureBundle;
-import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
-import org.jetbrains.plugins.clojure.utils.ClojureNamesUtil;
-
-import javax.swing.*;
 
 /**
  * @author ilyas
@@ -49,8 +58,7 @@ public abstract class NewClojureActionBase extends CreateElementActionBase {
   public void update(final AnActionEvent event) {
     super.update(event);
     final Presentation presentation = event.getPresentation();
-    final DataContext context = event.getDataContext();
-    Module module = (Module) context.getData(DataKeys.MODULE.getName());
+    Module module = event.getData(LangDataKeys.MODULE);
 
     if (module == null) {
       presentation.setEnabled(false);

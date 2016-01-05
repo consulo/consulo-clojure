@@ -1,14 +1,14 @@
 package org.jetbrains.plugins.clojure.repl.actions;
 
+import org.jetbrains.plugins.clojure.ClojureBundle;
+import org.jetbrains.plugins.clojure.ClojureIcons;
+import org.jetbrains.plugins.clojure.psi.util.ClojurePsiFactory;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
-import org.jetbrains.plugins.clojure.ClojureBundle;
-import org.jetbrains.plugins.clojure.ClojureIcons;
-import org.jetbrains.plugins.clojure.psi.util.ClojurePsiFactory;
 
 /**
  * @author ilyas
@@ -20,7 +20,7 @@ public class RunSelectedTextAction extends ClojureConsoleActionBase {
 
   @Override
   public void actionPerformed(AnActionEvent e) {
-    final Editor editor = e.getData(DataKeys.EDITOR);
+    final Editor editor = e.getData(LangDataKeys.EDITOR);
     if (editor == null) {
       return;
     }
