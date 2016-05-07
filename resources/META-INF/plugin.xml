@@ -17,7 +17,6 @@
 		<elementFinder implementation="org.jetbrains.plugins.clojure.psi.impl.javaView.ClojureClassFinder"/>
 		<debugger.positionManagerFactory
 				implementation="org.jetbrains.plugins.clojure.debugger.ClojurePositionManagerFactory"/>
-		<debugger.jvmDebugProvider implementation="org.jetbrains.plugins.clojure.debugger.ClojureJVMDebugProvider" />
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
@@ -109,6 +108,8 @@
 								 icon="/org/jetbrains/plugins/clojure/icons/clojure_icon_16x16.png"
 								 immutableClass="org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension"
 								 mutableClass="org.jetbrains.plugins.clojure.module.extension.ClojureMutableModuleExtension"/>
+
+		<xdebugger.lineBreakpointTypeResolver filetype="Clojure" implementationClass="consulo.java.debugger.JavaLineBreakpointTypeResolver" />
 	</extensions>
 
 	<application-components>
