@@ -1,13 +1,13 @@
 package org.jetbrains.plugins.clojure.compiler;
 
+import org.jetbrains.jps.clojure.model.impl.JpsClojureCompilerSettingsState;
+import org.jetbrains.jps.clojure.model.impl.JpsClojureModelSerializerExtension;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.components.StorageScheme;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import org.consulo.lombok.annotations.ProjectService;
-import org.jetbrains.jps.clojure.model.impl.JpsClojureCompilerSettingsState;
-import org.jetbrains.jps.clojure.model.impl.JpsClojureModelSerializerExtension;
+import consulo.lombok.annotations.ProjectService;
 
 /**
  * @author ilyas
