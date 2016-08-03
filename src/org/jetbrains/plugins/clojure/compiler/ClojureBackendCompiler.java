@@ -42,6 +42,7 @@ import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.ThrowableComputable;
+import com.intellij.openapi.util.UserDataHolderBase;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.JarFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -88,8 +89,7 @@ public class ClojureBackendCompiler extends ExternalCompiler
 		{
 			if(ModuleUtilCore.getExtension(module, ClojureModuleExtension.class) == null)
 			{
-				Messages.showErrorDialog(myProject, ClojureBundle.message("cannot.compile.clojure.files.no.facet", module.getName()),
-						ClojureBundle.message("cannot.compile"));
+				Messages.showErrorDialog(myProject, ClojureBundle.message("cannot.compile.clojure.files.no.facet", module.getName()), ClojureBundle.message("cannot.compile"));
 				return false;
 			}
 		}
@@ -115,8 +115,7 @@ public class ClojureBackendCompiler extends ExternalCompiler
 			final Module[] noJdkArray = nojdkModules.toArray(new Module[nojdkModules.size()]);
 			if(noJdkArray.length == 1)
 			{
-				Messages.showErrorDialog(myProject, ClojureBundle.message("cannot.compile.clojure.files.no.sdk", noJdkArray[0].getName()),
-						ClojureBundle.message("cannot.compile"));
+				Messages.showErrorDialog(myProject, ClojureBundle.message("cannot.compile.clojure.files.no.sdk", noJdkArray[0].getName()), ClojureBundle.message("cannot.compile"));
 			}
 			else
 			{
@@ -129,8 +128,7 @@ public class ClojureBackendCompiler extends ExternalCompiler
 					}
 					modulesList.append(noJdkArray[i].getName());
 				}
-				Messages.showErrorDialog(myProject, ClojureBundle.message("cannot.compile.clojure.files.no.sdk.mult", modulesList.toString()),
-						ClojureBundle.message("cannot.compile"));
+				Messages.showErrorDialog(myProject, ClojureBundle.message("cannot.compile.clojure.files.no.sdk.mult", modulesList.toString()), ClojureBundle.message("cannot.compile"));
 			}
 			return false;
 		}
@@ -178,7 +176,7 @@ public class ClojureBackendCompiler extends ExternalCompiler
 
 	@Override
 	@NotNull
-	public GeneralCommandLine createStartupCommand(
+	public GeneralCommandLine createStartupCommand(final UserDataHolderBase data,
 			final ModuleChunk chunk,
 			final CompileContext context,
 			final String outputPath) throws IOException, IllegalArgumentException
@@ -188,7 +186,7 @@ public class ClojureBackendCompiler extends ExternalCompiler
 			@Override
 			public GeneralCommandLine compute() throws IOException
 			{
-				return createStartupCommandImpl(chunk,  outputPath, context.getCompileScope());
+				return createStartupCommandImpl(chunk, outputPath, context.getCompileScope());
 			}
 		});
 	}
@@ -278,11 +276,7 @@ public class ClojureBackendCompiler extends ExternalCompiler
 	}
 
 
-	private static void fillFileWithClojureCompilerParams(
-			ModuleChunk chunk,
-			File fileWithParameters,
-			String outputPath,
-			CompileScope scope) throws FileNotFoundException
+	private static void fillFileWithClojureCompilerParams(ModuleChunk chunk, File fileWithParameters, String outputPath, CompileScope scope) throws FileNotFoundException
 	{
 
 		VirtualFile[] files = scope.getFiles(ClojureFileType.CLOJURE_FILE_TYPE, true);
