@@ -1,1 +1,1 @@
-![Build Status](http://must-be.org/vulcan/statusImage?name=consulo-clojure)
+[![Build Status](http://must-be.org/jenkins/job/consulo-clojure/badge/icon)](http://must-be.org/jenkins/job/consulo-clojure/)
