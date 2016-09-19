@@ -15,7 +15,7 @@
 
 package org.jetbrains.plugins.clojure.config.ui;
 
-import org.jetbrains.plugins.clojure.module.extension.ClojureMutableModuleExtension;
+import consulo.clojure.module.extension.ClojureMutableModuleExtension;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;

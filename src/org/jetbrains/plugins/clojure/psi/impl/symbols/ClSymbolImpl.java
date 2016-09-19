@@ -1,6 +1,6 @@
 package org.jetbrains.plugins.clojure.psi.impl.symbols;
 
-import com.intellij.ide.IconDescriptorUpdaters;
+import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.application.Application;

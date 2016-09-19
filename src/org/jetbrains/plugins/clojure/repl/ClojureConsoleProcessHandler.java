@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 
 import com.intellij.execution.console.LanguageConsoleImpl;
 import com.intellij.execution.process.ColoredProcessHandler;
-import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
@@ -24,12 +23,10 @@ public class ClojureConsoleProcessHandler extends ColoredProcessHandler
 	}
 
 	@Override
-	public void coloredTextAvailable(String text, Key attributes)
+	protected void textAvailable(String text, Key attributes)
 	{
-		ConsoleViewContentType consoleViewType = ConsoleViewContentType.getConsoleViewType(attributes);
 		final String string = processPrompts(myLanguageConsole, StringUtil.convertLineSeparators(text));
-
-		myLanguageConsole.printToHistory(string, consoleViewType.getAttributes());
+		ClojureConsoleHighlightingUtil.processOutput(myLanguageConsole, string, attributes);
 	}
 
 	private static String processPrompts(final LanguageConsoleImpl console, String text)

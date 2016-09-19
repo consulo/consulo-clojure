@@ -1,7 +1,6 @@
 package org.jetbrains.plugins.clojure.editor;
 
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.copyright.config.CopyrightFileConfig;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiComment;
@@ -12,6 +11,7 @@ import com.maddyhome.idea.copyright.CopyrightProfile;
 import com.maddyhome.idea.copyright.psi.UpdateCopyrightsProvider;
 import com.maddyhome.idea.copyright.psi.UpdatePsiFileCopyright;
 import com.maddyhome.idea.copyright.ui.TemplateCommentPanel;
+import consulo.copyright.config.CopyrightFileConfig;
 
 /**
  * @author peter

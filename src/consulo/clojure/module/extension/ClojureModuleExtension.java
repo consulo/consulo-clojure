@@ -1,9 +1,9 @@
-package org.jetbrains.plugins.clojure.module.extension;
+package consulo.clojure.module.extension;
 
-import org.consulo.module.extension.impl.ModuleExtensionImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
-import com.intellij.openapi.roots.ModuleRootLayer;
+import consulo.extension.impl.ModuleExtensionImpl;
+import consulo.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL

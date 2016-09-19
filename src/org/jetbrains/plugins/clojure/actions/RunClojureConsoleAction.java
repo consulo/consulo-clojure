@@ -14,7 +14,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.ClojureIcons;
-import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
+import consulo.clojure.module.extension.ClojureModuleExtension;
 import org.jetbrains.plugins.clojure.repl.ClojureConsoleRunner;
 
 import java.util.Arrays;

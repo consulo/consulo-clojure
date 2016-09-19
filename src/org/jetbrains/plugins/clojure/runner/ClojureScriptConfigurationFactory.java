@@ -1,11 +1,11 @@
 package org.jetbrains.plugins.clojure.runner;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
-import org.mustbe.consulo.module.extension.ModuleExtensionHelper;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
+import consulo.clojure.module.extension.ClojureModuleExtension;
+import consulo.module.extension.ModuleExtensionHelper;
 
 /**
  * Created by IntelliJ IDEA.

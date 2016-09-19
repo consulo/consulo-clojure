@@ -8,7 +8,6 @@ import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.repl.ClojureConsole;
 import org.jetbrains.plugins.clojure.repl.ClojureConsoleExecuteActionHandler;
 import org.jetbrains.plugins.clojure.repl.ClojureConsoleProcessHandler;
-import org.jetbrains.plugins.clojure.repl.ClojureConsoleView;
 import com.intellij.execution.ExecutionHelper;
 import com.intellij.execution.console.LanguageConsoleImpl;
 import com.intellij.execution.process.ProcessHandler;
@@ -32,103 +31,119 @@ import com.intellij.util.NotNullFunction;
 /**
  * @author ilyas
  */
-public abstract class ClojureConsoleActionBase extends AnAction {
+public abstract class ClojureConsoleActionBase extends AnAction
+{
 
-  private static final Logger LOG = Logger.getInstance("#org.jetbrains.plugins.clojure.repl.actions.LoadClojureFileInConsoleAction");
+	private static final Logger LOG = Logger.getInstance("#org.jetbrains.plugins.clojure.repl.actions.LoadClojureFileInConsoleAction");
 
-  protected static ClojureConsoleProcessHandler findRunningClojureConsole(Project project) {
-    final Collection<RunContentDescriptor> descriptors = ExecutionHelper.findRunningConsole(project, new ClojureConsoleMatcher());
-    for (RunContentDescriptor descriptor : descriptors) {
-      final ProcessHandler handler = descriptor.getProcessHandler();
-      if (handler instanceof ClojureConsoleProcessHandler) {
-        return (ClojureConsoleProcessHandler) handler;
-      }
-    }
-    return null;
-  }
+	protected static ClojureConsoleProcessHandler findRunningClojureConsole(Project project)
+	{
+		final Collection<RunContentDescriptor> descriptors = ExecutionHelper.findRunningConsole(project, new ClojureConsoleMatcher());
+		for(RunContentDescriptor descriptor : descriptors)
+		{
+			final ProcessHandler handler = descriptor.getProcessHandler();
+			if(handler instanceof ClojureConsoleProcessHandler)
+			{
+				return (ClojureConsoleProcessHandler) handler;
+			}
+		}
+		return null;
+	}
 
-  protected static void executeCommand(final Project project, String command) {
-    final ClojureConsoleProcessHandler processHandler = findRunningClojureConsole(project);
+	protected static void executeCommand(final Project project, String command)
+	{
+		final ClojureConsoleProcessHandler processHandler = findRunningClojureConsole(project);
 
-    LOG.assertTrue(processHandler != null);
+		LOG.assertTrue(processHandler != null);
 
-    // implement a command
-    final LanguageConsoleImpl languageConsole = processHandler.getLanguageConsole();
-    languageConsole.setInputText(command);
+		// implement a command
+		final LanguageConsoleImpl languageConsole = processHandler.getLanguageConsole();
+		languageConsole.setInputText(command);
 
-    final Editor editor = languageConsole.getCurrentEditor();
-    final CaretModel caretModel = editor.getCaretModel();
-    caretModel.moveToOffset(command.length());
+		final Editor editor = languageConsole.getCurrentEditor();
+		final CaretModel caretModel = editor.getCaretModel();
+		caretModel.moveToOffset(command.length());
 
 
-    LOG.assertTrue(languageConsole instanceof ClojureConsole);
+		LOG.assertTrue(languageConsole instanceof ClojureConsole);
 
-    final ClojureConsole console = (ClojureConsole) languageConsole;
-    final ClojureConsoleExecuteActionHandler handler = console.getExecuteHandler();
+		final ClojureConsole console = (ClojureConsole) languageConsole;
+		final ClojureConsoleExecuteActionHandler handler = console.getExecuteHandler();
 
-    handler.runExecuteAction(console, true);
-  }
+		handler.runExecuteAction(console, true);
+	}
 
-  private static class ClojureConsoleMatcher implements NotNullFunction<RunContentDescriptor, Boolean> {
-    @NotNull
-    public Boolean fun(RunContentDescriptor descriptor) {
-      return descriptor != null && (descriptor.getExecutionConsole() instanceof ClojureConsoleView);
-    }
-  }
+	private static class ClojureConsoleMatcher implements NotNullFunction<RunContentDescriptor, Boolean>
+	{
+		@NotNull
+		public Boolean fun(RunContentDescriptor descriptor)
+		{
+			return descriptor != null && (descriptor.getExecutionConsole() instanceof ClojureConsole);
+		}
+	}
 
-  @Override
-  public void update(AnActionEvent e) {
-    final Presentation presentation = e.getPresentation();
+	@Override
+	public void update(AnActionEvent e)
+	{
+		final Presentation presentation = e.getPresentation();
 
-    final Editor editor = e.getData(LangDataKeys.EDITOR);
+		final Editor editor = e.getData(LangDataKeys.EDITOR);
 
-    if (editor == null) {
-      presentation.setEnabled(false);
-      return;
-    }
-    final Project project = editor.getProject();
-    if (project == null) {
-      presentation.setEnabled(false);
-      return;
-    }
+		if(editor == null)
+		{
+			presentation.setEnabled(false);
+			return;
+		}
+		final Project project = editor.getProject();
+		if(project == null)
+		{
+			presentation.setEnabled(false);
+			return;
+		}
 
-    final Document document = editor.getDocument();
-    final PsiFile psiFile = PsiDocumentManager.getInstance(project).getPsiFile(document);
-    if (psiFile == null || !(psiFile instanceof ClojureFile)) {
-      presentation.setEnabled(false);
-      return;
-    }
+		final Document document = editor.getDocument();
+		final PsiFile psiFile = PsiDocumentManager.getInstance(project).getPsiFile(document);
+		if(psiFile == null || !(psiFile instanceof ClojureFile))
+		{
+			presentation.setEnabled(false);
+			return;
+		}
 
-    final VirtualFile virtualFile = psiFile.getVirtualFile();
-    if (virtualFile == null || virtualFile instanceof LightVirtualFile) {
-      presentation.setEnabled(false);
-      return;
-    }
-    final String filePath = virtualFile.getPath();
-    if (filePath == null) {
-      presentation.setEnabled(false);
-      return;
-    }
+		final VirtualFile virtualFile = psiFile.getVirtualFile();
+		if(virtualFile == null || virtualFile instanceof LightVirtualFile)
+		{
+			presentation.setEnabled(false);
+			return;
+		}
+		final String filePath = virtualFile.getPath();
+		if(filePath == null)
+		{
+			presentation.setEnabled(false);
+			return;
+		}
 
-    final ClojureConsoleProcessHandler handler = findRunningClojureConsole(project);
-    if (handler == null) {
-      presentation.setEnabled(false);
-      return;
-    }
+		final ClojureConsoleProcessHandler handler = findRunningClojureConsole(project);
+		if(handler == null)
+		{
+			presentation.setEnabled(false);
+			return;
+		}
 
-    final LanguageConsoleImpl console = handler.getLanguageConsole();
-    if (!(console instanceof ClojureConsole)) {
-      presentation.setEnabled(false);
-      return;
-    }
+		final LanguageConsoleImpl console = handler.getLanguageConsole();
+		if(!(console instanceof ClojureConsole))
+		{
+			presentation.setEnabled(false);
+			return;
+		}
 
-    presentation.setEnabled(true);
+		presentation.setEnabled(true);
 
-  }
+	}
 
-  protected static void showError(String msg) {
-    Messages.showErrorDialog(msg, ClojureBundle.message("clojure.repl.actions.load.text.title"));
-  }
+	protected static void showError(String msg)
+	{
+		Messages.showErrorDialog(msg, ClojureBundle.message("clojure.repl.actions.load.text.title"));
+	}
 
 
 }

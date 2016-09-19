@@ -14,11 +14,8 @@ import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
-import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
-import org.mustbe.consulo.java.module.extension.JavaModuleExtension;
-import com.intellij.compiler.JavaCompilerUtil;
 import com.intellij.compiler.OutputParser;
 import com.intellij.compiler.impl.ModuleChunk;
 import com.intellij.compiler.impl.javaCompiler.ExternalCompiler;
@@ -44,10 +41,13 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.ThrowableComputable;
 import com.intellij.openapi.util.UserDataHolderBase;
 import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.JarFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import com.intellij.util.io.URLUtil;
+import consulo.clojure.module.extension.ClojureModuleExtension;
+import consulo.java.compiler.JavaCompilerUtil;
+import consulo.java.module.extension.JavaModuleExtension;
 
 /**
  * @author ilyas
@@ -241,7 +241,7 @@ public class ClojureBackendCompiler extends ExternalCompiler
 				for(VirtualFile file : cpVFiles)
 				{
 					String path = file.getPath();
-					int jarSeparatorIndex = path.indexOf(JarFileSystem.JAR_SEPARATOR);
+					int jarSeparatorIndex = path.indexOf(URLUtil.JAR_SEPARATOR);
 					if(jarSeparatorIndex > 0)
 					{
 						path = path.substring(0, jarSeparatorIndex);

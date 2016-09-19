@@ -2,11 +2,11 @@ package org.jetbrains.plugins.clojure.actions;
 
 import javax.swing.Icon;
 
-import org.consulo.psi.PsiPackage;
+import consulo.psi.PsiPackage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
-import org.jetbrains.plugins.clojure.module.extension.ClojureModuleExtension;
+import consulo.clojure.module.extension.ClojureModuleExtension;
 import org.jetbrains.plugins.clojure.utils.ClojureNamesUtil;
 import com.intellij.CommonBundle;
 import com.intellij.ide.IdeView;
