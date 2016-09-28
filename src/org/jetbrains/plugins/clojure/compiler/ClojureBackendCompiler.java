@@ -176,8 +176,7 @@ public class ClojureBackendCompiler extends ExternalCompiler
 
 	@Override
 	@NotNull
-	public GeneralCommandLine createStartupCommand(final UserDataHolderBase data,
-			final ModuleChunk chunk,
+	public GeneralCommandLine createStartupCommand(final ModuleChunk chunk,
 			final CompileContext context,
 			final String outputPath) throws IOException, IllegalArgumentException
 	{

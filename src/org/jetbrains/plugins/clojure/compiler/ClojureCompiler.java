@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.clojure.compiler;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
@@ -76,7 +77,7 @@ public class ClojureCompiler implements TranslatingCompiler {
     if (settings.getState().COMPILE_CLOJURE) {
       // Compile Clojure classes
       try {
-        wrapper.compile();
+        wrapper.compile(Collections.emptyMap());
       }
       catch (CompilerException e) {
         context.addMessage(CompilerMessageCategory.ERROR, e.getMessage(), null, -1, -1);
