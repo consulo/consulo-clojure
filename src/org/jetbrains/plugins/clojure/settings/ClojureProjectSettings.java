@@ -19,10 +19,8 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StorageScheme;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import org.jetbrains.plugins.clojure.utils.ClojureUtils;
 
 /**
  * Project specific settings.
@@ -34,8 +32,7 @@ import org.jetbrains.plugins.clojure.utils.ClojureUtils;
  */
 @State(name = "ClojureProjectSettings",
     storages = {
-        @Storage(id = "default", file = "$PROJECT_FILE$"),
-        @Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/clojure_project.xml", scheme = StorageScheme.DIRECTORY_BASED)
+        @Storage(file = "$PROJECT_CONFIG_DIR$/clojure_project.xml")
     })
 public final class ClojureProjectSettings implements PersistentStateComponent<ClojureProjectSettings> {
 

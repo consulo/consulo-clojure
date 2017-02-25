@@ -7,7 +7,6 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StorageScheme;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 
@@ -15,8 +14,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
  * @author ilyas
  */
 @State(name = JpsClojureModelSerializerExtension.CLOJURE_COMPILER_SETTINGS_COMPONENT_NAME, storages = {
-		@Storage(id = "default", file = "$PROJECT_FILE$"),
-		@Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/" + JpsClojureModelSerializerExtension.CLOJURE_COMPILER_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
+		@Storage(file = "$PROJECT_CONFIG_DIR$/" + JpsClojureModelSerializerExtension.CLOJURE_COMPILER_SETTINGS_FILE)
 })
 public class ClojureCompilerSettings implements PersistentStateComponent<JpsClojureCompilerSettingsState>
 {

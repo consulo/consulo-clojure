@@ -12,7 +12,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 @State(
   name = "ClojureApplicationSettings",
   storages = {
-    @Storage(id = "clojure_config", file = "$APP_CONFIG$/clojure_application.xml")
+    @Storage(file = "$APP_CONFIG$/clojure_application.xml")
 })
 public class ClojureApplicationSettings implements PersistentStateComponent<ClojureApplicationSettings> {
 

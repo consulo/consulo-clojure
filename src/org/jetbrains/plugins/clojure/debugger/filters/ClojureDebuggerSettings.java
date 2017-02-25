@@ -1,11 +1,11 @@
 package org.jetbrains.plugins.clojure.debugger.filters;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.xdebugger.settings.XDebuggerSettings;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author ilyas
@@ -13,10 +13,7 @@ import org.jetbrains.annotations.NotNull;
 @State(
     name = "ClojureDebuggerSettings",
     storages = {
-    @Storage(
-        id = "clojure_debugger",
-        file = "$APP_CONFIG$/clojure_debug.xml"
-    )}
+    @Storage( file = "$APP_CONFIG$/clojure_debug.xml")}
 )
 public class ClojureDebuggerSettings extends XDebuggerSettings<ClojureDebuggerSettings> {
 
