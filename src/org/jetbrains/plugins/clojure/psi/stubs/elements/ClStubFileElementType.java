@@ -1,17 +1,20 @@
 package org.jetbrains.plugins.clojure.psi.stubs.elements;
 
-import com.intellij.psi.StubBuilder;
-import com.intellij.psi.stubs.*;
-import com.intellij.psi.tree.IStubFileElementType;
-import com.intellij.util.io.StringRef;
+import java.io.IOException;
+
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.psi.stubs.ClojureFileStubBuilder;
 import org.jetbrains.plugins.clojure.psi.stubs.api.ClFileStub;
 import org.jetbrains.plugins.clojure.psi.stubs.impl.ClFileStubImpl;
 import org.jetbrains.plugins.clojure.psi.stubs.index.ClojureClassNameIndex;
 import org.jetbrains.plugins.clojure.psi.stubs.index.ClojureFullScriptNameIndex;
-
-import java.io.IOException;
+import com.intellij.psi.StubBuilder;
+import com.intellij.psi.stubs.IndexSink;
+import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
+import com.intellij.psi.tree.IStubFileElementType;
+import com.intellij.util.io.StringRef;
 
 /**
  * @author ilyas
@@ -34,11 +37,6 @@ public class ClStubFileElementType extends IStubFileElementType<ClFileStub> {
 
   public String getExternalId() {
     return "clojure.FILE";
-  }
-
-  @Override
-  public void indexStub(PsiFileStub stub, IndexSink sink) {
-    super.indexStub(stub, sink);
   }
 
   @Override
