@@ -2,6 +2,7 @@ package org.jetbrains.plugins.clojure.compiler;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.function.Consumer;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
@@ -17,7 +18,6 @@ import com.intellij.ide.highlighter.JavaFileType;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.CompileScope;
-import com.intellij.openapi.compiler.CompilerManager;
 import com.intellij.openapi.compiler.CompilerMessageCategory;
 import com.intellij.openapi.compiler.TranslatingCompiler;
 import com.intellij.openapi.compiler.ex.CompileContextEx;
@@ -35,89 +35,123 @@ import com.intellij.util.Chunk;
 /**
  * @author ilyas
  */
-public class ClojureCompiler implements TranslatingCompiler {
-  private static final Logger LOG = Logger.getInstance("#org.jetbrains.plugins.clojure.compiler.ClojureCompiler");
-  private Project myProject;
-  private static final FileTypeManager FILE_TYPE_MANAGER = FileTypeManager.getInstance();
+public class ClojureCompiler implements TranslatingCompiler
+{
+	private static final Logger LOG = Logger.getInstance("#org.jetbrains.plugins.clojure.compiler.ClojureCompiler");
+	private Project myProject;
+	private static final FileTypeManager FILE_TYPE_MANAGER = FileTypeManager.getInstance();
 
-  public ClojureCompiler(Project project) {
-    myProject = project;
-  }
+	public ClojureCompiler(Project project)
+	{
+		myProject = project;
+	}
 
-  @NotNull
-  public String getDescription() {
-    return ClojureBundle.message("clojure.compiler.description");
-  }
+	@Override
+	@NotNull
+	public String getDescription()
+	{
+		return ClojureBundle.message("clojure.compiler.description");
+	}
 
-  public boolean isCompilableFile(final VirtualFile file, CompileContext context) {
-    final ClojureCompilerSettings settings = ClojureCompilerSettings.getInstance(myProject);
-    return ApplicationManager.getApplication().runReadAction(new Computable<Boolean>() {
-      public Boolean compute() {
-        if (!file.isValid()) return false;
+	@Override
+	public boolean isCompilableFile(final VirtualFile file, CompileContext context)
+	{
+		final ClojureCompilerSettings settings = ClojureCompilerSettings.getInstance(myProject);
+		return ApplicationManager.getApplication().runReadAction(new Computable<Boolean>()
+		{
+			@Override
+			public Boolean compute()
+			{
+				if(!file.isValid())
+				{
+					return false;
+				}
 
-        final FileType fileType = FILE_TYPE_MANAGER.getFileTypeByFile(file);
-        if (!fileType.equals(ClojureFileType.INSTANCE)) return false;
-        
-        PsiFile psi = PsiManager.getInstance(myProject).findFile(file);
-        if (!(psi instanceof ClojureFile)) return false;
+				final FileType fileType = FILE_TYPE_MANAGER.getFileTypeByFile(file);
+				if(!fileType.equals(ClojureFileType.INSTANCE))
+				{
+					return false;
+				}
 
-        return (settings.getState().COPY_CLJ_SOURCES || settings.getState().COMPILE_CLOJURE && ((ClojureFile) psi).isClassDefiningFile());
-      }
-    });
+				PsiFile psi = PsiManager.getInstance(myProject).findFile(file);
+				if(!(psi instanceof ClojureFile))
+				{
+					return false;
+				}
 
-  }
+				return (settings.getState().COPY_CLJ_SOURCES || settings.getState().COMPILE_CLOJURE && ((ClojureFile) psi).isClassDefiningFile());
+			}
+		});
 
+	}
 
-  public void compile(CompileContext context, Chunk<Module> moduleChunk, VirtualFile[] files, OutputSink outputSink) {
-    final BackendCompiler backEndCompiler = getBackEndCompiler();
-    final BackendCompilerWrapper wrapper = new BackendCompilerWrapper(this, moduleChunk, myProject, Arrays.asList(files),
-        (CompileContextEx) context, backEndCompiler, outputSink);
-    final ClojureCompilerSettings settings = ClojureCompilerSettings.getInstance(context.getProject());
+	@Override
+	public void compile(CompileContext context, Chunk<Module> moduleChunk, VirtualFile[] files, OutputSink outputSink)
+	{
+		final BackendCompiler backEndCompiler = getBackEndCompiler();
+		final BackendCompilerWrapper wrapper = new BackendCompilerWrapper(this, moduleChunk, myProject, Arrays.asList(files), (CompileContextEx) context, backEndCompiler, outputSink);
+		final ClojureCompilerSettings settings = ClojureCompilerSettings.getInstance(context.getProject());
 
-    if (settings.getState().COMPILE_CLOJURE) {
-      // Compile Clojure classes
-      try {
-        wrapper.compile(Collections.emptyMap());
-      }
-      catch (CompilerException e) {
-        context.addMessage(CompilerMessageCategory.ERROR, e.getMessage(), null, -1, -1);
-      }
-      catch (CacheCorruptedException e) {
-        LOG.info(e);
-        context.requestRebuildNextTime(e.getMessage());
-      }
-    }
+		if(settings.getState().COMPILE_CLOJURE)
+		{
+			// Compile Clojure classes
+			try
+			{
+				wrapper.compile(Collections.emptyMap());
+			}
+			catch(CompilerException e)
+			{
+				context.addMessage(CompilerMessageCategory.ERROR, e.getMessage(), null, -1, -1);
+			}
+			catch(CacheCorruptedException e)
+			{
+				LOG.info(e);
+				context.requestRebuildNextTime(e.getMessage());
+			}
+		}
 
-    // Copy clojure sources to output path
-    if (settings.getState().COPY_CLJ_SOURCES) {
-      final ResourceCompiler resourceCompiler = new ResourceCompiler(myProject);
-      resourceCompiler.compile(context, moduleChunk, files, outputSink);
-    }
-  }
+		// Copy clojure sources to output path
+		if(settings.getState().COPY_CLJ_SOURCES)
+		{
+			final ResourceCompiler resourceCompiler = new ResourceCompiler(myProject);
+			resourceCompiler.compile(context, moduleChunk, files, outputSink);
+		}
+	}
 
-  @NotNull
-  @Override
-  public FileType[] getInputFileTypes() {
-    return new FileType[] {ClojureFileType.INSTANCE, JavaFileType.INSTANCE};
-  }
+	@NotNull
+	@Override
+	public FileType[] getInputFileTypes()
+	{
+		return new FileType[]{
+				ClojureFileType.INSTANCE,
+				JavaFileType.INSTANCE
+		};
+	}
 
-  @NotNull
-  @Override
-  public FileType[] getOutputFileTypes() {
-    return new FileType[] {JavaFileType.INSTANCE, JavaClassFileType.INSTANCE};
-  }
+	@NotNull
+	@Override
+	public FileType[] getOutputFileTypes()
+	{
+		return new FileType[]{
+				JavaFileType.INSTANCE,
+				JavaClassFileType.INSTANCE
+		};
+	}
 
-  @Override
-  public boolean validateConfiguration(CompileScope scope) {
-    return getBackEndCompiler().checkCompiler(scope);
-  }
+	@Override
+	public boolean validateConfiguration(CompileScope scope)
+	{
+		return getBackEndCompiler().checkCompiler(scope);
+	}
 
-  @Override
-  public void init(@NotNull CompilerManager compilerManager) {
-    compilerManager.addCompilableFileType(ClojureFileType.INSTANCE);
-  }
+	@Override
+	public void registerCompilableFileTypes(@NotNull Consumer<FileType> fileTypeConsumer)
+	{
+		fileTypeConsumer.accept(ClojureFileType.INSTANCE);
+	}
 
-  private BackendCompiler getBackEndCompiler() {
-    return new ClojureBackendCompiler(myProject);
-  }
+	private BackendCompiler getBackEndCompiler()
+	{
+		return new ClojureBackendCompiler(myProject);
+	}
 }
