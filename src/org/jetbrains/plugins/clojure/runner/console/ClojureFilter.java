@@ -1,5 +1,11 @@
 package org.jetbrains.plugins.clojure.runner.console;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.swing.JList;
+
+import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.filters.Filter;
 import com.intellij.execution.filters.HyperlinkInfo;
 import com.intellij.execution.filters.OpenFileHyperlinkInfo;
@@ -12,13 +18,12 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.pom.Navigatable;
-import com.intellij.psi.*;
+import com.intellij.psi.JavaDirectoryService;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiJavaPackage;
 import com.intellij.psi.search.PsiShortNamesCache;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author ilyas
@@ -93,7 +98,7 @@ public class ClojureFilter implements Filter {
         }
       };
 
-      final Editor editor = PlatformDataKeys.EDITOR.getData(DataManager.getInstance().getDataContext());
+      final Editor editor = DataManager.getInstance().getDataContext().getData(PlatformDataKeys.EDITOR);
 
       new PopupChooserBuilder(list).
           setTitle("Choose file").

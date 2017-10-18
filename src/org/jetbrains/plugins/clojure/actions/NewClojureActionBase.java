@@ -2,11 +2,9 @@ package org.jetbrains.plugins.clojure.actions;
 
 import javax.swing.Icon;
 
-import consulo.psi.PsiPackage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
-import consulo.clojure.module.extension.ClojureModuleExtension;
 import org.jetbrains.plugins.clojure.utils.ClojureNamesUtil;
 import com.intellij.CommonBundle;
 import com.intellij.ide.IdeView;
@@ -30,6 +28,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaPackage;
 import com.intellij.psi.PsiNameHelper;
 import com.intellij.util.IncorrectOperationException;
+import consulo.clojure.module.extension.ClojureModuleExtension;
+import consulo.psi.PsiPackage;
 
 /**
  * @author ilyas
@@ -79,9 +79,8 @@ public abstract class NewClojureActionBase extends CreateElementActionBase {
   }
 
   public static boolean isUnderSourceRoots(final AnActionEvent e) {
-    final DataContext context = e.getDataContext();
-    final IdeView view = LangDataKeys.IDE_VIEW.getData(context);
-    final Project project = LangDataKeys.PROJECT.getData(context);
+    final IdeView view = e.getData(LangDataKeys.IDE_VIEW);
+    final Project project = e.getProject();
     if (view != null && project != null) {
       ProjectFileIndex projectFileIndex = ProjectRootManager.getInstance(project).getFileIndex();
       PsiDirectory[] dirs = view.getDirectories();
