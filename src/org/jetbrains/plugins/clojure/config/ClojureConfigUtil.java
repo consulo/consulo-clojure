@@ -14,7 +14,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.utils.LibrariesUtil;
 import clojure.lang.AFn;
-import com.intellij.execution.configurations.JavaParameters;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
@@ -34,6 +33,7 @@ import com.intellij.util.ArrayFactory;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.PathUtil;
 import com.intellij.util.containers.ContainerUtil;
+import consulo.java.execution.configurations.OwnJavaParameters;
 
 /**
  * @author ilyas
@@ -267,7 +267,7 @@ public class ClojureConfigUtil
 				NotificationType.WARNING), module.getProject());
 	}
 
-	public static class RunConfigurationParameters extends JavaParameters
+	public static class RunConfigurationParameters extends OwnJavaParameters
 	{
 		private boolean defaultClojureJarUsed = false;
 

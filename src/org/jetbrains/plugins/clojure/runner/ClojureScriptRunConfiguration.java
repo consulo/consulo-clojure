@@ -19,7 +19,6 @@ import com.intellij.execution.CommonProgramRunConfigurationParameters;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.JavaCommandLineState;
-import com.intellij.execution.configurations.JavaParameters;
 import com.intellij.execution.configurations.ModuleBasedConfiguration;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.configurations.RunConfigurationModule;
@@ -51,6 +50,7 @@ import com.intellij.openapi.util.JDOMExternalizer;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import consulo.java.execution.configurations.OwnJavaParameters;
 import consulo.java.module.extension.JavaModuleExtension;
 
 /**
@@ -156,8 +156,8 @@ public class ClojureScriptRunConfiguration extends ModuleBasedConfiguration impl
   }
 
   private static void configureScriptSystemClassPath(final ClojureConfigUtil.RunConfigurationParameters params, final Module module) throws CantRunException {
-    params.configureByModule(module, JavaParameters.JDK_ONLY);
-    params.configureByModule(module, JavaParameters.JDK_AND_CLASSES_AND_TESTS);
+    params.configureByModule(module, OwnJavaParameters.JDK_ONLY);
+    params.configureByModule(module, OwnJavaParameters.JDK_AND_CLASSES_AND_TESTS);
 
     ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
     OrderEntry[] entries = moduleRootManager.getOrderEntries();
@@ -197,7 +197,7 @@ public class ClojureScriptRunConfiguration extends ModuleBasedConfiguration impl
   }
 
 
-  private void configureScript(JavaParameters params) {
+  private void configureScript(OwnJavaParameters params) {
     // add script
     params.getProgramParametersList().add(scriptPath);
 
@@ -241,7 +241,7 @@ public class ClojureScriptRunConfiguration extends ModuleBasedConfiguration impl
         new ClojureConfigUtil.RunConfigurationParameters();
 
     final JavaCommandLineState state = new JavaCommandLineState(environment) {
-      protected JavaParameters createJavaParameters() throws ExecutionException {
+      protected OwnJavaParameters createJavaParameters() throws ExecutionException {
         ProgramParametersUtil.configureConfiguration(params, ClojureScriptRunConfiguration.this);
         configureJavaParams(params, module);
         configureScript(params);

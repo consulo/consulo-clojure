@@ -38,9 +38,7 @@ import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
 import clojure.lang.AFn;
 import com.intellij.execution.CantRunException;
-import com.intellij.execution.configurations.CommandLineBuilder;
 import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.configurations.JavaParameters;
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
@@ -58,6 +56,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.encoding.EncodingManager;
 import com.intellij.util.Alarm;
 import com.intellij.util.PathUtil;
+import consulo.java.execution.configurations.OwnJavaParameters;
 
 /**
  * @author Kurt Christensen, ilyas
@@ -113,8 +112,8 @@ public class ClojureReplProcessHandler extends ProcessHandler {
       // Only a single command line per-project is supported. We may need more flexibility
       //  in the future (e.g., different Clojure paths with different args)
 
-      final JavaParameters params = new JavaParameters();
-      params.configureByModule(myModule, JavaParameters.JDK_AND_CLASSES_AND_TESTS);
+      final OwnJavaParameters params = new OwnJavaParameters();
+      params.configureByModule(myModule, OwnJavaParameters.JDK_AND_CLASSES_AND_TESTS);
       // To avoid NCDFE while starting REPL
 
       final boolean sdkConfigured = ClojureConfigUtil.isClojureConfigured(myModule);
@@ -142,7 +141,7 @@ public class ClojureReplProcessHandler extends ProcessHandler {
       params.setMainClass(ClojureUtils.CLOJURE_MAIN);
       params.setWorkingDirectory(path);
 
-      final GeneralCommandLine line = CommandLineBuilder.createFromJavaParameters(params, module.getProject(), true);
+      final GeneralCommandLine line = params.toCommandLine();
 
       final ArrayList<String> env = new ArrayList<String>();
       final ArrayList<String> cmd = new ArrayList<String>();

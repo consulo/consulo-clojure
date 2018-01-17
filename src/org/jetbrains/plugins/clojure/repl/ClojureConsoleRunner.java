@@ -62,6 +62,7 @@ import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 import consulo.clojure.module.extension.ClojureModuleExtension;
 import consulo.compiler.roots.CompilerPathsImpl;
+import consulo.java.execution.configurations.OwnJavaParameters;
 
 /**
  * @author ilyas
@@ -318,8 +319,8 @@ public class ClojureConsoleRunner
 
 	private static ArrayList<String> createRuntimeArgs(Module module, String workingDir) throws CantRunException
 	{
-		final JavaParameters params = new JavaParameters();
-		params.configureByModule(module, JavaParameters.JDK_AND_CLASSES_AND_TESTS);
+		final OwnJavaParameters params = new OwnJavaParameters();
+		params.configureByModule(module, OwnJavaParameters.JDK_AND_CLASSES_AND_TESTS);
 		// To avoid NCDFE while starting REPL
 
 		final boolean sdkConfigured = ClojureConfigUtil.isClojureConfigured(module);
@@ -381,8 +382,8 @@ public class ClojureConsoleRunner
 
 	private GeneralCommandLine createCommandLine(Module module, String workingDir) throws CantRunException
 	{
-		final JavaParameters params = new JavaParameters();
-		params.configureByModule(module, JavaParameters.JDK_AND_CLASSES_AND_TESTS);
+		final OwnJavaParameters params = new OwnJavaParameters();
+		params.configureByModule(module, OwnJavaParameters.JDK_AND_CLASSES_AND_TESTS);
 		params.getVMParametersList().addAll(getJvmClojureOptions(module));
 		params.getProgramParametersList().addAll(getReplClojureOptions(module));
 		// To avoid NCDFE while starting REPL
@@ -415,7 +416,7 @@ public class ClojureConsoleRunner
 		params.setMainClass(getMainReplClass(module));
 		params.setWorkingDirectory(new File(workingDir));
 
-		final GeneralCommandLine line = CommandLineBuilder.createFromJavaParameters(params, module.getProject(), true);
+		final GeneralCommandLine line = params.toCommandLine();
 
 		//final ArrayList<String> cmd = new ArrayList<String>();
 		//cmd.add(executablePath);
