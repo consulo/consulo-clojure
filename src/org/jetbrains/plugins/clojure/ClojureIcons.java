@@ -16,10 +16,11 @@ import javax.swing.Icon;
 
 import org.jetbrains.annotations.NonNls;
 import com.intellij.openapi.util.IconLoader;
+import consulo.ui.image.Image;
 
 public interface ClojureIcons {
   @NonNls
-  final Icon CLOJURE_ICON_16x16 = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/clojure_icon_16x16.png");
+  final Image CLOJURE_ICON_16x16 = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/clojure_icon_16x16.png");
 
   final Icon FUNCTION = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/def_tmp.png");
   final Icon METHOD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/meth_tmp.png");

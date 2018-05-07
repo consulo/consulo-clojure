@@ -22,6 +22,7 @@ import org.jetbrains.plugins.clojure.ClojureIcons;
 import org.jetbrains.plugins.clojure.ClojureLanguage;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -68,7 +69,7 @@ public class ClojureFileType extends LanguageFileType
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return ClojureIcons.CLOJURE_ICON_16x16;
 	}

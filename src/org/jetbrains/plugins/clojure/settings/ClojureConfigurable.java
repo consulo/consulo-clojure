@@ -15,16 +15,14 @@
  */
 package org.jetbrains.plugins.clojure.settings;
 
+import javax.swing.JComponent;
+
+import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.components.AbstractProjectComponent;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.ClojureIcons;
-
-import javax.swing.Icon;
-import javax.swing.JComponent;
 
 /**
  * Project specific settings.
@@ -47,10 +45,6 @@ public final class ClojureConfigurable extends AbstractProjectComponent implemen
   @Nls
   public String getDisplayName() {
     return "Clojure";
-  }
-
-  public Icon getIcon() {
-    return ClojureIcons.CLOJURE_ICON_16x16;
   }
 
   public String getHelpTopic() {

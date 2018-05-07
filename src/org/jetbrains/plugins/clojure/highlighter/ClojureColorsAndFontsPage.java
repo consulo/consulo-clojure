@@ -34,11 +34,6 @@ public class ClojureColorsAndFontsPage implements ColorSettingsPage {
     return "Clojure";
   }
 
-  @Nullable
-  public Icon getIcon() {
-    return ClojureIcons.CLOJURE_ICON_16x16;
-  }
-
   @NotNull
   public AttributesDescriptor[] getAttributeDescriptors() {
     return ATTRS;

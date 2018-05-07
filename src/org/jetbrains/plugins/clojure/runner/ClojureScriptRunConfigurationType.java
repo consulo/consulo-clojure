@@ -1,5 +1,11 @@
 package org.jetbrains.plugins.clojure.runner;
 
+import static com.intellij.execution.configurations.ConfigurationTypeUtil.findConfigurationType;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.clojure.ClojureIcons;
+import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import com.intellij.execution.Location;
 import com.intellij.execution.RunManager;
 import com.intellij.execution.RunnerAndConfigurationSettings;
@@ -9,14 +15,7 @@ import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.ClojureIcons;
-import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
-
-import javax.swing.*;
-
-import static com.intellij.execution.configurations.ConfigurationTypeUtil.findConfigurationType;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,7 +50,7 @@ public class ClojureScriptRunConfigurationType implements ConfigurationType {
     return "Clojure Script";
   }
 
-  public Icon getIcon() {
+  public Image getIcon() {
     return ClojureIcons.CLOJURE_ICON_16x16;
   }
 

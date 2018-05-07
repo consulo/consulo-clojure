@@ -1,14 +1,16 @@
 package org.jetbrains.plugins.clojure.debugger.filters;
 
-import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
-import org.jetbrains.annotations.Nls;
-import org.jetbrains.plugins.clojure.ClojureBundle;
-import org.jetbrains.plugins.clojure.ClojureIcons;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+import org.jetbrains.annotations.Nls;
+import org.jetbrains.plugins.clojure.ClojureBundle;
+import com.intellij.openapi.options.Configurable;
+import com.intellij.openapi.options.ConfigurationException;
 
 /**
  * @author ilyas
@@ -34,10 +36,6 @@ public class ClojureDebuggerSettingsConfigurable implements Configurable {
   @Nls
   public String getDisplayName() {
     return ClojureBundle.message("settings.clojure.debug.caption");
-  }
-
-  public Icon getIcon() {
-    return ClojureIcons.CLOJURE_ICON_16x16;
   }
 
   public String getHelpTopic() {
