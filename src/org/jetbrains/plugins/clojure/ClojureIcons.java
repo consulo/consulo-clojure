@@ -22,12 +22,12 @@ public interface ClojureIcons {
   @NonNls
   final Image CLOJURE_ICON_16x16 = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/clojure_icon_16x16.png");
 
-  final Icon FUNCTION = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/def_tmp.png");
-  final Icon METHOD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/meth_tmp.png");
-  final Icon JAVA_METHOD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/method.png");
-  final Icon JAVA_FIELD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/field.png");
-  final Icon SYMBOL = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/symbol.png");
-  final Icon NAMESPACE = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/namespace.png");
+  final Image FUNCTION = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/def_tmp.png");
+  final Image METHOD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/meth_tmp.png");
+  final Image JAVA_METHOD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/method.png");
+  final Image JAVA_FIELD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/field.png");
+  final Image SYMBOL = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/symbol.png");
+  final Image NAMESPACE = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/namespace.png");
 
   final Icon REPL_CONSOLE = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_console.png");
   final Icon REPL_ADD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_add.png");

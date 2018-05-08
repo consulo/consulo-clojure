@@ -1,21 +1,30 @@
 package org.jetbrains.plugins.clojure.psi.impl.ns;
 
-import consulo.ide.IconDescriptorUpdaters;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
-import com.intellij.psi.impl.light.LightElement;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.IncorrectOperationException;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.psi.api.ns.ClNs;
 import org.jetbrains.plugins.clojure.psi.impl.ClojurePsiManager;
-
-import javax.swing.*;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiJavaPackage;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiModifierList;
+import com.intellij.psi.PsiQualifiedNamedElement;
+import com.intellij.psi.impl.light.LightElement;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.IncorrectOperationException;
+import consulo.awt.TargetAWT;
+import consulo.ide.IconDescriptorUpdaters;
 
 /**
  * @author ilyas
@@ -154,7 +163,7 @@ public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage
 
       @Nullable
       public Icon getIcon(boolean open) {
-        return IconDescriptorUpdaters.getIcon(ClSyntheticNamespace.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
+        return TargetAWT.to(IconDescriptorUpdaters.getIcon(ClSyntheticNamespace.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS));
       }
     };
   }

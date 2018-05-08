@@ -1,15 +1,12 @@
 package org.jetbrains.plugins.clojure.psi.impl.synthetic;
 
-import consulo.ide.IconDescriptorUpdaters;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Pair;
-import com.intellij.psi.*;
-import com.intellij.psi.impl.InheritanceImplUtil;
-import com.intellij.psi.impl.light.LightElement;
-import com.intellij.psi.javadoc.PsiDocComment;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.IncorrectOperationException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,12 +19,17 @@ import org.jetbrains.plugins.clojure.psi.api.synthetic.ClSyntheticClass;
 import org.jetbrains.plugins.clojure.psi.impl.ClKeywordImpl;
 import org.jetbrains.plugins.clojure.psi.util.ClojureKeywords;
 import org.jetbrains.plugins.clojure.psi.util.ClojurePsiUtil;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Pair;
+import com.intellij.psi.*;
+import com.intellij.psi.impl.InheritanceImplUtil;
+import com.intellij.psi.impl.light.LightElement;
+import com.intellij.psi.javadoc.PsiDocComment;
+import com.intellij.psi.scope.PsiScopeProcessor;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.IncorrectOperationException;
+import consulo.awt.TargetAWT;
+import consulo.ide.IconDescriptorUpdaters;
 
 /**
  * @author ilyas
@@ -101,7 +103,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
         return "(" + (pn.equals("") ? "<default package>" : pn) + ") in " + myFile.getName();
       }
       public Icon getIcon(boolean open) {
-        return IconDescriptorUpdaters.getIcon(myFile, 0);
+        return TargetAWT.to(IconDescriptorUpdaters.getIcon(myFile, 0));
       }
     };
   }

@@ -1,6 +1,24 @@
 package org.jetbrains.plugins.clojure.psi.impl.defs;
 
-import consulo.ide.IconDescriptorUpdaters;
+import java.util.ArrayList;
+
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
+import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
+import org.jetbrains.plugins.clojure.psi.api.ClList;
+import org.jetbrains.plugins.clojure.psi.api.ClLiteral;
+import org.jetbrains.plugins.clojure.psi.api.ClMetadata;
+import org.jetbrains.plugins.clojure.psi.api.ClQuotedForm;
+import org.jetbrains.plugins.clojure.psi.api.ClVector;
+import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
+import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
+import org.jetbrains.plugins.clojure.psi.impl.list.ClListBaseImpl;
+import org.jetbrains.plugins.clojure.psi.resolve.ResolveUtil;
+import org.jetbrains.plugins.clojure.psi.stubs.api.ClDefStub;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.Iconable;
@@ -13,20 +31,8 @@ import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
-import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
-import org.jetbrains.plugins.clojure.psi.api.*;
-import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
-import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
-import org.jetbrains.plugins.clojure.psi.impl.list.ClListBaseImpl;
-import org.jetbrains.plugins.clojure.psi.resolve.ResolveUtil;
-import org.jetbrains.plugins.clojure.psi.stubs.api.ClDefStub;
-
-import javax.swing.*;
-import java.util.ArrayList;
+import consulo.awt.TargetAWT;
+import consulo.ide.IconDescriptorUpdaters;
 
 /**
  * @author ilyas
@@ -125,7 +131,7 @@ public class ClDefImpl extends ClListBaseImpl<ClDefStub> implements ClDef, StubB
 
       @Nullable
       public Icon getIcon(boolean open) {
-        return IconDescriptorUpdaters.getIcon(ClDefImpl.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
+        return TargetAWT.to(IconDescriptorUpdaters.getIcon(ClDefImpl.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS));
       }
     };
   }

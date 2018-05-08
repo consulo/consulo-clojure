@@ -1,20 +1,33 @@
 package org.jetbrains.plugins.clojure.psi.resolve.completion;
 
-import com.intellij.codeInsight.lookup.LookupItem;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.*;
-import com.intellij.psi.util.MethodSignature;
-import com.intellij.util.Function;
-import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.containers.HashMap;
-import com.intellij.util.containers.HashSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import org.jetbrains.plugins.clojure.ClojureIcons;
 import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 import org.jetbrains.plugins.clojure.psi.impl.ns.ClSyntheticNamespace;
 import org.jetbrains.plugins.clojure.psi.resolve.ClojureResolveResult;
 import org.jetbrains.plugins.clojure.psi.resolve.ResolveUtil;
-
-import java.util.*;
+import com.intellij.codeInsight.lookup.LookupItem;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiModifier;
+import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.PsiSubstitutor;
+import com.intellij.psi.PsiType;
+import com.intellij.psi.ResolveResult;
+import com.intellij.psi.ResolveState;
+import com.intellij.psi.util.MethodSignature;
+import com.intellij.util.Function;
+import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.containers.HashMap;
+import com.intellij.util.containers.HashSet;
+import consulo.awt.TargetAWT;
 
 /**
  * @author ilyas
@@ -111,7 +124,7 @@ public class CompleteSymbol {
       tailBuffer.append(StringUtil.join(list, ", "));
 
       final LookupItem item = new LookupItem(methodText, (!withoutDot ? "." : "") + name);
-      item.setIcon(ClojureIcons.JAVA_METHOD);
+      item.setIcon(TargetAWT.to(ClojureIcons.JAVA_METHOD));
       item.setTailText(tailBuffer.toString(), true);
 
       variants.add(item);
