@@ -1,11 +1,8 @@
-clojure-intellij-plugin.iws
-*_ClojureLexer.java
 out
 dist
-jflex.log
 lib/*SDK
 *~
 /.idea/workspace.xml
 
-/.consulo/workspace.xml
-/dep
+/.consulo
+target/
