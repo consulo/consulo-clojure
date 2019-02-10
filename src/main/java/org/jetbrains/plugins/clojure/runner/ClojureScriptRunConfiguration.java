@@ -8,9 +8,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
@@ -137,12 +140,12 @@ public class ClojureScriptRunConfiguration extends ModuleBasedConfiguration impl
     PathMacroManager.getInstance(getProject()).collapsePathsRecursively(element);
   }
 
-  public void setEnvs(@NotNull Map<String, String> envs) {
+  public void setEnvs(@Nonnull Map<String, String> envs) {
     this.envs.clear();
     this.envs.putAll(envs);
   }
 
-  @NotNull
+  @Nonnull
   public Map<String, String> getEnvs() {
     return envs;
   }
@@ -209,7 +212,7 @@ public class ClojureScriptRunConfiguration extends ModuleBasedConfiguration impl
     return getConfigurationModule().getModule();
   }
 
-  public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment environment) throws ExecutionException {
+  public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment environment) throws ExecutionException {
     final Module module = getModule();
     if (module == null) {
       throw new ExecutionException("Module is not specified");

@@ -1,11 +1,12 @@
 package org.jetbrains.plugins.clojure.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElementImpl;
 import org.jetbrains.plugins.clojure.psi.api.ClSet;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author ilyas
@@ -16,7 +17,7 @@ public class ClSetImpl extends ClojurePsiElementImpl implements ClSet {
     super(node, "ClSet");
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement getFirstBrace() {
     // XXX: there must be a cleaner way of doing this...
     ASTNode sharp;

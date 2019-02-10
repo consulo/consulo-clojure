@@ -14,8 +14,8 @@ package org.jetbrains.plugins.clojure.debugger;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.psi.api.ClList;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
@@ -67,7 +67,7 @@ public class ClojurePositionManager implements PositionManager {
     return myDebugProcess;
   }
 
-  @NotNull
+  @Nonnull
   public List<Location> locationsOfLine(ReferenceType type, SourcePosition position) throws NoDataException {
     try {
         int line = position.getLine() + 1;
@@ -138,7 +138,7 @@ public class ClojurePositionManager implements PositionManager {
     return stringRef.get();
   }
 
-  @NotNull
+  @Nonnull
   public List<ReferenceType> getAllClasses(final SourcePosition position) throws NoDataException {
     PsiFile file = position.getFile();
     if (!(file instanceof ClojureFile)) throw new NoDataException();

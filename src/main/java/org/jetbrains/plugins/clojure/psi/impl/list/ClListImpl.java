@@ -1,14 +1,13 @@
 package org.jetbrains.plugins.clojure.psi.impl.list;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.EmptyStub;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.stubs.NamedStub;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.plugins.clojure.psi.api.ClList;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author ilyas
@@ -19,7 +18,7 @@ public class ClListImpl extends ClListBaseImpl<EmptyStub> {
     super(node);
   }
 
-  public ClListImpl(EmptyStub stub, @NotNull IStubElementType nodeType) {
+  public ClListImpl(EmptyStub stub, @Nonnull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -29,7 +28,7 @@ public class ClListImpl extends ClListBaseImpl<EmptyStub> {
   }
 
   @Override
-  public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+  public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
     return ListDeclarations.get(processor, state, lastParent, place, this, getHeadText());
   }
 }

@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.function.Consumer;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
@@ -47,7 +48,7 @@ public class ClojureCompiler implements TranslatingCompiler
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return ClojureBundle.message("clojure.compiler.description");
@@ -118,7 +119,7 @@ public class ClojureCompiler implements TranslatingCompiler
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public FileType[] getInputFileTypes()
 	{
@@ -128,7 +129,7 @@ public class ClojureCompiler implements TranslatingCompiler
 		};
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public FileType[] getOutputFileTypes()
 	{
@@ -145,7 +146,7 @@ public class ClojureCompiler implements TranslatingCompiler
 	}
 
 	@Override
-	public void registerCompilableFileTypes(@NotNull Consumer<FileType> fileTypeConsumer)
+	public void registerCompilableFileTypes(@Nonnull Consumer<FileType> fileTypeConsumer)
 	{
 		fileTypeConsumer.accept(ClojureFileType.INSTANCE);
 	}

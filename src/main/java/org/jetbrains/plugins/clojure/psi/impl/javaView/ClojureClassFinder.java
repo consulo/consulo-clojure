@@ -8,8 +8,8 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.clojure.compiler.ClojureCompilerSettings;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.psi.stubs.index.ClojureFullScriptNameIndex;
@@ -17,6 +17,8 @@ import org.jetbrains.plugins.clojure.psi.stubs.index.ClojureFullScriptNameIndex;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * @author ilyas
@@ -29,17 +31,17 @@ public class ClojureClassFinder extends PsiElementFinder {
   }
 
   @Nullable
-  public PsiClass findClass(@NotNull String qualifiedName, @NotNull GlobalSearchScope scope) {
+  public PsiClass findClass(@Nonnull String qualifiedName, @Nonnull GlobalSearchScope scope) {
     return getClassByFQName(qualifiedName, scope);
   }
 
-  @NotNull
-  public PsiClass[] findClasses(@NotNull String qualifiedName, @NotNull GlobalSearchScope scope) {
+  @Nonnull
+  public PsiClass[] findClasses(@Nonnull String qualifiedName, @Nonnull GlobalSearchScope scope) {
     return getClassesByFQName(qualifiedName, scope);
   }
 
-  @NotNull
-  public PsiClass[] getClasses(@NotNull PsiJavaPackage psiPackage, @NotNull GlobalSearchScope scope) {
+  @Nonnull
+  public PsiClass[] getClasses(@Nonnull PsiJavaPackage psiPackage, @Nonnull GlobalSearchScope scope) {
     if (!ClojureCompilerSettings.getInstance(psiPackage.getProject()).getState().COMPILE_CLOJURE) return PsiClass.EMPTY_ARRAY;
 
     List<PsiClass> result = new ArrayList<PsiClass>();
@@ -74,7 +76,7 @@ public class ClojureClassFinder extends PsiElementFinder {
   }
 
   @Nullable
-  private PsiClass getClassByFQName(@NotNull @NonNls String name, @NotNull GlobalSearchScope scope) {
+  private PsiClass getClassByFQName(@Nonnull @NonNls String name, @Nonnull GlobalSearchScope scope) {
     if (!areClassesCompiled()) return null;
 
     final Collection<PsiClass> scriptClasses = getScriptClassesByFQName(name, scope);
@@ -84,8 +86,8 @@ public class ClojureClassFinder extends PsiElementFinder {
     return null;
   }
 
-  @NotNull
-  private PsiClass[] getClassesByFQName(@NotNull @NonNls String fqn, @NotNull GlobalSearchScope scope) {
+  @Nonnull
+  private PsiClass[] getClassesByFQName(@Nonnull @NonNls String fqn, @Nonnull GlobalSearchScope scope) {
     if (!areClassesCompiled()) return PsiClass.EMPTY_ARRAY;
 
     final Collection<PsiClass> result = getScriptClassesByFQName(fqn, scope);

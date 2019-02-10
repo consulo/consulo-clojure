@@ -1,17 +1,19 @@
 package org.jetbrains.plugins.clojure.psi.api;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * @author ilyas
  */
 public interface ClMetadata extends ClojurePsiElement {
 
-  @NotNull
+  @Nonnull
   List<ClKeyword> getKeys();
 
   @Nullable

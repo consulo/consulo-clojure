@@ -1,6 +1,6 @@
 package org.jetbrains.plugins.clojure.psi.api;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 
 /**

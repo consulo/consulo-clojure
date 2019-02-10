@@ -3,11 +3,12 @@ package org.jetbrains.plugins.clojure.psi.impl.symbols;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import org.jetbrains.plugins.clojure.lexer.TokenSets;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElementImpl;
@@ -72,7 +73,7 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
     super(node);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public PsiReference[] getReferences() {
     PsiReference fakeClassReference = new MyFakeClassPsiReference();
@@ -124,13 +125,13 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public ResolveResult[] multiResolve(boolean incomplete) {
     final ResolveCache resolveCache = ResolveCache.getInstance(getProject());
     return resolveCache.resolveWithCaching(this, RESOLVER, true, incomplete);
   }
 
-  public PsiElement setName(@NotNull @NonNls String newName) throws IncorrectOperationException {
+  public PsiElement setName(@Nonnull @NonNls String newName) throws IncorrectOperationException {
     final ASTNode newNode = ClojurePsiFactory.getInstance(getProject()).createSymbolNodeFromText(newName);
     getParent().getNode().replaceChild(getNode(), newNode);
     return newNode.getPsi();
@@ -378,7 +379,7 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
     return results.length == 1 ? results[0].getElement() : null;
   }
 
-  @NotNull
+  @Nonnull
   public String getCanonicalText() {
     return getText();
   }
@@ -404,7 +405,7 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
     return this;
   }
 
-  public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+  public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
     if (isReferenceTo(element)) return this;
     final PsiFile file = getContainingFile();
     if (element instanceof PsiClass && (file instanceof ClojureFile)) {
@@ -426,7 +427,7 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
     return multipleResolveResults().contains(element);
   }
 
-  @NotNull
+  @Nonnull
   public Object[] getVariants() {
     return CompleteSymbol.getVariants(this);
   }
@@ -435,7 +436,7 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
     return false;
   }
 
-  @NotNull
+  @Nonnull
   public String getNameString() {
     return getText();
   }
@@ -458,7 +459,7 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
       return null;
     }
 
-    @NotNull
+    @Nonnull
     public String getCanonicalText() {
       return ClSymbolImpl.this.getCanonicalText();
     }
@@ -467,7 +468,7 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
       return null;
     }
 
-    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
       return null;
     }
 
@@ -475,7 +476,7 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
       return ClSymbolImpl.this.isReferenceTo(element);
     }
 
-    @NotNull
+    @Nonnull
     public Object[] getVariants() {
       return new Object[0];
     }

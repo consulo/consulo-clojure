@@ -1,7 +1,7 @@
 package org.jetbrains.plugins.clojure.psi.impl.symbols;
 
 import com.intellij.lang.ASTNode;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author ilyas
@@ -16,7 +16,7 @@ public class ClImplicitArgumentImpl extends ClSymbolImpl {
     return "ClImplicitArgument";
   }
 
-  @NotNull
+  @Nonnull
   public String getNameString() {
     return getText();
   }

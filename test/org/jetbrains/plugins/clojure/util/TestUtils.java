@@ -1,12 +1,14 @@
 package org.jetbrains.plugins.clojure.util;
 
 import com.intellij.openapi.diagnostic.Logger;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+
+import javax.annotation.Nullable;
 
 /**
  * @author ilyas
@@ -57,7 +59,7 @@ public class TestUtils {
   }
 
   @Nullable
-  public static String getDataPath(@NotNull Class clazz) {
+  public static String getDataPath(@Nonnull Class clazz) {
     final String classDir = getClassRelativePath(clazz);
     String moduleDir = getModulePath(clazz);
     return classDir != null && moduleDir != null ? moduleDir + "/" + classDir + "/data/" : null;
@@ -70,12 +72,12 @@ public class TestUtils {
   }
 
   @Nullable
-  public static String getDataPath(@NotNull Class s, @NotNull final String relativePath) {
+  public static String getDataPath(@Nonnull Class s, @Nonnull final String relativePath) {
     return getDataPath(s) + "/" + relativePath;
   }
 
   @Nullable
-  public static String getClassRelativePath(@NotNull Class s) {
+  public static String getClassRelativePath(@Nonnull Class s) {
     String classFullPath = getClassFullPath(s);
     for (String path : RUN_PATHES) {
       final String dataPath = getClassDirPath(classFullPath, path);
@@ -87,7 +89,7 @@ public class TestUtils {
   }
 
   @Nullable
-  public static String getModulePath(@NotNull Class s) {
+  public static String getModulePath(@Nonnull Class s) {
     String classFullPath = getClassFullPath(s);
     for (String path : RUN_PATHES) {
       final String dataPath = getModulePath(classFullPath, path);
@@ -98,14 +100,14 @@ public class TestUtils {
     return null;
   }
 
-  public static String getClassFullPath(@NotNull final Class s) {
+  public static String getClassFullPath(@Nonnull final Class s) {
     String name = s.getSimpleName() + ".class";
     final URL url = s.getResource(name);
     return url.getPath();
   }
 
   @Nullable
-  private static String getModulePath(@NotNull String s, @NotNull final String indicator) {
+  private static String getModulePath(@Nonnull String s, @Nonnull final String indicator) {
     int n = s.indexOf(indicator);
     if (n == -1) {
       return null;
@@ -114,7 +116,7 @@ public class TestUtils {
   }
 
   @Nullable
-  private static String getClassDirPath(@NotNull String s, @NotNull final String indicator) {
+  private static String getClassDirPath(@Nonnull String s, @Nonnull final String indicator) {
     int n = s.indexOf(indicator);
     if (n == -1) {
       return null;

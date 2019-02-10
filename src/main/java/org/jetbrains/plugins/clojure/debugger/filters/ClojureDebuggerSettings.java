@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.clojure.debugger.filters;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.options.Configurable;
@@ -23,7 +24,7 @@ public class ClojureDebuggerSettings extends XDebuggerSettings<ClojureDebuggerSe
     super("clojure_debugger");
   }
 
-  @NotNull
+  @Nonnull
   public Configurable createConfigurable() {
     return new ClojureDebuggerSettingsConfigurable(this);
   }

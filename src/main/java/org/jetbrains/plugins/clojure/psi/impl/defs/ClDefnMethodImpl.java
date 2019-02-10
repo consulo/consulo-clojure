@@ -1,9 +1,10 @@
 package org.jetbrains.plugins.clojure.psi.impl.defs;
 
+import javax.annotation.Nullable;
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.clojure.psi.api.defs.ClDefMethod;
 import org.jetbrains.plugins.clojure.psi.stubs.api.ClDefStub;
 import com.intellij.lang.ASTNode;
@@ -18,7 +19,7 @@ import consulo.ide.IconDescriptorUpdaters;
 */
 public class ClDefnMethodImpl extends ClDefImpl implements ClDefMethod {
 
-  public ClDefnMethodImpl(ClDefStub stub, @NotNull IStubElementType nodeType) {
+  public ClDefnMethodImpl(ClDefStub stub, @Nonnull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

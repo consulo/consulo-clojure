@@ -2,11 +2,12 @@ package org.jetbrains.plugins.clojure.psi.impl.defs;
 
 import java.util.ArrayList;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.api.ClList;
@@ -38,7 +39,7 @@ import consulo.ide.IconDescriptorUpdaters;
  * @author ilyas
  */
 public class ClDefImpl extends ClListBaseImpl<ClDefStub> implements ClDef, StubBasedPsiElement<ClDefStub> {
-  public ClDefImpl(ClDefStub stub, @NotNull IStubElementType nodeType) {
+  public ClDefImpl(ClDefStub stub, @Nonnull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -83,7 +84,7 @@ public class ClDefImpl extends ClListBaseImpl<ClDefStub> implements ClDef, StubB
   }
 
   @Override
-  public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+  public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
     // Do not resolve identifier
     if (lastParent != null && lastParent.getParent() == this && lastParent instanceof ClSymbol) return true;
     //process parameters
@@ -171,7 +172,7 @@ public class ClDefImpl extends ClListBaseImpl<ClDefStub> implements ClDef, StubB
     return null;
   }
 
-  private String processMetadata(@NotNull ClMetadata meta) {
+  private String processMetadata(@Nonnull ClMetadata meta) {
     final StringBuffer buffer = new StringBuffer();
     final ClojurePsiElement args = meta.getValue("arglists");
     if (args != null) {
@@ -204,7 +205,7 @@ public class ClDefImpl extends ClListBaseImpl<ClDefStub> implements ClDef, StubB
   }
 
 
-  public PsiElement setName(@NotNull @NonNls String name) throws IncorrectOperationException {
+  public PsiElement setName(@Nonnull @NonNls String name) throws IncorrectOperationException {
     final ClSymbol sym = getNameSymbol();
     if (sym != null) sym.setName(name);
     return this;

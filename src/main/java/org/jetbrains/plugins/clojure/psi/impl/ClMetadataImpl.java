@@ -3,7 +3,7 @@ package org.jetbrains.plugins.clojure.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElementImpl;
 import org.jetbrains.plugins.clojure.psi.api.ClKeyword;
@@ -26,7 +26,7 @@ public class ClMetadataImpl extends ClojurePsiElementImpl implements ClMetadata 
     return "ClMetadata";
   }
 
-  @NotNull
+  @Nonnull
   public List<ClKeyword> getKeys() {
     ClMap map = getUnderlyingMap();
     if (map == null) return Collections.emptyList();

@@ -6,11 +6,10 @@ import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.clojure.ClojureIcons;
+import javax.annotation.Nonnull;
 
-import javax.swing.*;
+import javax.annotation.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,12 +28,12 @@ import java.util.Map;
  * limitations under the License.
  */
 public class ClojureColorsAndFontsPage implements ColorSettingsPage {
-  @NotNull
+  @Nonnull
   public String getDisplayName() {
     return "Clojure";
   }
 
-  @NotNull
+  @Nonnull
   public AttributesDescriptor[] getAttributeDescriptors() {
     return ATTRS;
   }
@@ -54,18 +53,18 @@ public class ClojureColorsAndFontsPage implements ColorSettingsPage {
           new AttributesDescriptor(ClojureSyntaxHighlighter.DEF_ID, ClojureSyntaxHighlighter.DEF),
       };
 
-  @NotNull
+  @Nonnull
   public ColorDescriptor[] getColorDescriptors() {
     return new ColorDescriptor[0];
   }
 
-  @NotNull
+  @Nonnull
   public SyntaxHighlighter getHighlighter() {
     return new ClojureSyntaxHighlighter();
   }
 
   @NonNls
-  @NotNull
+  @Nonnull
   public String getDemoText() {
     return "; Example from Clojure Special Forms http://clojure.org/special_forms\n" +
         "; \n" +

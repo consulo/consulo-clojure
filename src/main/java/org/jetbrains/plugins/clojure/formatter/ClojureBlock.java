@@ -8,8 +8,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiErrorElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.formatter.processors.ClojureSpacingProcessor;
 import org.jetbrains.plugins.clojure.parser.ClojureElementTypes;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
@@ -31,7 +31,7 @@ public class ClojureBlock implements Block, ClojureElementTypes{
   protected List<Block> mySubBlocks = null;
 
 
-  public ClojureBlock(@NotNull final ASTNode node, @Nullable final Alignment alignment, @NotNull final Indent indent, @Nullable final Wrap wrap, final CodeStyleSettings settings) {
+  public ClojureBlock(@Nonnull final ASTNode node, @Nullable final Alignment alignment, @Nonnull final Indent indent, @Nullable final Wrap wrap, final CodeStyleSettings settings) {
     myNode = node;
     myAlignment = alignment;
     setAlignment(alignment);
@@ -40,22 +40,22 @@ public class ClojureBlock implements Block, ClojureElementTypes{
     mySettings = settings;
   }
 
-  @NotNull
+  @Nonnull
   public ASTNode getNode() {
     return myNode;
   }
 
-  @NotNull
+  @Nonnull
   public CodeStyleSettings getSettings() {
     return mySettings;
   }
 
-  @NotNull
+  @Nonnull
   public TextRange getTextRange() {
     return myNode.getTextRange();
   }
 
-  @NotNull
+  @Nonnull
   public List<Block> getSubBlocks() {
     if (mySubBlocks == null) {
       mySubBlocks = ClojureBlockGenerator.generateSubBlocks(myNode, myAlignment, myWrap, mySettings, this);
@@ -82,7 +82,7 @@ public class ClojureBlock implements Block, ClojureElementTypes{
     return ClojureSpacingProcessor.getSpacing(child1, child2);
   }
 
-  @NotNull
+  @Nonnull
   public ChildAttributes getChildAttributes(final int newChildIndex) {
     return getAttributesByParent();
   }
@@ -108,7 +108,7 @@ public class ClojureBlock implements Block, ClojureElementTypes{
    * @param node Tree node
    * @return true if node is incomplete
    */
-  public boolean isIncomplete(@NotNull final ASTNode node) {
+  public boolean isIncomplete(@Nonnull final ASTNode node) {
     ASTNode lastChild = node.getLastChildNode();
     while (lastChild != null &&
         (lastChild.getPsi() instanceof PsiWhiteSpace || lastChild.getPsi() instanceof PsiComment)) {

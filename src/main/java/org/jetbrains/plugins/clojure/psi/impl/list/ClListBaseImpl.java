@@ -1,34 +1,25 @@
 package org.jetbrains.plugins.clojure.psi.impl.list;
 
-import com.intellij.openapi.util.Condition;
 import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.Function;
-import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.plugins.clojure.psi.ClojureBaseElementImpl;
-import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.api.ClList;
-import org.jetbrains.plugins.clojure.psi.api.ClQuotedForm;
 import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.NamedStub;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.lang.ASTNode;
-import org.jetbrains.plugins.clojure.psi.stubs.api.ClDefStub;
-
-import java.util.List;
 
 /**
  * @author ilyas
  */
 public abstract class ClListBaseImpl<T extends StubElement> extends ClojureBaseElementImpl<T> implements ClList, StubBasedPsiElement<T> {
 
-  public ClListBaseImpl(T stub, @NotNull IStubElementType nodeType) {
+  public ClListBaseImpl(T stub, @Nonnull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -65,7 +56,7 @@ public abstract class ClListBaseImpl<T extends StubElement> extends ClojureBaseE
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement getFirstBrace() {
     PsiElement element = findChildByType(ClojureTokenTypes.LEFT_PAREN);
     assert element != null;

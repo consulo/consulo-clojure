@@ -1,16 +1,15 @@
 package org.jetbrains.plugins.clojure.actions;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.utils.ClojureNamesUtil;
 import com.intellij.CommonBundle;
 import com.intellij.ide.IdeView;
 import com.intellij.ide.actions.CreateElementActionBase;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.module.Module;
@@ -43,7 +42,7 @@ public abstract class NewClojureActionBase extends CreateElementActionBase {
     super(text, description, icon);
   }
 
-  @NotNull
+  @Nonnull
   protected final PsiElement[] invokeDialog(final Project project, final PsiDirectory directory) {
     MyInputValidator validator = new MyInputValidator(project, directory);
     Messages.showInputDialog(project, getDialogPrompt(), getDialogTitle(), Messages.getQuestionIcon(), "", validator);
@@ -95,12 +94,12 @@ public abstract class NewClojureActionBase extends CreateElementActionBase {
     return false;
   }
 
-  @NotNull
+  @Nonnull
   protected PsiElement[] create(String newName, PsiDirectory directory) throws Exception {
     return doCreate(newName, directory);
   }
 
-  @NotNull
+  @Nonnull
   protected abstract PsiElement[] doCreate(String newName, PsiDirectory directory) throws Exception;
 
   protected static PsiFile createFileFromTemplate(final PsiDirectory directory, String className, @NonNls String templateName,
@@ -118,7 +117,7 @@ public abstract class NewClojureActionBase extends CreateElementActionBase {
     checkCreateFile(directory, newName);
   }
 
-  public static void checkCreateFile(@NotNull PsiDirectory directory, String name) throws IncorrectOperationException {
+  public static void checkCreateFile(@Nonnull PsiDirectory directory, String name) throws IncorrectOperationException {
     final String trimmedName = StringUtil.trimEnd(name, CLOJURE_EXTENSION);
     if (!ClojureNamesUtil.isIdentifier(trimmedName)) {
       throw new IncorrectOperationException(ClojureBundle.message("0.is.not.an.identifier", name));

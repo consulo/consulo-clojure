@@ -4,8 +4,8 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 
 /**
@@ -33,7 +33,7 @@ public class ClojureBraceMatcher implements PairedBraceMatcher {
     return PAIRS;
   }
 
-  public boolean isPairedBracesAllowedBeforeType(@NotNull final IElementType lbraceType, @Nullable final IElementType tokenType) {
+  public boolean isPairedBracesAllowedBeforeType(@Nonnull final IElementType lbraceType, @Nullable final IElementType tokenType) {
     return tokenType == null
         || ClojureTokenTypes.WHITESPACE_SET.contains(tokenType)
         || ClojureTokenTypes.COMMENTS.contains(tokenType)

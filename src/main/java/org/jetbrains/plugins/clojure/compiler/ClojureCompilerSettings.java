@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.clojure.compiler;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.jps.clojure.model.impl.JpsClojureCompilerSettingsState;
 import org.jetbrains.jps.clojure.model.impl.JpsClojureModelSerializerExtension;
 import com.intellij.openapi.components.PersistentStateComponent;
@@ -18,8 +19,8 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 })
 public class ClojureCompilerSettings implements PersistentStateComponent<JpsClojureCompilerSettingsState>
 {
-	@NotNull
-	public static ClojureCompilerSettings getInstance(@NotNull Project project)
+	@Nonnull
+	public static ClojureCompilerSettings getInstance(@Nonnull Project project)
 	{
 		return ServiceManager.getService(project, ClojureCompilerSettings.class);
 	}

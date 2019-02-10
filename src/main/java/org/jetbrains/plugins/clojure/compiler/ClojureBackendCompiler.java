@@ -11,7 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
@@ -133,21 +134,21 @@ public class ClojureBackendCompiler extends ExternalCompiler
 		return true;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getId()
 	{
 		return "ClojureCompiler";
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentableName()
 	{
 		return ClojureBundle.message("clojure.compiler.name");
 	}
 
 	@Override
-	public OutputParser createErrorParser(@NotNull String outputDir, Process process)
+	public OutputParser createErrorParser(@Nonnull String outputDir, Process process)
 	{
 		return new ClojureOutputParser();
 	}
@@ -166,7 +167,7 @@ public class ClojureBackendCompiler extends ExternalCompiler
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public GeneralCommandLine createStartupCommand(final ModuleChunk chunk,
 			final CompileContext context,
 			final String outputPath) throws IOException, IllegalArgumentException

@@ -1,5 +1,7 @@
 package org.jetbrains.plugins.clojure.findUsages;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.application.QueryExecutorBase;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -12,7 +14,6 @@ import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.UsageSearchContext;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 
@@ -25,7 +26,7 @@ public class ClojureReferenceSearcher extends QueryExecutorBase<PsiReference, Re
   }
 
   @Override
-  public void processQuery(@NotNull ReferencesSearch.SearchParameters params, @NotNull Processor<PsiReference> consumer) {
+  public void processQuery(@Nonnull ReferencesSearch.SearchParameters params, @Nonnull Processor<PsiReference> consumer) {
     final PsiElement elem = params.getElementToSearch();
     SearchScope scope = params.getEffectiveSearchScope();
     if (elem instanceof PsiNamedElement
@@ -36,7 +37,7 @@ public class ClojureReferenceSearcher extends QueryExecutorBase<PsiReference, Re
       if (name != null) {
         RequestResultProcessor processor = new RequestResultProcessor() {
           @Override
-          public boolean processTextOccurrence(@NotNull PsiElement element, int offsetInElement, @NotNull Processor<PsiReference> consumer) {
+          public boolean processTextOccurrence(@Nonnull PsiElement element, int offsetInElement, @Nonnull Processor<PsiReference> consumer) {
             if (element instanceof ClSymbol) {
               ClSymbol refSymbol = (ClSymbol) element;
               for (PsiReference ref : refSymbol.getReferences()) {

@@ -1,8 +1,8 @@
 package org.jetbrains.plugins.clojure.psi.api.symbols;
 
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
@@ -15,7 +15,7 @@ public interface ClSymbol extends ClojurePsiElement, PsiPolyVariantReference, Ps
 
   final ClSymbol[] EMPTY_ARRAY = new ClSymbol[0];
 
-  @NotNull
+  @Nonnull
   String getNameString();
 
   @Nullable

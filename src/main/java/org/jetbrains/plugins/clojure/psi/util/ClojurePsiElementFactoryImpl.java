@@ -1,5 +1,7 @@
 package org.jetbrains.plugins.clojure.psi.util;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.Condition;
 import com.intellij.psi.PsiClass;
@@ -10,8 +12,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.clojure.psi.api.ClList;
 import org.jetbrains.plugins.clojure.psi.api.ClListLike;
 import org.jetbrains.plugins.clojure.psi.api.ClVector;
@@ -32,19 +35,19 @@ public class ClojurePsiElementFactoryImpl extends ClojurePsiFactory {
   private static final String DUMMY = "DUMMY.";
 
 
-  public ASTNode createSymbolNodeFromText(@NotNull String newName) {
+  public ASTNode createSymbolNodeFromText(@Nonnull String newName) {
     final String text = "(" + newName + ")";
     final ClojureFile dummyFile = createClojureFileFromText(text);
     return dummyFile.getFirstChild().getFirstChild().getNextSibling().getNode();
   }
 
   @Override
-  public boolean hasSyntacticalErrors(@NotNull String text) {
+  public boolean hasSyntacticalErrors(@Nonnull String text) {
     final ClojureFile clojureFile = (ClojureFile) PsiFileFactory.getInstance(getProject()).createFileFromText(DUMMY + ClojureFileType.CLOJURE_FILE_TYPE.getDefaultExtension(), text);
     return hasErrorElement(clojureFile);
   }
 
-  public String getErrorMessage(@NotNull String text) {
+  public String getErrorMessage(@Nonnull String text) {
     if (!hasSyntacticalErrors(text)) return null;
     final ClojureFile clojureFile = (ClojureFile) PsiFileFactory.getInstance(getProject()).createFileFromText(DUMMY + ClojureFileType.CLOJURE_FILE_TYPE.getDefaultExtension(), text);
     return getErrorMessageInner(clojureFile);
@@ -69,19 +72,19 @@ public class ClojurePsiElementFactoryImpl extends ClojurePsiFactory {
     return false;
   }
 
-  @NotNull
-  public ClojureFile createClojureFileFromText(@NotNull String text) {
+  @Nonnull
+  public ClojureFile createClojureFileFromText(@Nonnull String text) {
     return (ClojureFile) PsiFileFactory.getInstance(getProject()).createFileFromText(DUMMY + ClojureFileType.CLOJURE_FILE_TYPE.getDefaultExtension(), text);
   }
 
   @Override
-  public ClList createListFromText(@NotNull String text) {
+  public ClList createListFromText(@Nonnull String text) {
     return (ClList)createSymbolNodeFromText("(" + text + ")").getPsi();
 
   }
 
   @Override
-  public ClVector createVectorFromText(@NotNull String text) {
+  public ClVector createVectorFromText(@Nonnull String text) {
     return (ClVector)createSymbolNodeFromText("[" + text + "]").getPsi();
   }
 

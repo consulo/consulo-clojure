@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nls;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import consulo.annotations.RequiredDispatchThread;
+import consulo.ui.RequiredUIAccess;
 
 /**
  * Project specific settings.
@@ -54,7 +54,7 @@ public final class ClojureConfigurable implements Configurable
 		return null;
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	public JComponent createComponent()
 	{
 		if(mySettingsForm == null)
@@ -64,20 +64,20 @@ public final class ClojureConfigurable implements Configurable
 		return mySettingsForm.getComponent();
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	public boolean isModified()
 	{
 		return mySettingsForm.isModified();
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	public void apply() throws ConfigurationException
 	{
 		ClojureProjectSettings settings = ClojureProjectSettings.getInstance(myProject);
 		settings.coloredParentheses = mySettingsForm.isColoredParentheses();
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	public void reset()
 	{
 		if(mySettingsForm != null)
@@ -86,7 +86,7 @@ public final class ClojureConfigurable implements Configurable
 		}
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	public void disposeUIResources()
 	{
 		mySettingsForm = null;

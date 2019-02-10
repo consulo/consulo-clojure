@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.lexer.ClojureFlexLexer;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import com.intellij.lexer.Lexer;
@@ -73,12 +73,12 @@ public class ClojureSyntaxHighlighter extends SyntaxHighlighterBase implements C
       ClojureTokenTypes.COLON_SYMBOL
   );
 
-  @NotNull
+  @Nonnull
   public Lexer getHighlightingLexer() {
     return new ClojureFlexLexer();
   }
 
-  @NotNull
+  @Nonnull
   public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
     return pack(ATTRIBUTES.get(tokenType));
   }

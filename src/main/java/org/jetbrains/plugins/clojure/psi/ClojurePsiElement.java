@@ -1,7 +1,7 @@
 package org.jetbrains.plugins.clojure.psi;
 
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * @author ilyas

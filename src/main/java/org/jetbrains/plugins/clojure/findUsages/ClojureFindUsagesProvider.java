@@ -1,12 +1,15 @@
 package org.jetbrains.plugins.clojure.findUsages;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.clojure.lexer.ClojureFlexLexer;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
@@ -23,23 +26,23 @@ public class ClojureFindUsagesProvider implements FindUsagesProvider{
             ClojureTokenTypes.IDENTIFIERS, ClojureTokenTypes.COMMENTS, ClojureTokenTypes.STRINGS);
   }
 
-  public boolean canFindUsagesFor(@NotNull PsiElement psiElement) {
+  public boolean canFindUsagesFor(@Nonnull PsiElement psiElement) {
     return psiElement instanceof ClDef || psiElement instanceof ClSymbol;
   }
 
-  public String getHelpId(@NotNull PsiElement psiElement) {
+  public String getHelpId(@Nonnull PsiElement psiElement) {
     return null;
   }
 
-  @NotNull
-  public String getType(@NotNull PsiElement element) {
+  @Nonnull
+  public String getType(@Nonnull PsiElement element) {
     if (element instanceof ClSymbol) return "symbol";
     if (element instanceof ClDef) return "definition";
     return "entity";
   }
 
-  @NotNull
-  public String getDescriptiveName(@NotNull PsiElement element) {
+  @Nonnull
+  public String getDescriptiveName(@Nonnull PsiElement element) {
     if (element instanceof ClSymbol) {
       ClSymbol symbol = (ClSymbol) element;
       final String name = symbol.getText();
@@ -56,8 +59,8 @@ public class ClojureFindUsagesProvider implements FindUsagesProvider{
     return element.getText();
   }
 
-  @NotNull
-  public String getNodeText(@NotNull PsiElement element, boolean useFullName) {
+  @Nonnull
+  public String getNodeText(@Nonnull PsiElement element, boolean useFullName) {
     if (element instanceof ClSymbol) {
       ClSymbol symbol = (ClSymbol) element;
       final String name = symbol.getReferenceName();

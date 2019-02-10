@@ -16,7 +16,7 @@
 package org.jetbrains.plugins.clojure.utils;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.jps.clojure.build.ClojureBuilder;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import com.intellij.openapi.editor.Editor;
@@ -39,7 +39,7 @@ public class ClojureUtils {
 
   public static final String CLOJURE_DEFAULT_JVM_PARAMS = "-Xss1m -server";
 
-  public static boolean isClojureEditor(@NotNull Editor editor) {
+  public static boolean isClojureEditor(@Nonnull Editor editor) {
     VirtualFile vfile = FileDocumentManager.getInstance().getFile(editor.getDocument());
     Project project = editor.getProject();
     if (vfile == null) return false;

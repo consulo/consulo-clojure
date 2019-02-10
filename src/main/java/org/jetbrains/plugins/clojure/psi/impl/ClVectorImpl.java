@@ -2,15 +2,14 @@ package org.jetbrains.plugins.clojure.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElementImpl;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.api.ClVector;
 import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class ClVectorImpl extends ClojurePsiElementImpl implements ClVector {
     super(node, "ClVector");
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement getFirstBrace() {
     PsiElement element = findChildByType(ClojureTokenTypes.LEFT_SQUARE);
     assert element != null;

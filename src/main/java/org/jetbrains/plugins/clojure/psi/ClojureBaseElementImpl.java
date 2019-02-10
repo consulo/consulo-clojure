@@ -14,7 +14,7 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.psi.api.ClQuotedForm;
 import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 
@@ -64,7 +64,7 @@ public abstract class ClojureBaseElementImpl <T extends StubElement> extends Stu
     return (T)element;
   }
 
-  public ClojureBaseElementImpl(T stub, @NotNull IStubElementType nodeType) {
+  public ClojureBaseElementImpl(T stub, @Nonnull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

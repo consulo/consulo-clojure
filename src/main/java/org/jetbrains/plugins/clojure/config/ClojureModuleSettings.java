@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.clojure.config;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
 
 /**
@@ -8,13 +9,13 @@ import org.jetbrains.plugins.clojure.utils.ClojureUtils;
  */
 public class ClojureModuleSettings {
 
-  @NotNull
+  @Nonnull
   public String myReplClass = ClojureUtils.CLOJURE_MAIN;
 
-  @NotNull
+  @Nonnull
   public String myJvmOpts = ClojureUtils.CLOJURE_DEFAULT_JVM_PARAMS;
 
-  @NotNull
+  @Nonnull
   public String myReplOpts = "";
 
 }

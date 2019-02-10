@@ -6,8 +6,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.PsiFileWithStubSupport;
 import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
 import org.jetbrains.plugins.clojure.psi.api.ns.ClNs;
@@ -29,10 +29,10 @@ public interface ClojureFile extends PsiFile, ClojurePsiElement, PsiFileWithStub
   @Nullable
   ClNs getNamespaceElement();
 
-  @NotNull
+  @Nonnull
   ClNs findOrCreateNamespaceElement() throws IncorrectOperationException;
 
-  @NotNull
+  @Nonnull
   String getPackageName();
 
   @Nullable

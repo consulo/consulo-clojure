@@ -1,6 +1,7 @@
 package consulo.clojure.module.extension;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
 import consulo.extension.impl.ModuleExtensionImpl;
 import consulo.roots.ModuleRootLayer;
@@ -11,33 +12,33 @@ import consulo.roots.ModuleRootLayer;
  */
 public class ClojureModuleExtension extends ModuleExtensionImpl<ClojureModuleExtension>
 {
-	@NotNull
+	@Nonnull
 	protected String myReplClass = ClojureUtils.CLOJURE_MAIN;
 
-	@NotNull
+	@Nonnull
 	protected String myJvmOpts = ClojureUtils.CLOJURE_DEFAULT_JVM_PARAMS;
 
-	@NotNull
+	@Nonnull
 	protected String myReplOpts = "";
 
-	public ClojureModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
+	public ClojureModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer moduleRootLayer)
 	{
 		super(id, moduleRootLayer);
 	}
 
-	@NotNull
+	@Nonnull
 	public String getReplClass()
 	{
 		return myReplClass;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getJvmOpts()
 	{
 		return myJvmOpts;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getReplOpts()
 	{
 		return myReplOpts;

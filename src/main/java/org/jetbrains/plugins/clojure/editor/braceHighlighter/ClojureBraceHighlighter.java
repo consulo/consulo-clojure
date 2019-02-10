@@ -1,6 +1,6 @@
 package org.jetbrains.plugins.clojure.editor.braceHighlighter;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.parser.ClojureElementTypes;
 import org.jetbrains.plugins.clojure.psi.api.ClList;
 import org.jetbrains.plugins.clojure.settings.ClojureProjectSettings;
@@ -18,7 +18,7 @@ import com.intellij.psi.tree.IElementType;
  */
 public class ClojureBraceHighlighter implements Annotator
 {
-	public void annotate(@NotNull PsiElement psiElement, @NotNull AnnotationHolder annotationHolder)
+	public void annotate(@Nonnull PsiElement psiElement, @Nonnull AnnotationHolder annotationHolder)
 	{
 		if(psiElement instanceof LeafPsiElement &&
 				ClojureProjectSettings.getInstance(psiElement.getProject()).coloredParentheses)

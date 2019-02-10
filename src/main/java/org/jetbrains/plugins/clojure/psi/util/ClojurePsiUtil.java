@@ -27,8 +27,8 @@ import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.impl.ClKeywordImpl;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.util.Trinity;
 import com.intellij.util.containers.HashSet;
 
@@ -51,7 +51,7 @@ public class ClojurePsiUtil {
   }
 
   @Nullable
-  public static ClList findFormByName(ClojurePsiElement container, @NotNull String name) {
+  public static ClList findFormByName(ClojurePsiElement container, @Nonnull String name) {
     for (PsiElement element : container.getChildren()) {
       if (element instanceof ClList) {
         ClList list = (ClList) element;
@@ -65,7 +65,7 @@ public class ClojurePsiUtil {
   }
 
   @Nullable
-  public static ClList findFormByNameSet(ClojurePsiElement container, @NotNull Set<String> names) {
+  public static ClList findFormByNameSet(ClojurePsiElement container, @Nonnull Set<String> names) {
     for (PsiElement element : container.getChildren()) {
       if (element instanceof ClList) {
         ClList list = (ClList) element;
@@ -101,8 +101,8 @@ public class ClojurePsiUtil {
     return next;
   }
 
-  @NotNull
-  public static Trinity<PsiElement, PsiElement, PsiElement> findCommonParentAndLastChildren(@NotNull PsiElement element1, @NotNull PsiElement element2) {
+  @Nonnull
+  public static Trinity<PsiElement, PsiElement, PsiElement> findCommonParentAndLastChildren(@Nonnull PsiElement element1, @Nonnull PsiElement element2) {
     if (element1 == element2) return new Trinity<PsiElement, PsiElement, PsiElement>(element1, element1, element1);
     final PsiFile containingFile = element1.getContainingFile();
     final PsiElement topLevel = containingFile == element2.getContainingFile() ? containingFile : null;
@@ -134,8 +134,8 @@ public class ClojurePsiUtil {
     return next != null;
   }
 
-  @NotNull
-  public static ArrayList<PsiElement> getParents(@NotNull PsiElement element, @Nullable PsiElement topLevel) {
+  @Nonnull
+  public static ArrayList<PsiElement> getParents(@Nonnull PsiElement element, @Nullable PsiElement topLevel) {
     ArrayList<PsiElement> parents = new ArrayList<PsiElement>();
     PsiElement parent = element;
     while (parent != topLevel && parent != null) {
@@ -161,7 +161,7 @@ public class ClojurePsiUtil {
    * @param previous should the s-exp <i>behind</i> the caret be returned (rather than <i>around</i> the caret).
    * @return the s-expression, or {@code null} if none could be found.
    */
-  public static @Nullable ClBraced findSexpAtCaret(@NotNull Editor editor, boolean previous) {
+  public static @Nullable ClBraced findSexpAtCaret(@Nonnull Editor editor, boolean previous) {
     Project project = editor.getProject();
     if (project == null) { return null; }
 
@@ -195,7 +195,7 @@ public class ClojurePsiUtil {
    * @param editor the editor to search in.
    * @return the s-expression, or {@code null} if not currently inside one.
    */
-  public static @Nullable ClList findTopSexpAroundCaret(@NotNull Editor editor) {
+  public static @Nullable ClList findTopSexpAroundCaret(@Nonnull Editor editor) {
     Project project = editor.getProject();
     if (project == null) { return null; }
 
@@ -222,7 +222,7 @@ public class ClojurePsiUtil {
     return children.length != 0 ? children[children.length - 1] : null;
   }
 
-  public static boolean isValidClojureExpression(String text, @NotNull Project project) {
+  public static boolean isValidClojureExpression(String text, @Nonnull Project project) {
     if (text == null) return false;
     text = text.trim();
     final ClojurePsiFactory factory = ClojurePsiFactory.getInstance(project);

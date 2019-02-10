@@ -9,8 +9,8 @@ import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.utils.LibrariesUtil;
 import clojure.lang.AFn;
@@ -43,7 +43,7 @@ public class ClojureConfigUtil
 	private static final Library[] LIBRARY_EMPTY_ARRAY = new Library[0];
 	private static final ArrayFactory<Library> LIBRARY_ARRAY_FACTORY = new ArrayFactory<Library>()
 	{
-		@NotNull
+		@Nonnull
 		@Override
 		public Library[] create(int count)
 		{
@@ -112,7 +112,7 @@ public class ClojureConfigUtil
 		return result;
 	}
 
-	private static String getClojureVersion(@NotNull String jarPath)
+	private static String getClojureVersion(@Nonnull String jarPath)
 	{
 		String jarVersion = getClojureJarVersion(jarPath, LIBRARY_PROPERTIES_PATH);
 		return jarVersion != null ? jarVersion : UNDEFINED_VERSION;
@@ -212,7 +212,7 @@ public class ClojureConfigUtil
 		return LibrariesUtil.getLibrariesByCondition(module, CLOJURE_LIB_CONDITION);
 	}
 
-	@NotNull
+	@Nonnull
 	public static String getClojureSdkJarPath(Module module)
 	{
 		if(module == null)

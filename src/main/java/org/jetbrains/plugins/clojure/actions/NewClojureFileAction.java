@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.clojure.actions;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.ClojureIcons;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
@@ -39,7 +40,7 @@ public class NewClojureFileAction extends NewClojureActionBase {
     return ClojureBundle.message("newfile.command.name");
   }
 
-  @NotNull
+  @Nonnull
   protected PsiElement[] doCreate(String newName, PsiDirectory directory) throws Exception {
     PsiFile file = createFileFromTemplate(directory, newName, "ClojureFile.clj");
     PsiElement lastChild = file.getLastChild();

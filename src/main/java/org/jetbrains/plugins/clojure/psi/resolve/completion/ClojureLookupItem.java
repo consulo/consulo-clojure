@@ -1,7 +1,8 @@
 package org.jetbrains.plugins.clojure.psi.resolve.completion;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
 import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 import org.jetbrains.plugins.clojure.psi.util.ClojurePsiFactory;
@@ -22,7 +23,7 @@ import com.intellij.psi.util.PsiTreeUtil;
  * @since 15.01.13
  */
 public class ClojureLookupItem extends LookupItem<PsiElement> {
-  @NotNull
+  @Nonnull
   private final PsiElement myElement;
   private boolean isInImport = false;
   private boolean isClassName = false;
@@ -43,8 +44,8 @@ public class ClojureLookupItem extends LookupItem<PsiElement> {
     isClassName = className;
   }
 
-  @NonNls @NotNull
-  private static String getLookupString(@NotNull PsiElement element) {
+  @NonNls @Nonnull
+  private static String getLookupString(@Nonnull PsiElement element) {
     if (element instanceof PsiNamedElement) {
       return ((PsiNamedElement) element).getName();
     } else {
@@ -52,7 +53,7 @@ public class ClojureLookupItem extends LookupItem<PsiElement> {
     }
   }
 
-  public ClojureLookupItem(@NotNull PsiElement element) {
+  public ClojureLookupItem(@Nonnull PsiElement element) {
     super(element, getLookupString(element));
     myElement = element;
   }

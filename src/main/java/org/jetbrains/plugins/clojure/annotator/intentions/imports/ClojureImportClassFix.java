@@ -1,6 +1,6 @@
 package org.jetbrains.plugins.clojure.annotator.intentions.imports;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import com.intellij.codeInspection.HintAction;
 import com.intellij.openapi.editor.Editor;
@@ -23,21 +23,21 @@ public class ClojureImportClassFix implements HintAction {
     return false;
   }
 
-  @NotNull
+  @Nonnull
   public String getText() {
     return ClojureBundle.message("import.named", myElements[0].getName());
   }
 
-  @NotNull
+  @Nonnull
   public String getFamilyName() {
     return ClojureBundle.message("import.symbol");
   }
 
-  public boolean isAvailable(@NotNull Project project, Editor editor, PsiFile file) {
+  public boolean isAvailable(@Nonnull Project project, Editor editor, PsiFile file) {
     return false;
   }
 
-  public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+  public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
 
   }
 

@@ -1,20 +1,9 @@
 package org.jetbrains.plugins.clojure.psi;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Condition;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.stubs.StubElement;
-import com.intellij.util.Function;
-import com.intellij.util.containers.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.clojure.psi.api.ClQuotedForm;
-import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 
-import java.util.List;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,12 +24,12 @@ public class ClojurePsiElementImpl extends ClojureBaseElementImpl<StubElement> i
 
   final private String myName;
 
-  public ClojurePsiElementImpl(@NotNull ASTNode astNode, @NotNull String name) {
+  public ClojurePsiElementImpl(@Nonnull ASTNode astNode, @Nonnull String name) {
     super(astNode);
     myName = name;
   }
 
-  public ClojurePsiElementImpl(@NotNull ASTNode astNode) {
+  public ClojurePsiElementImpl(@Nonnull ASTNode astNode) {
     super(astNode);
     myName = null;
   }

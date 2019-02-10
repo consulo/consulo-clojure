@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
 import org.jetbrains.plugins.clojure.utils.ClojureUtils;
@@ -26,7 +26,6 @@ import com.intellij.execution.Executor;
 import com.intellij.execution.ExecutorRegistry;
 import com.intellij.execution.configurations.CommandLineBuilder;
 import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.configurations.JavaParameters;
 import com.intellij.execution.console.ConsoleHistoryController;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.CommandLineArgumentsProvider;
@@ -89,7 +88,7 @@ public class ClojureConsoleRunner
 	private AnAction myRunAction;
 
 
-	public ClojureConsoleRunner(@NotNull Module module, @NotNull String consoleTitle, @NotNull CommandLineArgumentsProvider provider, @Nullable String workingDir)
+	public ClojureConsoleRunner(@Nonnull Module module, @Nonnull String consoleTitle, @Nonnull CommandLineArgumentsProvider provider, @Nullable String workingDir)
 	{
 		myModule = module;
 		myProject = module.getProject();
@@ -98,7 +97,7 @@ public class ClojureConsoleRunner
 		myWorkingDir = workingDir;
 	}
 
-	public static void run(@NotNull final Module module, final String workingDir, final String... statements2execute) throws CantRunException
+	public static void run(@Nonnull final Module module, final String workingDir, final String... statements2execute) throws CantRunException
 	{
 		final ArrayList<String> args = createRuntimeArgs(module, workingDir);
 

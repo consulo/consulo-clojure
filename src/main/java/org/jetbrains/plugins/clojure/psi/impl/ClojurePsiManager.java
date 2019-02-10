@@ -1,6 +1,6 @@
 package org.jetbrains.plugins.clojure.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ProjectComponent;
@@ -29,7 +29,7 @@ public class ClojurePsiManager implements ProjectComponent
 	{
 	}
 
-	@NotNull
+	@Nonnull
 	public String getComponentName()
 	{
 		return "ClojurePsiManager";

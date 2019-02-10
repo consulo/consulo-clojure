@@ -6,8 +6,9 @@ import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
 import org.jetbrains.plugins.clojure.psi.api.ns.ClNs;
@@ -33,7 +34,7 @@ public class NamespaceUtil {
 //          "clojure.xml"
   };
 
-  public static PsiNamedElement[] getDeclaredElements(@NotNull String nsFqn, @NotNull Project project) {
+  public static PsiNamedElement[] getDeclaredElements(@Nonnull String nsFqn, @Nonnull Project project) {
     final Collection<ClNs> nses = StubIndex.getInstance().get(ClojureNsNameIndex.KEY, nsFqn, project, GlobalSearchScope.allScope(project));
     ArrayList<PsiNamedElement> result = new ArrayList<PsiNamedElement>();
 
@@ -52,7 +53,7 @@ public class NamespaceUtil {
     return result.toArray(PsiNamedElement.EMPTY_ARRAY);
   }
 
-  public static PsiNamedElement[] getDefaultDefinitions(@NotNull Project project) {
+  public static PsiNamedElement[] getDefaultDefinitions(@Nonnull Project project) {
     final ArrayList<PsiNamedElement> res = new ArrayList<PsiNamedElement>();
     for (String ns : DEFAULT_NSES) {
       res.addAll(Arrays.asList(getDeclaredElements(ns, project)));
@@ -60,7 +61,7 @@ public class NamespaceUtil {
     return res.toArray(PsiNamedElement.EMPTY_ARRAY);
   }
 
-  public static ClSyntheticNamespace[] getTopLevelNamespaces(@NotNull Project project) {
+  public static ClSyntheticNamespace[] getTopLevelNamespaces(@Nonnull Project project) {
     ArrayList<ClSyntheticNamespace> result = new ArrayList<ClSyntheticNamespace>();
     for (String fqn : StubIndex.getInstance().getAllKeys(ClojureNsNameIndex.KEY, project)) {
       if (!fqn.contains(".")) {
@@ -71,7 +72,7 @@ public class NamespaceUtil {
   }
 
   @Nullable
-  public static ClSyntheticNamespace getNamespace(@NotNull String fqn, @NotNull final Project project) {
+  public static ClSyntheticNamespace getNamespace(@Nonnull String fqn, @Nonnull final Project project) {
     final Collection<ClNs> nsWithPrefix = StubIndex.getInstance().get(ClojureNsNameIndex.KEY, fqn, project, GlobalSearchScope.allScope(project));
     if (!nsWithPrefix.isEmpty()) {
       final ClNs ns = nsWithPrefix.iterator().next();
@@ -102,7 +103,7 @@ public class NamespaceUtil {
       this.navigationElement = navigationElement;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public PsiElement getNavigationElement() {
       return navigationElement != null ? navigationElement : super.getNavigationElement();
@@ -114,7 +115,7 @@ public class NamespaceUtil {
     }
 
     @Override
-    public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+    public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
       final HashSet<String> innerNamespaces = new HashSet<String>();
 
       // Add inner namespaces

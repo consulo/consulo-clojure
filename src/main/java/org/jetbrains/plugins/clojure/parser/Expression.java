@@ -1,7 +1,7 @@
 package org.jetbrains.plugins.clojure.parser;
 
 import com.intellij.lang.ASTNode;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElementImpl;
 
 /**
@@ -20,7 +20,7 @@ import org.jetbrains.plugins.clojure.psi.ClojurePsiElementImpl;
  * limitations under the License.
  */
 public class Expression extends ClojurePsiElementImpl {
-  public Expression(@NotNull final ASTNode node) {
+  public Expression(@Nonnull final ASTNode node) {
     super(node);
   }
 

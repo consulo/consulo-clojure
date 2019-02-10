@@ -3,12 +3,12 @@ package org.jetbrains.plugins.clojure.psi.impl.ns;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 import org.jetbrains.plugins.clojure.psi.api.ClQuotedForm;
 import org.jetbrains.plugins.clojure.psi.stubs.api.ClNsStub;
-import org.jetbrains.plugins.clojure.psi.util.ClojurePsiUtil;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 
 /**
@@ -16,7 +16,7 @@ import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
  */
 public class ClInNsImpl extends ClNsImpl{
 
-  public ClInNsImpl(ClNsStub stub, @NotNull IStubElementType nodeType) {
+  public ClInNsImpl(ClNsStub stub, @Nonnull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

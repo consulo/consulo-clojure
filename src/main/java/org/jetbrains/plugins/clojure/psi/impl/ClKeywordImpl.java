@@ -6,23 +6,17 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.StubBasedPsiElement;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
-import com.intellij.util.Function;
 import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.psi.ClStubElementType;
 import org.jetbrains.plugins.clojure.psi.ClojureBaseElementImpl;
 import org.jetbrains.plugins.clojure.psi.api.ClKeyword;
 import org.jetbrains.plugins.clojure.psi.stubs.api.ClKeywordStub;
-import org.jetbrains.plugins.clojure.psi.stubs.api.ClNsStub;
 import org.jetbrains.plugins.clojure.psi.stubs.index.ClojureKeywordIndex;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author ilyas
@@ -32,7 +26,7 @@ public class ClKeywordImpl extends ClojureBaseElementImpl<ClKeywordStub> impleme
     super(node);
   }
 
-  public ClKeywordImpl(ClKeywordStub stub, @NotNull ClStubElementType nodeType) {
+  public ClKeywordImpl(ClKeywordStub stub, @Nonnull ClStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -42,7 +36,7 @@ public class ClKeywordImpl extends ClojureBaseElementImpl<ClKeywordStub> impleme
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public String getName() {
     ClKeywordStub stub = getStub();
     if (stub != null) {
@@ -52,7 +46,7 @@ public class ClKeywordImpl extends ClojureBaseElementImpl<ClKeywordStub> impleme
     return getText();
   }
 
-  public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+  public PsiElement setName(@NonNls @Nonnull String name) throws IncorrectOperationException {
     throw new IncorrectOperationException("Name changing for the keyword");
   }
 
@@ -73,7 +67,7 @@ public class ClKeywordImpl extends ClojureBaseElementImpl<ClKeywordStub> impleme
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public String getCanonicalText() {
     return getText();
   }
@@ -82,7 +76,7 @@ public class ClKeywordImpl extends ClojureBaseElementImpl<ClKeywordStub> impleme
     return null;
   }
 
-  public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+  public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException {
     return null;
   }
 
@@ -94,7 +88,7 @@ public class ClKeywordImpl extends ClojureBaseElementImpl<ClKeywordStub> impleme
     return false;
   }
 
-  @NotNull
+  @Nonnull
   public Object[] getVariants() {
     final Project project = getProject();
     final Collection<String> keys = StubIndex.getInstance().getAllKeys(ClojureKeywordIndex.KEY, project);

@@ -6,7 +6,7 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.HashSet;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import org.jetbrains.plugins.clojure.parser.util.ParserUtils;
@@ -43,8 +43,8 @@ public class ClojureParser implements PsiParser, ClojureTokenTypes {
     NS_TOKENS.addAll(Arrays.asList(NS, IN_NS, CREATE_NS));
   }
 
-  @NotNull
-  public ASTNode parse(@NotNull IElementType root, @NotNull PsiBuilder builder, @NotNull LanguageVersion languageVersion) {
+  @Nonnull
+  public ASTNode parse(@Nonnull IElementType root, @Nonnull PsiBuilder builder, @Nonnull LanguageVersion languageVersion) {
     //builder.setDebugMode(true);
     PsiBuilder.Marker marker = builder.mark();
     for (IElementType token = builder.getTokenType(); token != null; token = builder.getTokenType()) {

@@ -1,5 +1,7 @@
 package org.jetbrains.plugins.clojure.psi.impl.ns;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.Condition;
 import com.intellij.psi.*;
@@ -8,8 +10,9 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.clojure.psi.api.ClList;
 import org.jetbrains.plugins.clojure.psi.api.ClListLike;
 import org.jetbrains.plugins.clojure.psi.api.ns.ClNs;
@@ -26,7 +29,7 @@ import org.jetbrains.plugins.clojure.psi.util.ClojurePsiUtil;
  */
 public class ClNsImpl extends ClListBaseImpl<ClNsStub> implements ClNs, StubBasedPsiElement<ClNsStub> {
 
-  public ClNsImpl(ClNsStub stub, @NotNull IStubElementType nodeType) {
+  public ClNsImpl(ClNsStub stub, @Nonnull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -81,7 +84,7 @@ public class ClNsImpl extends ClListBaseImpl<ClNsStub> implements ClNs, StubBase
   }
 
   @Override
-  public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+  public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
     return ImportOwner.processDeclarations(this, processor, place);
   }
 
@@ -110,7 +113,7 @@ public class ClNsImpl extends ClListBaseImpl<ClNsStub> implements ClNs, StubBase
     return (ClList) element;
   }
 
-  @NotNull
+  @Nonnull
   public ClList findOrCreateImportClause(@Nullable PsiElement place) {
     final ClList imports = findImportClause(place);
     if (imports != null) return imports;
@@ -121,7 +124,7 @@ public class ClNsImpl extends ClListBaseImpl<ClNsStub> implements ClNs, StubBase
     return findImportClause(null);
   }
 
-  @NotNull
+  @Nonnull
   public ClList findOrCreateImportClause() {
     return findOrCreateImportClause(null);
   }
@@ -133,7 +136,7 @@ public class ClNsImpl extends ClListBaseImpl<ClNsStub> implements ClNs, StubBase
     return factory.findOrCreateJavaImportForClass(clazz, importClause);
   }
 
-  @NotNull
+  @Nonnull
   protected ClList addFreshImportClause() {
     commitDocument();
     final ClSymbol first = getFirstSymbol();

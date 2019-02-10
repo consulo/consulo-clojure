@@ -15,7 +15,7 @@
 package org.jetbrains.plugins.clojure.file;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.ClojureIcons;
 import org.jetbrains.plugins.clojure.ClojureLanguage;
 import com.intellij.lang.Language;
@@ -45,21 +45,21 @@ public class ClojureFileType extends LanguageFileType
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return "Clojure";
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "Clojure file";
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getDefaultExtension()
 	{
 		return CLOJURE_DEFAULT_EXTENSION;

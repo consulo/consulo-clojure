@@ -3,8 +3,8 @@ package org.jetbrains.plugins.clojure.psi.impl.ns;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.psi.api.ns.ClNs;
 import org.jetbrains.plugins.clojure.psi.impl.ClojurePsiManager;
@@ -30,8 +30,10 @@ import consulo.ide.IconDescriptorUpdaters;
  * @author ilyas
  */
 public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage {
-  @NotNull private final String myName;
-  @NotNull private final String myQualifiedName;
+  @Nonnull
+  private final String myName;
+  @Nonnull
+  private final String myQualifiedName;
   private ClNs myNamespace;
 
   protected ClSyntheticNamespace(PsiManager manager, String name, String fqn, ClNs ns) {
@@ -45,7 +47,7 @@ public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage
     return "";
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     throw new IncorrectOperationException("Don't ever call it!");
   }
 
@@ -58,7 +60,7 @@ public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage
     return ClojurePsiManager.getInstance(getProject()).getDummyFile();
   }
 
-  @NotNull
+  @Nonnull
   public String getQualifiedName() {
     return myQualifiedName;
   }
@@ -67,23 +69,23 @@ public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public PsiJavaPackage[] getSubPackages() {
     return new PsiJavaPackage[0];
   }
 
-  @NotNull
-  public PsiJavaPackage[] getSubPackages(@NotNull GlobalSearchScope scope) {
+  @Nonnull
+  public PsiJavaPackage[] getSubPackages(@Nonnull GlobalSearchScope scope) {
     return new PsiJavaPackage[0];
   }
 
-  @NotNull
+  @Nonnull
   public PsiClass[] getClasses() {
     return new PsiClass[0];
   }
 
-  @NotNull
-  public PsiClass[] getClasses(@NotNull GlobalSearchScope scope) {
+  @Nonnull
+  public PsiClass[] getClasses(@Nonnull GlobalSearchScope scope) {
     return new PsiClass[0];
   }
 
@@ -91,7 +93,7 @@ public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage
     return null;
   }
 
-  public void handleQualifiedNameChange(@NotNull String newQualifiedName) {
+  public void handleQualifiedNameChange(@Nonnull String newQualifiedName) {
   }
 
   public VirtualFile[] occursInPackagePrefixes() {
@@ -106,8 +108,8 @@ public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage
     return false;
   }
 
-  @NotNull
-  public PsiClass[] findClassByShortName(@NotNull String name, @NotNull GlobalSearchScope scope) {
+  @Nonnull
+  public PsiClass[] findClassByShortName(@Nonnull String name, @Nonnull GlobalSearchScope scope) {
     return new PsiClass[0];
   }
 
@@ -131,13 +133,13 @@ public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage
     return false;
   }
 
-  @NotNull
+  @Nonnull
   public PsiDirectory[] getDirectories() {
     return new PsiDirectory[0];
   }
 
-  @NotNull
-  public PsiDirectory[] getDirectories(@NotNull GlobalSearchScope scope) {
+  @Nonnull
+  public PsiDirectory[] getDirectories(@Nonnull GlobalSearchScope scope) {
     return new PsiDirectory[0];
   }
 
@@ -168,7 +170,7 @@ public class ClSyntheticNamespace extends LightElement implements PsiJavaPackage
     };
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public PsiElement getNavigationElement() {
     if (myNamespace != null) return myNamespace;

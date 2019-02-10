@@ -5,11 +5,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.psi.api.ClList;
 import org.jetbrains.plugins.clojure.psi.api.ClVector;
@@ -43,13 +44,13 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return myFile.getNamespaceElement();
   }
 
-  @NotNull
+  @Nonnull
   private final ClojureFile myFile;
   private String myQualifiedName;
   private String myName;
 
   @Override
-  public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+  public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
     for (PsiMethod method : getAllMethods()) {
       if (!processor.execute(method, state)) return false;
     }
@@ -61,7 +62,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return super.processDeclarations(processor, state, lastParent, place);
   }
 
-  public ClSyntheticClassImpl(@NotNull ClojureFile file) {
+  public ClSyntheticClassImpl(@Nonnull ClojureFile file) {
     super(file.getManager(), ClojureFileType.CLOJURE_LANGUAGE);
     myFile = file;
     assert myFile.isClassDefiningFile();
@@ -87,7 +88,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return "ClojureSyntheticClass[" + getQualifiedName() + "]";
   }
 
-  public void accept(@NotNull PsiElementVisitor psiElementVisitor) {
+  public void accept(@Nonnull PsiElementVisitor psiElementVisitor) {
   }
 
 
@@ -137,7 +138,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public PsiClassType[] getExtendsListTypes() {
     final PsiClass superClass = getSuperClass();
     final PsiElementFactory factory = JavaPsiFacade.getInstance(getProject()).getElementFactory();
@@ -154,7 +155,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     myFile.delete();
   }
 
-  @NotNull
+  @Nonnull
   public PsiClassType[] getImplementsListTypes() {
     return new PsiClassType[0];
   }
@@ -173,7 +174,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return null;
   }
 
-  @NotNull
+  @Nonnull
   private ClList getNsElement() {
     return myFile.getNamespaceElement();
   }
@@ -201,7 +202,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return new PsiClass[0];
   }
 
-  @NotNull
+  @Nonnull
   public PsiClass[] getSupers() {
     final ArrayList<PsiClass> list = new ArrayList<PsiClass>();
     final PsiClass psiClass = getSuperClass();
@@ -212,7 +213,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return list.toArray(PsiClass.EMPTY_ARRAY);
   }
 
-  @NotNull
+  @Nonnull
   public PsiClassType[] getSuperTypes() {
     final ArrayList<PsiClassType> types = new ArrayList<PsiClassType>();
     final PsiClass superClass = getSuperClass();
@@ -231,7 +232,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return types.toArray(PsiClassType.EMPTY_ARRAY);
   }
 
-  @NotNull
+  @Nonnull
   public PsiField[] getFields() {
     final ArrayList<PsiField> list = new ArrayList<PsiField>();
     final PsiClass psiClass = getSuperClass();
@@ -244,7 +245,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return list.toArray(new PsiField[list.size()]);
   }
 
-  @NotNull
+  @Nonnull
   public PsiMethod[] getMethods() {
     final ArrayList<PsiMethod> methods = new ArrayList<PsiMethod>();
     final PsiClass psiClass = getSuperClass();
@@ -257,32 +258,32 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return methods.toArray(new PsiMethod[methods.size()]);
   }
 
-  @NotNull
+  @Nonnull
   public PsiMethod[] getConstructors() {
     return new PsiMethod[0];
   }
 
-  @NotNull
+  @Nonnull
   public PsiClass[] getInnerClasses() {
     return new PsiClass[0];
   }
 
-  @NotNull
+  @Nonnull
   public PsiClassInitializer[] getInitializers() {
     return new PsiClassInitializer[0];
   }
 
-  @NotNull
+  @Nonnull
   public PsiField[] getAllFields() {
     return getFields();
   }
 
-  @NotNull
+  @Nonnull
   public PsiMethod[] getAllMethods() {
     return getMethods();
   }
 
-  @NotNull
+  @Nonnull
   public PsiClass[] getAllInnerClasses() {
     return new PsiClass[0];
   }
@@ -295,22 +296,22 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public PsiMethod[] findMethodsBySignature(PsiMethod psiMethod, boolean b) {
     return new PsiMethod[0];
   }
 
-  @NotNull
+  @Nonnull
   public PsiMethod[] findMethodsByName(@NonNls String s, boolean b) {
     return new PsiMethod[0];
   }
 
-  @NotNull
+  @Nonnull
   public List<Pair<PsiMethod, PsiSubstitutor>> findMethodsAndTheirSubstitutorsByName(@NonNls String s, boolean b) {
     return new ArrayList<Pair<PsiMethod, PsiSubstitutor>>();
   }
 
-  @NotNull
+  @Nonnull
   public List<Pair<PsiMethod, PsiSubstitutor>> getAllMethodsAndTheirSubstitutors() {
     return new ArrayList<Pair<PsiMethod, PsiSubstitutor>>();
   }
@@ -340,7 +341,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return null;
   }
 
-  public boolean isInheritor(@NotNull PsiClass psiClass, boolean b) {
+  public boolean isInheritor(@Nonnull PsiClass psiClass, boolean b) {
     return InheritanceImplUtil.isInheritor(this, psiClass, b);
   }
 
@@ -352,7 +353,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public Collection<HierarchicalMethodSignature> getVisibleSignatures() {
     return new ArrayList<HierarchicalMethodSignature>();
   }
@@ -391,7 +392,7 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public PsiTypeParameter[] getTypeParameters() {
     return new PsiTypeParameter[0];
   }

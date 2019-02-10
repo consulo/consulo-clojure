@@ -7,8 +7,9 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsProvider;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 
@@ -16,7 +17,7 @@ import org.jetbrains.plugins.clojure.file.ClojureFileType;
  * @author ilyas
  */
 public class ClojureCodeStyleSettingsProvider extends CodeStyleSettingsProvider{
-  @NotNull
+  @Nonnull
   public Configurable createSettingsPage(CodeStyleSettings settings, CodeStyleSettings originalSettings) {
     return new CodeStyleAbstractConfigurable(settings, originalSettings, ClojureBundle.message("title.clojure.code.style.settings")) {
       protected CodeStyleAbstractPanel createPanel(CodeStyleSettings settings) {

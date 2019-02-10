@@ -4,8 +4,9 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.clojure.psi.api.ClList;
 import org.jetbrains.plugins.clojure.psi.api.ClListLike;
 import org.jetbrains.plugins.clojure.psi.api.ClVector;
@@ -20,17 +21,17 @@ public abstract class ClojurePsiFactory {
     return ServiceManager.getService(project, ClojurePsiFactory.class);
   }
 
-  public abstract ASTNode createSymbolNodeFromText(@NotNull String newName); 
+  public abstract ASTNode createSymbolNodeFromText(@Nonnull String newName);
 
-  public abstract boolean hasSyntacticalErrors(@NotNull String text);
+  public abstract boolean hasSyntacticalErrors(@Nonnull String text);
 
-  public abstract String getErrorMessage(@NotNull String text);
+  public abstract String getErrorMessage(@Nonnull String text);
 
-  public abstract ClojureFile createClojureFileFromText(@NotNull String text);
+  public abstract ClojureFile createClojureFileFromText(@Nonnull String text);
 
-  public abstract ClList createListFromText(@NotNull String text);
+  public abstract ClList createListFromText(@Nonnull String text);
 
-  public abstract ClVector createVectorFromText(@NotNull String text);
+  public abstract ClVector createVectorFromText(@Nonnull String text);
 
   @Nullable
   public abstract ClListLike findOrCreateJavaImportForClass(PsiClass clazz, ClList importClause);

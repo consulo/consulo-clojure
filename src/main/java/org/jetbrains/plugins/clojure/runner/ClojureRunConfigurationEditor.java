@@ -10,7 +10,7 @@ import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.FieldPanel;
 import com.intellij.ui.RawCommandLineEditor;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 
@@ -107,7 +107,7 @@ public class ClojureRunConfigurationEditor extends SettingsEditor<ClojureScriptR
     configuration.setEnvs(myEnvVariables.getEnvs());
   }
 
-  @NotNull
+  @Nonnull
   public JComponent createEditor() {
     myModulesModel = new DefaultComboBoxModel();
     myModulesBox.setModel(myModulesModel);

@@ -2,7 +2,7 @@ package org.jetbrains.plugins.clojure.repl.actions;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.repl.ClojureConsole;
@@ -75,7 +75,7 @@ public abstract class ClojureConsoleActionBase extends AnAction
 
 	private static class ClojureConsoleMatcher implements NotNullFunction<RunContentDescriptor, Boolean>
 	{
-		@NotNull
+		@Nonnull
 		public Boolean fun(RunContentDescriptor descriptor)
 		{
 			return descriptor != null && (descriptor.getExecutionConsole() instanceof ClojureConsole);

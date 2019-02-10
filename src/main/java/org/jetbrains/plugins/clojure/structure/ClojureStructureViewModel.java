@@ -1,12 +1,13 @@
 package org.jetbrains.plugins.clojure.structure;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.util.treeView.smartTree.Grouper;
 import com.intellij.ide.util.treeView.smartTree.Sorter;
 import com.intellij.ide.util.treeView.smartTree.Filter;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
 
 /**
@@ -20,22 +21,22 @@ public class ClojureStructureViewModel extends TextEditorBasedStructureViewModel
         myFile = file;
     }
 
-    @NotNull
+    @Nonnull
     public StructureViewTreeElement getRoot() {
         return new ClojureStructureViewElement(myFile);
     }
 
-    @NotNull
+    @Nonnull
     public Grouper[] getGroupers() {
         return Grouper.EMPTY_ARRAY;
     }
 
-    @NotNull
+    @Nonnull
     public Sorter[] getSorters() {
         return new Sorter[]{Sorter.ALPHA_SORTER};
     }
 
-    @NotNull
+    @Nonnull
     public Filter[] getFilters() {
         return Filter.EMPTY_ARRAY;
     }
@@ -44,7 +45,7 @@ public class ClojureStructureViewModel extends TextEditorBasedStructureViewModel
         return myFile;
     }
 
-    @NotNull
+    @Nonnull
     protected Class[] getSuitableClasses() {
         return new Class[]{ClDef.class};
     }

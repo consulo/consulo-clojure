@@ -6,7 +6,7 @@ import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.highlighter.ClojureEditorHighlighter;
 
@@ -42,7 +42,7 @@ public class ClojureCodeStylePanel extends CodeStyleAbstractPanel {
   protected void prepareForReformat(PsiFile psiFile) {
   }
 
-  @NotNull
+  @Nonnull
   protected FileType getFileType() {
     return ClojureFileType.CLOJURE_FILE_TYPE;
   }

@@ -5,7 +5,7 @@ import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.containers.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElementImpl;
@@ -28,7 +28,7 @@ public class ClMapImpl extends ClojurePsiElementImpl implements ClMap {
     return "ClMap";
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement getFirstBrace() {
     PsiElement element = findChildByType(ClojureTokenTypes.LEFT_CURLY);
     assert element != null;

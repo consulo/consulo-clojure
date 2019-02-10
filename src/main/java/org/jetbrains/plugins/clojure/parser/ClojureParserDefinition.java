@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.clojure.parser;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.clojure.lexer.ClojureFlexLexer;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import org.jetbrains.plugins.clojure.psi.impl.ClojureFileImpl;
@@ -32,37 +33,37 @@ import consulo.lang.LanguageVersion;
  */
 public class ClojureParserDefinition implements ParserDefinition {
 
-  @NotNull
-  public Lexer createLexer(@NotNull LanguageVersion languageVersion) {
+  @Nonnull
+  public Lexer createLexer(@Nonnull LanguageVersion languageVersion) {
     return new ClojureFlexLexer();
   }
 
-  @NotNull
-  public PsiParser createParser(@NotNull LanguageVersion languageVersion) {
+  @Nonnull
+  public PsiParser createParser(@Nonnull LanguageVersion languageVersion) {
     return new ClojureParser();
   }
 
-  @NotNull
+  @Nonnull
   public IFileElementType getFileNodeType() {
     return ClojureElementTypes.FILE;
   }
 
-  @NotNull
+  @Nonnull
   public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
     return ClojureTokenTypes.WHITESPACE_SET;
   }
 
-  @NotNull
+  @Nonnull
   public TokenSet getCommentTokens(LanguageVersion languageVersion) {
     return ClojureTokenTypes.COMMENTS;
   }
 
-  @NotNull
+  @Nonnull
   public TokenSet getStringLiteralElements(LanguageVersion languageVersion) {
     return ClojureTokenTypes.STRINGS;
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement createElement(ASTNode node) {
     return ClojurePsiCreator.createElement(node);
   }

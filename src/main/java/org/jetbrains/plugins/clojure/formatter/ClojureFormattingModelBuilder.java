@@ -9,14 +9,14 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author ilyas
  */
 public class ClojureFormattingModelBuilder implements FormattingModelBuilder {
-  @NotNull
+  @Nonnull
   public FormattingModel createModel(final PsiElement element, final CodeStyleSettings settings) {
     ASTNode node = element.getNode();
     assert node != null;

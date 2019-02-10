@@ -17,7 +17,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.parser.ClojureElementTypes;
 import org.jetbrains.plugins.clojure.parser.ClojureParser;
@@ -129,12 +129,12 @@ public class ClojureFileImpl extends PsiFileBase implements ClojureFile {
     return clone;
   }
 
-  @NotNull
+  @Nonnull
   public FileType getFileType() {
     return ClojureFileType.CLOJURE_FILE_TYPE;
   }
 
-  @NotNull
+  @Nonnull
   public String getPackageName() {
     StubElement stub = getStub();
     if (stub instanceof ClFileStub) {
@@ -216,7 +216,7 @@ public class ClojureFileImpl extends PsiFileBase implements ClojureFile {
       }
     } else {
       PsiTreeUtil.processElements(this, new PsiElementProcessor() {
-        public boolean execute(@NotNull PsiElement element) {
+        public boolean execute(@Nonnull PsiElement element) {
           if (element instanceof ClDef) {
             result.add((ClDef) element);
           }
@@ -258,7 +258,7 @@ public class ClojureFileImpl extends PsiFileBase implements ClojureFile {
     return ((ClNs) ClojurePsiUtil.findFormByNameSet(this, ClojureParser.NS_TOKENS));
   }
 
-  @NotNull
+  @Nonnull
   public ClNs findOrCreateNamespaceElement() throws IncorrectOperationException {
     final ClNs ns = getNamespaceElement();
     if (ns != null) return ns;
@@ -286,7 +286,7 @@ public class ClojureFileImpl extends PsiFileBase implements ClojureFile {
   }
 
   @Override
-  public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+  public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
 
     //Process precedent read forms
     ResolveUtil.processChildren(this, processor, state, lastParent, place);

@@ -2,7 +2,7 @@ package org.jetbrains.plugins.clojure.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElementImpl;
 import org.jetbrains.plugins.clojure.psi.api.ClKeyword;
@@ -11,7 +11,7 @@ import org.jetbrains.plugins.clojure.psi.api.ClKeyword;
  * @author ilyas
  */
 public class ClMapEntryImpl extends ClojurePsiElementImpl implements ClMapEntry {
-  public ClMapEntryImpl(@NotNull ASTNode astNode) {
+  public ClMapEntryImpl(@Nonnull ASTNode astNode) {
     super(astNode, "ClMapEntry");
   }
 

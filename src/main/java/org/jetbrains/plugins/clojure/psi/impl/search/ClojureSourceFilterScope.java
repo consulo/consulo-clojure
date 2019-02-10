@@ -6,7 +6,7 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.module.Module;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author ilyas
@@ -32,7 +32,7 @@ public class ClojureSourceFilterScope extends GlobalSearchScope {
     return myDelegate != null ? myDelegate.compare(file1, file2) : 0;
   }
 
-  public boolean isSearchInModuleContent(@NotNull final Module aModule) {
+  public boolean isSearchInModuleContent(@Nonnull final Module aModule) {
     return myDelegate == null || myDelegate.isSearchInModuleContent(aModule);
   }
 

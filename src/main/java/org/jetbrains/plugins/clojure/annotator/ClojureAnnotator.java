@@ -6,7 +6,7 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.containers.HashSet;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.highlighter.ClojureSyntaxHighlighter;
 import org.jetbrains.plugins.clojure.psi.api.ClKeyword;
@@ -27,7 +27,7 @@ public class ClojureAnnotator implements Annotator {
         "recur", "quote", "var", "set!", "monitor-enter", "monitor-exit", "."));
   }
 
-  public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
+  public void annotate(@Nonnull PsiElement element, @Nonnull AnnotationHolder holder) {
     if (element instanceof ClList) {
       annotateList((ClList) element, holder);
     }

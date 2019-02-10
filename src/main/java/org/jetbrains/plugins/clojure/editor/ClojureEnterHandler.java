@@ -1,5 +1,7 @@
 package org.jetbrains.plugins.clojure.editor;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegate;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Document;
@@ -11,8 +13,8 @@ import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 
@@ -20,8 +22,8 @@ import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
  * @author peter
  */
 public class ClojureEnterHandler implements EnterHandlerDelegate {
-  public Result preprocessEnter(@NotNull final PsiFile file, @NotNull final Editor editor, @NotNull final Ref<Integer> caretOffsetRef,
-                                @NotNull final Ref<Integer> caretAdvance, @NotNull final DataContext dataContext,
+  public Result preprocessEnter(@Nonnull final PsiFile file, @Nonnull final Editor editor, @Nonnull final Ref<Integer> caretOffsetRef,
+                                @Nonnull final Ref<Integer> caretAdvance, @Nonnull final DataContext dataContext,
                                 @Nullable final EditorActionHandler originalHandler) {
     if (file instanceof ClojureFile) {
       Document document = editor.getDocument();
@@ -52,7 +54,7 @@ public class ClojureEnterHandler implements EnterHandlerDelegate {
     return Result.Continue;
   }
 
-  public Result postProcessEnter(@NotNull PsiFile psiFile, @NotNull Editor editor, @NotNull DataContext dataContext) {
+  public Result postProcessEnter(@Nonnull PsiFile psiFile, @Nonnull Editor editor, @Nonnull DataContext dataContext) {
     return Result.Continue;
   }
 }

@@ -11,8 +11,9 @@ import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.clojure.config.ClojureConfigUtil;
 
 import java.io.File;
@@ -60,7 +61,7 @@ public class LibrariesUtil {
     });
   }
 
-  @NotNull
+  @Nonnull
   public static String getClojureLibraryHome(Library library) {
     String path = "";
     if (library instanceof LibraryEx && ((LibraryEx) library).isDisposed()) return path;

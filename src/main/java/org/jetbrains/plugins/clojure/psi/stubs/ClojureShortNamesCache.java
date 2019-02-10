@@ -3,9 +3,12 @@ package org.jetbrains.plugins.clojure.psi.stubs;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.clojure.compiler.ClojureCompilerSettings;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import org.jetbrains.plugins.clojure.psi.api.ns.ClNs;
@@ -63,13 +66,13 @@ public class ClojureShortNamesCache extends PsiShortNamesCache
 		return result.toArray(new ClNs[result.size()]);
 	}
 
-	@NotNull
-	public PsiFile[] getFilesByName(@NotNull String name)
+	@Nonnull
+	public PsiFile[] getFilesByName(@Nonnull String name)
 	{
 		return new PsiFile[0];
 	}
 
-	@NotNull
+	@Nonnull
 	public String[] getAllFileNames()
 	{
 		return FilenameIndex.getAllFilenames(myProject);
@@ -81,8 +84,8 @@ public class ClojureShortNamesCache extends PsiShortNamesCache
 		return settings.getState().COMPILE_CLOJURE;
 	}
 
-	@NotNull
-	public PsiClass[] getClassesByName(@NotNull String name, @NotNull GlobalSearchScope scope)
+	@Nonnull
+	public PsiClass[] getClassesByName(@Nonnull String name, @Nonnull GlobalSearchScope scope)
 	{
 		if(!areClassesCompiled())
 		{
@@ -122,7 +125,7 @@ public class ClojureShortNamesCache extends PsiShortNamesCache
 		});
 	}
 
-	@NotNull
+	@Nonnull
 	public String[] getAllClassNames()
 	{
 		if(!areClassesCompiled())
@@ -134,7 +137,7 @@ public class ClojureShortNamesCache extends PsiShortNamesCache
 		return classNames.toArray(new String[classNames.size()]);
 	}
 
-	public void getAllClassNames(@NotNull HashSet<String> dest)
+	public void getAllClassNames(@Nonnull HashSet<String> dest)
 	{
 		if(!areClassesCompiled())
 		{
@@ -145,71 +148,71 @@ public class ClojureShortNamesCache extends PsiShortNamesCache
 		dest.addAll(classNames);
 	}
 
-	@NotNull
-	public PsiMethod[] getMethodsByName(@NonNls String name, @NotNull GlobalSearchScope scope)
+	@Nonnull
+	public PsiMethod[] getMethodsByName(@NonNls String name, @Nonnull GlobalSearchScope scope)
 	{
 		return new PsiMethod[0];
 	}
 
-	@NotNull
-	public PsiMethod[] getMethodsByNameIfNotMoreThan(@NonNls String name, @NotNull GlobalSearchScope scope, int maxCount)
+	@Nonnull
+	public PsiMethod[] getMethodsByNameIfNotMoreThan(@NonNls String name, @Nonnull GlobalSearchScope scope, int maxCount)
 	{
 		return new PsiMethod[0];
 	}
 
 	@Override
-	public boolean processMethodsWithName(@NonNls @NotNull String s, @NotNull GlobalSearchScope globalSearchScope, @NotNull Processor<PsiMethod> psiMethodProcessor)
+	public boolean processMethodsWithName(@NonNls @Nonnull String s, @Nonnull GlobalSearchScope globalSearchScope, @Nonnull Processor<PsiMethod> psiMethodProcessor)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean processMethodsWithName(@NonNls @NotNull String s, @NotNull Processor<? super PsiMethod> processor, @NotNull GlobalSearchScope searchScope, @Nullable IdFilter idFilter)
+	public boolean processMethodsWithName(@NonNls @Nonnull String s, @Nonnull Processor<? super PsiMethod> processor, @Nonnull GlobalSearchScope searchScope, @Nullable IdFilter idFilter)
 	{
 		return false;
 	}
 
-	@NotNull
+	@Nonnull
 	public String[] getAllMethodNames()
 	{
 		return new String[0];
 	}
 
-	public void getAllMethodNames(@NotNull HashSet<String> set)
+	public void getAllMethodNames(@Nonnull HashSet<String> set)
 	{
 	}
 
-	@NotNull
-	public PsiField[] getFieldsByName(@NotNull String name, @NotNull GlobalSearchScope scope)
+	@Nonnull
+	public PsiField[] getFieldsByName(@Nonnull String name, @Nonnull GlobalSearchScope scope)
 	{
 		return new PsiField[0];
 	}
 
-	@NotNull
+	@Nonnull
 	public String[] getAllFieldNames()
 	{
 		return new String[0];
 	}
 
-	public void getAllFieldNames(@NotNull HashSet<String> set)
+	public void getAllFieldNames(@Nonnull HashSet<String> set)
 	{
 	}
 
 	@Override
-	public boolean processFieldsWithName(@NotNull String s, @NotNull Processor<? super PsiField> processor, @NotNull GlobalSearchScope searchScope, @Nullable IdFilter idFilter)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean processClassesWithName(@NotNull String s, @NotNull Processor<? super PsiClass> processor, @NotNull GlobalSearchScope searchScope, @Nullable IdFilter idFilter)
+	public boolean processFieldsWithName(@Nonnull String s, @Nonnull Processor<? super PsiField> processor, @Nonnull GlobalSearchScope searchScope, @Nullable IdFilter idFilter)
 	{
 		return false;
 	}
 
-	@NotNull
 	@Override
-	public PsiField[] getFieldsByNameIfNotMoreThan(@NonNls @NotNull String s, @NotNull GlobalSearchScope globalSearchScope, int i)
+	public boolean processClassesWithName(@Nonnull String s, @Nonnull Processor<? super PsiClass> processor, @Nonnull GlobalSearchScope searchScope, @Nullable IdFilter idFilter)
+	{
+		return false;
+	}
+
+	@Nonnull
+	@Override
+	public PsiField[] getFieldsByNameIfNotMoreThan(@NonNls @Nonnull String s, @Nonnull GlobalSearchScope globalSearchScope, int i)
 	{
 		return new PsiField[0];
 	}

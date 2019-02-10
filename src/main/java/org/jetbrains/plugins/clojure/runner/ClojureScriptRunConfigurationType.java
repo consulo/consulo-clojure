@@ -2,8 +2,9 @@ package org.jetbrains.plugins.clojure.runner;
 
 import static com.intellij.execution.configurations.ConfigurationTypeUtil.findConfigurationType;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.ClojureIcons;
 import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
 import com.intellij.execution.Location;
@@ -55,7 +56,7 @@ public class ClojureScriptRunConfigurationType implements ConfigurationType {
   }
 
   @NonNls
-  @NotNull
+  @Nonnull
   public String getId() {
     return "ClojureScriptRunConfiguration";
   }

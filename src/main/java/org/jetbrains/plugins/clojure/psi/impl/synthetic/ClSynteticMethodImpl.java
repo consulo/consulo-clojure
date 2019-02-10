@@ -2,8 +2,9 @@ package org.jetbrains.plugins.clojure.psi.impl.synthetic;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.psi.api.defs.ClDef;
 import org.jetbrains.plugins.clojure.psi.api.synthetic.ClSyntheticClass;
@@ -52,7 +53,7 @@ public class ClSynteticMethodImpl extends LightElement implements ClSyntheticMet
     return null;
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
   }
 
   public PsiElement copy() {
@@ -71,12 +72,12 @@ public class ClSynteticMethodImpl extends LightElement implements ClSyntheticMet
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public PsiParameterList getParameterList() {
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public PsiReferenceList getThrowsList() {
     return null;
   }
@@ -93,8 +94,8 @@ public class ClSynteticMethodImpl extends LightElement implements ClSyntheticMet
     return false;
   }
 
-  @NotNull
-  public MethodSignature getSignature(@NotNull PsiSubstitutor substitutor) {
+  @Nonnull
+  public MethodSignature getSignature(@Nonnull PsiSubstitutor substitutor) {
     return null;
   }
 
@@ -102,22 +103,22 @@ public class ClSynteticMethodImpl extends LightElement implements ClSyntheticMet
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public PsiMethod[] findSuperMethods() {
     return new PsiMethod[0];
   }
 
-  @NotNull
+  @Nonnull
   public PsiMethod[] findSuperMethods(boolean checkAccess) {
     return new PsiMethod[0];
   }
 
-  @NotNull
+  @Nonnull
   public PsiMethod[] findSuperMethods(PsiClass parentClass) {
     return new PsiMethod[0];
   }
 
-  @NotNull
+  @Nonnull
   public List<MethodSignatureBackedByPsiMethod> findSuperMethodSignaturesIncludingStatic(boolean checkAccess) {
     return null;
   }
@@ -126,21 +127,21 @@ public class ClSynteticMethodImpl extends LightElement implements ClSyntheticMet
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public PsiMethod[] findDeepestSuperMethods() {
     return new PsiMethod[0];
   }
 
-  @NotNull
+  @Nonnull
   public PsiModifierList getModifierList() {
     return null;
   }
 
-  public boolean hasModifierProperty(@NotNull String name) {
+  public boolean hasModifierProperty(@Nonnull String name) {
     return false;
   }
 
-  @NotNull
+  @Nonnull
   public String getName() {
     return null;
   }
@@ -149,7 +150,7 @@ public class ClSynteticMethodImpl extends LightElement implements ClSyntheticMet
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public HierarchicalMethodSignature getHierarchicalMethodSignature() {
     return PsiSuperMethodImplUtil.getHierarchicalMethodSignature(this);
   }
@@ -174,7 +175,7 @@ public class ClSynteticMethodImpl extends LightElement implements ClSyntheticMet
     return null;
   }
 
-  @NotNull
+  @Nonnull
   public PsiTypeParameter[] getTypeParameters() {
     return new PsiTypeParameter[0];
   }

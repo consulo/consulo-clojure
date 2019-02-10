@@ -1,8 +1,8 @@
 package org.jetbrains.plugins.clojure.debugger.fragments;
 
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.clojure.psi.api.ClList;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.clojure.psi.api.ns.ClNs;
 import org.jetbrains.plugins.clojure.psi.impl.ClojureFileImpl;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
@@ -11,8 +11,6 @@ import com.intellij.psi.*;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.openapi.project.Project;
 import com.intellij.testFramework.LightVirtualFile;
-
-import javax.naming.OperationNotSupportedException;
 
 /**
  * @author ilyas
@@ -99,7 +97,7 @@ public class ClojureCodeFragment extends ClojureFileImpl implements JavaCodeFrag
     return null; 
   }
 
-  @NotNull
+  @Nonnull
   public ClNs findOrCreateNamespaceElement() throws IncorrectOperationException {
     throw new IncorrectOperationException("creating imports is not supported in this element");
   }

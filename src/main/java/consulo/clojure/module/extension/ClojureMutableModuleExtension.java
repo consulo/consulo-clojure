@@ -1,9 +1,9 @@
 package consulo.clojure.module.extension;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.config.ui.ClojureFacetSettingsTab;
 import com.intellij.openapi.util.Comparing;
 import consulo.module.extension.MutableModuleExtension;
@@ -15,22 +15,22 @@ import consulo.roots.ModuleRootLayer;
  */
 public class ClojureMutableModuleExtension extends ClojureModuleExtension implements MutableModuleExtension<ClojureModuleExtension>
 {
-	public ClojureMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
+	public ClojureMutableModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer moduleRootLayer)
 	{
 		super(id, moduleRootLayer);
 	}
 
-	public void setReplClass(@NotNull String replClass)
+	public void setReplClass(@Nonnull String replClass)
 	{
 		myReplClass = replClass;
 	}
 
-	public void setJvmOpts(@NotNull String jvmOpts)
+	public void setJvmOpts(@Nonnull String jvmOpts)
 	{
 		myJvmOpts = jvmOpts;
 	}
 
-	public void setReplOpts(@NotNull String replOpts)
+	public void setReplOpts(@Nonnull String replOpts)
 	{
 		myReplOpts = replOpts;
 	}
@@ -49,7 +49,7 @@ public class ClojureMutableModuleExtension extends ClojureModuleExtension implem
 	}
 
 	@Override
-	public boolean isModified(@NotNull ClojureModuleExtension extension)
+	public boolean isModified(@Nonnull ClojureModuleExtension extension)
 	{
 		boolean modified = false;
 		modified |= isEnabled() != extension.isEnabled();

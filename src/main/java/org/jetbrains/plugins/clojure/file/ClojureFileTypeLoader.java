@@ -1,8 +1,9 @@
 package org.jetbrains.plugins.clojure.file;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * User: peter
@@ -19,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
  * limitations under the License.
  */
 public class ClojureFileTypeLoader extends FileTypeFactory {
-  public void createFileTypes(@NotNull FileTypeConsumer consumer) {
+  public void createFileTypes(@Nonnull FileTypeConsumer consumer) {
     consumer.consume(ClojureFileType.CLOJURE_FILE_TYPE, ClojureFileType.CLOJURE_DEFAULT_EXTENSION);
   }
 }

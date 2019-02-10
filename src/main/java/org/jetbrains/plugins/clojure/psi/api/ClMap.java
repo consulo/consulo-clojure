@@ -1,10 +1,11 @@
 package org.jetbrains.plugins.clojure.psi.api;
 
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.impl.ClMapEntry;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * @author ilyas

@@ -2,14 +2,14 @@ package org.jetbrains.plugins.clojure.refactoring.rename;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author ilyas
  */
 public class RenameClojureFileProcessor extends RenamePsiElementProcessor {
   @Override
-  public boolean canProcessElement(@NotNull PsiElement element) {
+  public boolean canProcessElement(@Nonnull PsiElement element) {
     return false; //todo: ?
   }
 }
