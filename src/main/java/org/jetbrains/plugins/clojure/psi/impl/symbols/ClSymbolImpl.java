@@ -4,11 +4,9 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
+import javax.annotation.Nullable;
 
 import org.jetbrains.annotations.NonNls;
-
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import org.jetbrains.plugins.clojure.lexer.TokenSets;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElementImpl;
@@ -38,7 +36,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.util.Iconable;
@@ -62,8 +59,8 @@ import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.HashMap;
 import com.intellij.util.containers.HashSet;
-import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
+import consulo.ui.image.Image;
 
 /**
  * @author ilyas
@@ -153,13 +150,8 @@ public class ClSymbolImpl extends ClojurePsiElementImpl implements ClSymbol {
       }
 
       @Nullable
-      public Icon getIcon(boolean open) {
-        return TargetAWT.to(IconDescriptorUpdaters.getIcon(ClSymbolImpl.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS));
-      }
-
-      @Nullable
-      public TextAttributesKey getTextAttributesKey() {
-        return null;
+      public Image getIcon() {
+        return IconDescriptorUpdaters.getIcon(ClSymbolImpl.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
       }
     };
   }

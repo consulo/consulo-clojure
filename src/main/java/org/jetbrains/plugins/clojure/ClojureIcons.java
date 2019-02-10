@@ -12,8 +12,6 @@
  */
 package org.jetbrains.plugins.clojure;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NonNls;
 import com.intellij.openapi.util.IconLoader;
 import consulo.ui.image.Image;
@@ -29,10 +27,10 @@ public interface ClojureIcons {
   final Image SYMBOL = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/symbol.png");
   final Image NAMESPACE = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/namespace.png");
 
-  final Icon REPL_CONSOLE = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_console.png");
-  final Icon REPL_ADD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_add.png");
-  final Icon REPL_CLOSE = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_close.png");
-  final Icon REPL_LOAD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_run.png");
-  final Icon REPL_GO = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_go.png");
-  final Icon REPL_EVAL = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_eval.png");
+  final Image REPL_CONSOLE = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_console.png");
+  final Image REPL_ADD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_add.png");
+  final Image REPL_CLOSE = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_close.png");
+  final Image REPL_LOAD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_run.png");
+  final Image REPL_GO = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_go.png");
+  final Image REPL_EVAL = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_eval.png");
 }

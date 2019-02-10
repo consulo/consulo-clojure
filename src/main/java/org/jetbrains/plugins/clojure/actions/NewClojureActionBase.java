@@ -1,7 +1,6 @@
 package org.jetbrains.plugins.clojure.actions;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.clojure.ClojureBundle;
@@ -29,6 +28,7 @@ import com.intellij.psi.PsiNameHelper;
 import com.intellij.util.IncorrectOperationException;
 import consulo.clojure.module.extension.ClojureModuleExtension;
 import consulo.psi.PsiPackage;
+import consulo.ui.image.Image;
 
 /**
  * @author ilyas
@@ -38,7 +38,7 @@ public abstract class NewClojureActionBase extends CreateElementActionBase {
   @NonNls
   private static final String CLOJURE_EXTENSION = ".clj";
 
-  public NewClojureActionBase(String text, String description, Icon icon) {
+  public NewClojureActionBase(String text, String description, Image icon) {
     super(text, description, icon);
   }
 

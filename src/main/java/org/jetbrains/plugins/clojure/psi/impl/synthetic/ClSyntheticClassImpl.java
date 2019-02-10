@@ -6,11 +6,9 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
+import javax.annotation.Nullable;
 
 import org.jetbrains.annotations.NonNls;
-
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.psi.api.ClList;
 import org.jetbrains.plugins.clojure.psi.api.ClVector;
@@ -29,8 +27,8 @@ import com.intellij.psi.javadoc.PsiDocComment;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.IncorrectOperationException;
-import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
+import consulo.ui.image.Image;
 
 /**
  * @author ilyas
@@ -103,8 +101,8 @@ public class ClSyntheticClassImpl extends LightElement implements ClSyntheticCla
         String pn = myFile.getPackageName();
         return "(" + (pn.equals("") ? "<default package>" : pn) + ") in " + myFile.getName();
       }
-      public Icon getIcon(boolean open) {
-        return TargetAWT.to(IconDescriptorUpdaters.getIcon(myFile, 0));
+      public Image getIcon() {
+        return IconDescriptorUpdaters.getIcon(myFile, 0);
       }
     };
   }

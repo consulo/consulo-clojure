@@ -11,7 +11,6 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
-import consulo.awt.TargetAWT;
 
 /**
  * @author ilyas
@@ -21,7 +20,7 @@ public class NewClojureFileAction extends NewClojureActionBase {
   private static final String DUMMY = "dummy.";
 
   public NewClojureFileAction() {
-    super(ClojureBundle.message("newfile.menu.action.text"), ClojureBundle.message("newfile.menu.action.description"), TargetAWT.to(ClojureIcons.CLOJURE_ICON_16x16));
+    super(ClojureBundle.message("newfile.menu.action.text"), ClojureBundle.message("newfile.menu.action.description"), ClojureIcons.CLOJURE_ICON_16x16);
   }
 
   protected String getActionName(PsiDirectory directory, String newName) {

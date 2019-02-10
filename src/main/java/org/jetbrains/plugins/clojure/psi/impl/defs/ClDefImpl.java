@@ -3,11 +3,9 @@ package org.jetbrains.plugins.clojure.psi.impl.defs;
 import java.util.ArrayList;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
+import javax.annotation.Nullable;
 
 import org.jetbrains.annotations.NonNls;
-
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
 import org.jetbrains.plugins.clojure.psi.api.ClList;
@@ -32,8 +30,8 @@ import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
+import consulo.ui.image.Image;
 
 /**
  * @author ilyas
@@ -131,8 +129,8 @@ public class ClDefImpl extends ClListBaseImpl<ClDefStub> implements ClDef, StubB
       }
 
       @Nullable
-      public Icon getIcon(boolean open) {
-        return TargetAWT.to(IconDescriptorUpdaters.getIcon(ClDefImpl.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS));
+      public Image getIcon() {
+        return IconDescriptorUpdaters.getIcon(ClDefImpl.this, Iconable.ICON_FLAG_VISIBILITY | Iconable.ICON_FLAG_READ_STATUS);
       }
     };
   }
