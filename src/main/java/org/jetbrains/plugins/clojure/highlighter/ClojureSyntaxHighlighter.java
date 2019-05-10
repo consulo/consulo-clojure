@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jetbrains.annotations.NonNls;
 import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.clojure.lexer.ClojureFlexLexer;
 import org.jetbrains.plugins.clojure.lexer.ClojureTokenTypes;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
-import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
@@ -112,7 +112,7 @@ public class ClojureSyntaxHighlighter extends SyntaxHighlighterBase implements C
   // Registering TextAttributes
   static {
 
-    final Color deepBlue = SyntaxHighlighterColors.KEYWORD.getDefaultAttributes().getForegroundColor();
+    final Color deepBlue = DefaultLanguageHighlighterColors.KEYWORD.getDefaultAttributes().getForegroundColor();
     ATOM_ATTRIB.setForegroundColor(deepBlue);
     TextAttributesKey.createTextAttributesKey(ATOM_ID, ATOM_ATTRIB);
   }
