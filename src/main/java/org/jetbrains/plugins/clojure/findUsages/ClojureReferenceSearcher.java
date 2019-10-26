@@ -1,7 +1,5 @@
 package org.jetbrains.plugins.clojure.findUsages;
 
-import javax.annotation.Nonnull;
-
 import com.intellij.openapi.application.QueryExecutorBase;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -17,6 +15,8 @@ import com.intellij.util.Processor;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
 import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author ilyas
  */
@@ -26,7 +26,7 @@ public class ClojureReferenceSearcher extends QueryExecutorBase<PsiReference, Re
   }
 
   @Override
-  public void processQuery(@Nonnull ReferencesSearch.SearchParameters params, @Nonnull Processor<PsiReference> consumer) {
+  public void processQuery(@Nonnull ReferencesSearch.SearchParameters params, @Nonnull Processor<? super PsiReference> consumer) {
     final PsiElement elem = params.getElementToSearch();
     SearchScope scope = params.getEffectiveSearchScope();
     if (elem instanceof PsiNamedElement
@@ -37,7 +37,7 @@ public class ClojureReferenceSearcher extends QueryExecutorBase<PsiReference, Re
       if (name != null) {
         RequestResultProcessor processor = new RequestResultProcessor() {
           @Override
-          public boolean processTextOccurrence(@Nonnull PsiElement element, int offsetInElement, @Nonnull Processor<PsiReference> consumer) {
+          public boolean processTextOccurrence(@Nonnull PsiElement element, int offsetInElement, @Nonnull Processor<? super PsiReference> consumer) {
             if (element instanceof ClSymbol) {
               ClSymbol refSymbol = (ClSymbol) element;
               for (PsiReference ref : refSymbol.getReferences()) {
