@@ -15,13 +15,13 @@
  */
 package org.jetbrains.plugins.clojure.settings;
 
-import javax.swing.JComponent;
-
-import org.jetbrains.annotations.Nls;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import consulo.ui.RequiredUIAccess;
+import consulo.ui.annotation.RequiredUIAccess;
+import org.jetbrains.annotations.Nls;
+
+import javax.swing.*;
 
 /**
  * Project specific settings.

@@ -1,4 +1,4 @@
-<idea-plugin>
+<consulo-plugin>
 	<id>org.intellij.clojure</id>
 	<name>Clojure</name>
 	<description>Provides Clojure language support: syntax and error highlighting, completion, navigation and
@@ -228,4 +228,4 @@
 	</actions>
 
 
-</idea-plugin>
+</consulo-plugin>
