@@ -1,19 +1,12 @@
 package org.jetbrains.plugins.clojure.psi.resolve;
 
-import com.intellij.openapi.util.Condition;
-import com.intellij.openapi.util.Key;
-import com.intellij.openapi.util.Trinity;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
 import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.scope.PsiScopeProcessor;
+import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.NameHint;
-import org.jetbrains.plugins.clojure.psi.ClojurePsiElement;
-import org.jetbrains.plugins.clojure.psi.api.ClListLike;
-import org.jetbrains.plugins.clojure.psi.api.symbols.ClSymbol;
-import org.jetbrains.plugins.clojure.psi.api.ClList;
-import org.jetbrains.plugins.clojure.psi.impl.list.ListDeclarations;
+import com.intellij.psi.scope.PsiScopeProcessor;
+import com.intellij.psi.util.PsiTreeUtil;
+import consulo.util.dataholder.Key;
 
 /**
  * @author ilyas

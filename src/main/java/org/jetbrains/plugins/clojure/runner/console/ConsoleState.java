@@ -1,20 +1,17 @@
 package org.jetbrains.plugins.clojure.runner.console;
 
-import com.intellij.execution.impl.ConsoleViewImpl;
-import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
-import com.intellij.execution.ExecutionBundle;
-import com.intellij.openapi.util.Key;
+import consulo.util.dataholder.Key;
+import org.jetbrains.plugins.clojure.ClojureBundle;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-
-import org.jetbrains.plugins.clojure.ClojureBundle;
+import java.io.Writer;
 
 /**
  * @author ilyas

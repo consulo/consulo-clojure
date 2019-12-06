@@ -1,10 +1,10 @@
 package org.jetbrains.plugins.clojure.repl;
 
-import org.jetbrains.plugins.clojure.ClojureLanguage;
 import com.intellij.execution.console.ConsoleHistoryController;
 import com.intellij.execution.console.LanguageConsoleImpl;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Key;
+import consulo.util.dataholder.Key;
+import org.jetbrains.plugins.clojure.ClojureLanguage;
 
 /**
  * @author ilyas

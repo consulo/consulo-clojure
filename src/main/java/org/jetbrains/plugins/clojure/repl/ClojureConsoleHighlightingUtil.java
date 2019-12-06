@@ -1,12 +1,12 @@
 package org.jetbrains.plugins.clojure.repl;
 
-import java.util.regex.Pattern;
-
-import org.intellij.lang.annotations.Language;
 import com.intellij.execution.console.LanguageConsoleImpl;
 import com.intellij.execution.impl.ConsoleViewImpl;
 import com.intellij.execution.ui.ConsoleViewContentType;
-import com.intellij.openapi.util.Key;
+import consulo.util.dataholder.Key;
+import org.intellij.lang.annotations.Language;
+
+import java.util.regex.Pattern;
 
 /**
  * @author ilyas

@@ -1,12 +1,12 @@
 package org.jetbrains.plugins.clojure.repl;
 
-import java.util.regex.Matcher;
-
 import com.intellij.execution.console.LanguageConsoleImpl;
 import com.intellij.execution.process.ColoredProcessHandler;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
+import consulo.util.dataholder.Key;
+
+import java.util.regex.Matcher;
 
 /**
  * @author ilyas
