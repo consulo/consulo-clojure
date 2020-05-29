@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.jetbrains.plugins.clojure.ClojureBundle;
 import org.jetbrains.plugins.clojure.file.ClojureFileType;
@@ -22,6 +23,7 @@ import com.intellij.compiler.impl.ModuleChunk;
 import com.intellij.compiler.impl.javaCompiler.ExternalCompiler;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.ParametersList;
+import com.intellij.execution.process.ProcessHandler;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.CompileScope;
@@ -147,8 +149,9 @@ public class ClojureBackendCompiler extends ExternalCompiler
 		return ClojureBundle.message("clojure.compiler.name");
 	}
 
+	@Nullable
 	@Override
-	public OutputParser createErrorParser(@Nonnull String outputDir, Process process)
+	public OutputParser createErrorParser(@Nonnull String outputDir, ProcessHandler processHandler)
 	{
 		return new ClojureOutputParser();
 	}
