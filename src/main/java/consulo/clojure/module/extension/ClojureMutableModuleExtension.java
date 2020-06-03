@@ -6,14 +6,20 @@ import javax.swing.JComponent;
 import javax.annotation.Nullable;
 import org.jetbrains.plugins.clojure.config.ui.ClojureFacetSettingsTab;
 import com.intellij.openapi.util.Comparing;
+import consulo.disposer.Disposable;
 import consulo.module.extension.MutableModuleExtension;
+import consulo.module.extension.swing.SwingMutableModuleExtension;
 import consulo.roots.ModuleRootLayer;
+import consulo.ui.Component;
+import consulo.ui.Label;
+import consulo.ui.annotation.RequiredUIAccess;
+import consulo.ui.layout.VerticalLayout;
 
 /**
  * @author VISTALL
  * @since 14:37/12.06.13
  */
-public class ClojureMutableModuleExtension extends ClojureModuleExtension implements MutableModuleExtension<ClojureModuleExtension>
+public class ClojureMutableModuleExtension extends ClojureModuleExtension implements MutableModuleExtension<ClojureModuleExtension>, SwingMutableModuleExtension
 {
 	public ClojureMutableModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer moduleRootLayer)
 	{
@@ -35,9 +41,18 @@ public class ClojureMutableModuleExtension extends ClojureModuleExtension implem
 		myReplOpts = replOpts;
 	}
 
+	@RequiredUIAccess
 	@Nullable
 	@Override
-	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
+	public Component createConfigurationComponent(@Nonnull Disposable disposable, @Nonnull Runnable runnable)
+	{
+		return VerticalLayout.create().add(Label.create("Unsupported platform"));
+	}
+
+	@RequiredUIAccess
+	@Nullable
+	@Override
+	public JComponent createConfigurablePanel(@Nonnull Disposable disposable, @Nonnull Runnable runnable)
 	{
 		return new ClojureFacetSettingsTab(this);
 	}
