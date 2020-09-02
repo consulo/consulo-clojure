@@ -5,18 +5,16 @@ import com.intellij.codeInsight.completion.CompletionService;
 import com.intellij.codeInsight.lookup.Lookup;
 import com.intellij.codeInsight.lookup.LookupManager;
 import com.intellij.execution.process.ProcessHandler;
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.EmptyAction;
-import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.project.DumbAwareAction;
-import com.intellij.openapi.util.IconLoader;
+import consulo.localize.LocalizeValue;
 
 /**
 * @author ilyas
 */
 public abstract class ClojureExecuteActionBase extends DumbAwareAction {
-  public static final String ACTIONS_EXECUTE_ICON = "/actions/execute.png";
-
   protected final ClojureConsole myLanguageConsole;
   protected final ProcessHandler myProcessHandler;
   protected final ClojureConsoleExecuteActionHandler myConsoleExecuteActionHandler;
@@ -25,7 +23,7 @@ public abstract class ClojureExecuteActionBase extends DumbAwareAction {
                                   ProcessHandler processHandler,
                                   ClojureConsoleExecuteActionHandler consoleExecuteActionHandler,
                                   String actionId) {
-    super(null, null, IconLoader.getIcon(ACTIONS_EXECUTE_ICON));
+    super(LocalizeValue.empty(), LocalizeValue.empty(), AllIcons.Actions.Execute);
     myLanguageConsole = languageConsole;
     myProcessHandler = processHandler;
     myConsoleExecuteActionHandler = consoleExecuteActionHandler;
