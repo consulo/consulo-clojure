@@ -12,25 +12,23 @@
  */
 package org.jetbrains.plugins.clojure;
 
-import org.jetbrains.annotations.NonNls;
-import com.intellij.openapi.util.IconLoader;
+import consulo.clojure.icon.ClojureIconGroup;
 import consulo.ui.image.Image;
 
 public interface ClojureIcons {
-  @NonNls
-  final Image CLOJURE_ICON_16x16 = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/clojure_icon_16x16.png");
+  final Image CLOJURE_ICON_16x16 = ClojureIconGroup.clojure_icon_16x16();
 
-  final Image FUNCTION = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/def_tmp.png");
-  final Image METHOD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/meth_tmp.png");
-  final Image JAVA_METHOD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/method.png");
-  final Image JAVA_FIELD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/field.png");
-  final Image SYMBOL = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/symbol.png");
-  final Image NAMESPACE = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/namespace.png");
+  final Image FUNCTION = ClojureIconGroup.def_tmp();
+  final Image METHOD = ClojureIconGroup.meth_tmp();
+  final Image JAVA_METHOD = ClojureIconGroup.method();
+  final Image JAVA_FIELD = ClojureIconGroup.field();
+  final Image SYMBOL = ClojureIconGroup.symbol();
+  final Image NAMESPACE = ClojureIconGroup.namespace();
 
-  final Image REPL_CONSOLE = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_console.png");
-  final Image REPL_ADD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_add.png");
-  final Image REPL_CLOSE = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_close.png");
-  final Image REPL_LOAD = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_run.png");
-  final Image REPL_GO = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_go.png");
-  final Image REPL_EVAL = IconLoader.findIcon("/org/jetbrains/plugins/clojure/icons/repl_eval.png");
+  final Image REPL_CONSOLE = ClojureIconGroup.repl_console();
+  final Image REPL_ADD = ClojureIconGroup.repl_add();
+  final Image REPL_CLOSE = ClojureIconGroup.repl_close();
+  final Image REPL_LOAD = ClojureIconGroup.repl_run();
+  final Image REPL_GO = ClojureIconGroup.repl_go();
+  final Image REPL_EVAL = ClojureIconGroup.repl_eval();
 }

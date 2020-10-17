@@ -104,7 +104,7 @@
 		<moduleExtensionProvider key="clojure"
 								 parentKey="java"
 								 name="Clojure"
-								 icon="/org/jetbrains/plugins/clojure/icons/clojure_icon_16x16.png"
+								 icon="consulo.clojure.ClojureIconGroup@clojure_icon_16x16"
 								 immutableClass="consulo.clojure.module.extension.ClojureModuleExtension"
 								 mutableClass="consulo.clojure.module.extension.ClojureMutableModuleExtension"/>
 
