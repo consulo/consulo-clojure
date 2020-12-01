@@ -1,32 +1,33 @@
 package org.jetbrains.plugins.clojure.editor.braceHighlighter;
 
 import com.intellij.openapi.editor.markup.TextAttributes;
-
-import java.awt.*;
+import consulo.ui.color.ColorValue;
+import consulo.ui.color.RGBColor;
+import consulo.ui.style.StandardColors;
 
 /**
  * @author ilyas
  */
 public abstract class ClojureBraceAttributes {
-  private static final Color[] CLOJURE_BRACE_COLORS =
+  private static final ColorValue[] CLOJURE_BRACE_COLORS =
       {
-          Color.BLUE, // 0
-          new Color(139, 0, 0), // 10 red
-          new Color(47, 79, 47),     // 1
-          new Color(199, 21, 133), // 7 MediumVioletRed
-          new Color(85, 26, 139), // 2 purple
-          Color.DARK_GRAY,   // 3
-          new Color(0, 0, 128), // 8 navy - blue
-          Color.RED,             // 5
-          new Color(47, 79, 47), // 6 Dark green
-          new Color(255, 100, 0),   // 1 orange
-          new Color(139, 101, 8), // 9 Dark golden
+          StandardColors.BLUE, // 0
+          new RGBColor(139, 0, 0), // 10 red
+          new RGBColor(47, 79, 47),     // 1
+          new RGBColor(199, 21, 133), // 7 MediumVioletRed
+          new RGBColor(85, 26, 139), // 2 purple
+          StandardColors.GRAY,   // 3
+          new RGBColor(0, 0, 128), // 8 navy - blue
+          StandardColors.RED,             // 5
+          new RGBColor(47, 79, 47), // 6 Dark green
+          new RGBColor(255, 100, 0),   // 1 orange
+          new RGBColor(139, 101, 8), // 9 Dark golden
 
       };
 
-  public static TextAttributes getBraceAttributes(int level, Color background) {
-    Color braceColor = CLOJURE_BRACE_COLORS[level % CLOJURE_BRACE_COLORS.length];
-    Color adjustedBraceColor = new Color(braceColor.getRGB() ^ background.getRGB() ^ 0xFFFFFF);
+  public static TextAttributes getBraceAttributes(int level, ColorValue background) {
+    ColorValue braceColor = CLOJURE_BRACE_COLORS[level % CLOJURE_BRACE_COLORS.length];
+    ColorValue adjustedBraceColor = RGBColor.fromRGBValue(RGBColor.toRGBValue(braceColor.toRGB()) ^ RGBColor.toRGBValue(background.toRGB()) ^ 0xFFFFFF);
     return new TextAttributes(adjustedBraceColor, null, null, null, 1);
   }
 }

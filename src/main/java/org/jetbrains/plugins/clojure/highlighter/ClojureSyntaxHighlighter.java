@@ -106,16 +106,7 @@ public class ClojureSyntaxHighlighter extends SyntaxHighlighterBase implements C
   @NonNls
   static final String CHAR_ID = "Clojure Character";
 
-  public static final TextAttributes ATOM_ATTRIB = HighlighterColors.TEXT.getDefaultAttributes().clone();
-
-
-  // Registering TextAttributes
-  static {
-
-    final Color deepBlue = DefaultLanguageHighlighterColors.KEYWORD.getDefaultAttributes().getForegroundColor();
-    ATOM_ATTRIB.setForegroundColor(deepBlue);
-    TextAttributesKey.createTextAttributesKey(ATOM_ID, ATOM_ATTRIB);
-  }
+  public static final TextAttributesKey ATOM_ATTRIB = TextAttributesKey.createTextAttributesKey(ATOM_ID, DefaultLanguageHighlighterColors.KEYWORD);
 
   public static TextAttributesKey LINE_COMMENT = TextAttributesKey.createTextAttributesKey(LINE_COMMENT_ID, DefaultLanguageHighlighterColors.LINE_COMMENT);
   public static TextAttributesKey KEY = TextAttributesKey.createTextAttributesKey(KEY_ID, DefaultLanguageHighlighterColors.STATIC_FIELD);
