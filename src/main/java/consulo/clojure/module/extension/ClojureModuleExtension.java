@@ -1,10 +1,10 @@
 package consulo.clojure.module.extension;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.plugins.clojure.utils.ClojureUtils;
-import consulo.extension.impl.ModuleExtensionImpl;
+import consulo.module.extension.impl.ModuleExtensionImpl;
 import consulo.roots.ModuleRootLayer;
+import org.jetbrains.plugins.clojure.utils.ClojureUtils;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author VISTALL
