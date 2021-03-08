@@ -3,7 +3,7 @@ package org.jetbrains.plugins.clojure.psi.impl.list;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.containers.HashSet;
+import java.util.HashSet;
 import javax.annotation.Nullable;
 
 import org.jetbrains.plugins.clojure.psi.api.ClList;

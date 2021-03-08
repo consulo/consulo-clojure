@@ -30,7 +30,7 @@ import org.jetbrains.plugins.clojure.psi.impl.ClKeywordImpl;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import com.intellij.openapi.util.Trinity;
-import com.intellij.util.containers.HashSet;
+import java.util.HashSet;
 
 import java.util.ArrayList;
 import java.util.Set;
