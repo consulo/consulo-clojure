@@ -1,30 +1,13 @@
 package org.jetbrains.plugins.clojure.compiler;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.jetbrains.plugins.clojure.ClojureBundle;
-import org.jetbrains.plugins.clojure.file.ClojureFileType;
-import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
-import org.jetbrains.plugins.clojure.utils.ClojureUtils;
 import com.intellij.compiler.OutputParser;
 import com.intellij.compiler.impl.ModuleChunk;
-import com.intellij.compiler.impl.javaCompiler.ExternalCompiler;
+import com.intellij.compiler.impl.javaCompiler.BackendCompiler;
+import com.intellij.compiler.impl.javaCompiler.javac.JavacCompilerConfiguration;
+import com.intellij.compiler.impl.javaCompiler.javac.JpsJavaCompilerOptions;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.ParametersList;
 import com.intellij.execution.process.ProcessHandler;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.CompileScope;
 import com.intellij.openapi.diagnostic.Logger;
@@ -33,33 +16,38 @@ import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.JavaSdkType;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ModuleSourceOrderEntry;
-import com.intellij.openapi.roots.OrderEntry;
-import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.roots.*;
 import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.ThrowableComputable;
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.io.URLUtil;
+import consulo.annotation.access.RequiredReadAction;
 import consulo.clojure.module.extension.ClojureModuleExtension;
 import consulo.java.compiler.JavaCompilerUtil;
+import consulo.java.compiler.impl.javaCompiler.BackendCompilerProcessBuilder;
 import consulo.java.module.extension.JavaModuleExtension;
+import org.jetbrains.plugins.clojure.ClojureBundle;
+import org.jetbrains.plugins.clojure.file.ClojureFileType;
+import org.jetbrains.plugins.clojure.psi.api.ClojureFile;
+import org.jetbrains.plugins.clojure.utils.ClojureUtils;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author ilyas
  */
-public class ClojureBackendCompiler extends ExternalCompiler
+public class ClojureBackendCompiler implements BackendCompiler
 {
 
 	private static final Logger LOG = Logger.getInstance("#org.jetbrains.plugins.clojure.compiler.ClojureBackendCompiler");
 
 	private final Project myProject;
-	private final List<File> myTempFiles = new ArrayList<File>();
 
 	public ClojureBackendCompiler(Project project)
 	{
@@ -151,13 +139,14 @@ public class ClojureBackendCompiler extends ExternalCompiler
 
 	@Nullable
 	@Override
-	public OutputParser createErrorParser(@Nonnull String outputDir, ProcessHandler processHandler)
+	public OutputParser createErrorParser(BackendCompilerProcessBuilder processBuilder, @Nonnull String outputDir, ProcessHandler process)
 	{
 		return new ClojureOutputParser();
 	}
 
+	@Nullable
 	@Override
-	public OutputParser createOutputParser(String outputDir)
+	public OutputParser createOutputParser(BackendCompilerProcessBuilder processBuilder, @Nonnull String outputDir)
 	{
 		return new OutputParser()
 		{
@@ -169,21 +158,23 @@ public class ClojureBackendCompiler extends ExternalCompiler
 		};
 	}
 
-	@Override
 	@Nonnull
-	public GeneralCommandLine createStartupCommand(final ModuleChunk chunk,
-			final CompileContext context,
-			final String outputPath) throws IOException, IllegalArgumentException
+	@Override
+	public BackendCompilerProcessBuilder prepareProcess(@Nonnull ModuleChunk moduleChunk, @Nonnull String outputPath, @Nonnull CompileContext compileContext) throws IOException
 	{
-		return ApplicationManager.getApplication().runReadAction(new ThrowableComputable<GeneralCommandLine, IOException>()
+		JpsJavaCompilerOptions jpsJavaCompilerOptions = JavacCompilerConfiguration.getInstance(compileContext.getProject());
+		return new BackendCompilerProcessBuilder(moduleChunk, outputPath, compileContext, jpsJavaCompilerOptions, false)
 		{
+			@RequiredReadAction
+			@Nonnull
 			@Override
-			public GeneralCommandLine compute() throws IOException
+			public GeneralCommandLine buildCommandLine() throws IOException
 			{
-				return createStartupCommandImpl(chunk, outputPath, context.getCompileScope());
+				return createStartupCommandImpl(myModuleChunk, outputPath, myCompileContext.getCompileScope());
 			}
-		});
+		};
 	}
+
 
 	private GeneralCommandLine createStartupCommandImpl(ModuleChunk chunk, String outputPath, CompileScope scope) throws IOException
 	{
@@ -341,12 +332,5 @@ public class ClojureBackendCompiler extends ExternalCompiler
 		printer.println("(defn intellij-nice-printer [arr]\n" + "  (reduce (fn [x y] (str (.toString x) \"^^\" y)) (. java.util.Arrays asList arr))" +
 				")");
 	}
-
-	@Override
-	public void compileFinished()
-	{
-		FileUtil.asyncDelete(myTempFiles);
-	}
-
 }
 
