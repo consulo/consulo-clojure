@@ -67,7 +67,7 @@ public class ClojureScriptRunConfiguration extends ModuleBasedConfiguration impl
 	private String vmParams;
 	private String scriptParams;
 	private boolean runInREPL;
-	private final Map<String, String> envs = new com.intellij.util.containers.hash.LinkedHashMap<String, String>();
+	private final Map<String, String> envs = new LinkedHashMap<String, String>();
 	public boolean passParentEnv = true;
 
 	//  private static final String JLINE_CONSOLE_RUNNER = "jline.ConsoleRunner";
