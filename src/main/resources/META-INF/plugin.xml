@@ -5,6 +5,9 @@
 		refactorings
 	</description>
 	<category>Custom Languages</category>
+	<tags>
+		<tag>custom.language</tag>
+	</tags>
 	<version>SNAPSHOT</version>
 	<vendor url="http://www.jetbrains.com">JetBrains Inc.</vendor>
 	<depends>consulo.java</depends>
