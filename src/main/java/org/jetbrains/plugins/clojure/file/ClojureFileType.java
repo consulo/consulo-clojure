@@ -14,13 +14,15 @@
  */
 package org.jetbrains.plugins.clojure.file;
 
-import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
-import org.jetbrains.plugins.clojure.ClojureIcons;
-import org.jetbrains.plugins.clojure.ClojureLanguage;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.plugins.clojure.ClojureIcons;
+import org.jetbrains.plugins.clojure.ClojureLanguage;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,16 +48,16 @@ public class ClojureFileType extends LanguageFileType
 
 	@Override
 	@Nonnull
-	public String getName()
+	public String getId()
 	{
 		return "Clojure";
 	}
 
 	@Override
 	@Nonnull
-	public String getDescription()
+	public LocalizeValue getDescription()
 	{
-		return "Clojure file";
+		return LocalizeValue.localizeTODO("Clojure file");
 	}
 
 	@Override
@@ -65,6 +67,7 @@ public class ClojureFileType extends LanguageFileType
 		return CLOJURE_DEFAULT_EXTENSION;
 	}
 
+	@Nonnull
 	@Override
 	public Image getIcon()
 	{
